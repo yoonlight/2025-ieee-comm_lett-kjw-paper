@@ -1,0 +1,115 @@
+{
+    "name": "2025 IEEE Communications Letters KJW",
+    "image": "dotwee/latexdevcontainer:latest-full",
+    // "build": {
+    //     "context": "..",
+    //     "dockerfile": "Dockerfile"
+    // },
+    "customizations": {
+        "settings": {
+            "latex-workshop.latex.recipes": [
+                {
+                    "name": "latexmk",
+                    "tools": [
+                        "latexmk"
+                    ]
+                },
+                {
+                    "name": "pdflatex -> bibtex -> pdflatex * 2",
+                    "tools": [
+                        "pdflatex",
+                        "bibtex",
+                        "pdflatex",
+                        "pdflatex"
+                    ]
+                },
+                {
+                    "name": "bibtex",
+                    "tools": [
+                        "bibtex"
+                    ]
+                },
+                {
+                    "name": "link-checker",
+                    "tools": [
+                        "pdflinkchecker"
+                    ]
+                }
+            ],
+            "latex-workshop.latex.tools": [
+                {
+                    "name": "latexmk",
+                    "command": "latexmk",
+                    "args": [
+                        "-synctex=1",
+                        "-interaction=nonstopmode",
+                        "-file-line-error",
+                        "-pdf",
+                        "%DOC%"
+                    ]
+                },
+                {
+                    "name": "pdflatex",
+                    "command": "pdflatex",
+                    "args": [
+                        "-synctex=1",
+                        "-interaction=nonstopmode",
+                        "-file-line-error",
+                        "%DOC%"
+                    ],
+                    "env": {}
+                },
+                {
+                    "name": "bibtex",
+                    "command": "bibtex",
+                    "args": [
+                        "%DOCFILE%"
+                    ],
+                    "env": {}
+                },
+                {
+                    "name": "pdflinkchecker",
+                    "command": "pdflinkchecker",
+                    "args": [
+                        "%DIR%"
+                    ],
+                    "env": {}
+                },
+            ],
+            "extensions": [
+                "james-yu.latex-workshop",
+                "aaron-bond.better-comments",
+                "vscodevim.vim",
+                "shardulm94.trailing-spaces",
+                "stkb.rewrap",
+                "streetsidesoftware.code-spell-checker",
+                "mguellsegarra.highlight-on-copy",
+                "nickfode.latex-formatter",
+                "natqe.reload",
+                "ms-vscode.wordcount"
+            ]
+        },
+        "latex-workshop.view.pdf.viewer": "tab",
+        "vscode": {
+            "extensions": [
+                "streetsidesoftware.code-spell-checker",
+                "bierner.github-markdown-preview",
+                "tecosaur.latex-utilities",
+                "James-Yu.latex-workshop",
+                "nickfode.latex-formatter",
+                "bierner.markdown-checkbox",
+                "bierner.markdown-emoji",
+                "bierner.markdown-footnotes",
+                "bierner.markdown-preview-github-styles",
+                "bierner.markdown-mermaid",
+                "bierner.markdown-yaml-preamble",
+                "DavidAnson.vscode-markdownlint",
+                "evgeniypeshkov.syntax-highlighter",
+                "ms-vscode.wordcount",
+                "hashhar.gitattributes"
+            ]
+        }
+    },
+    // "postCreateCommand": "tlmgr update --self && tlmgr install latexmk"
+    "postCreateCommand": "bash install.sh"
+}
