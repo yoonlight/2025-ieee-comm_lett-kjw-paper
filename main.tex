@@ -133,6 +133,28 @@ Due to high complexity of calculation of the inverse matrix, GMRES algorithm is 
 (\boldsymbol{\Sigma}_{\mathbf{y}}+\mathbf{A}\boldsymbol{\Sigma}_{t}^{2}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top})\mathbf{u} = \mathbf{y}- \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}],
 \end{equation}
 where $\mathbf{u}$ is ~.
+
+\begin{algorithm}[!t]
+\caption{Posterior sampling-based channel estimation}
+\begin{algorithmic}[1]
+  \STATE $x_{1}\sim\mathcal{N}(0, \Sigma_{1})$
+  \FOR{$i=T$ to $1$}
+    \STATE $s \gets i-1 / T$
+    \STATE $t \gets i/T$
+    \STATE $\hat{x} \gets d_{\theta}(x_{t}|y,A)$
+    \STATE $\Sigma_{x|x_{t}}\gets \Sigma_{t}\nabla_{x_{t}}d_{\theta}(x_{t},t)^{\top}$
+    \STATE $u\gets (\Sigma_{y}+A\Sigma_{x|x_{t}}A^{\top})^{-1}(y-A\hat{x})$
+    \STATE $s_{y|x}\gets \nabla_{x_{t}}d_{\theta}(x_{t},t)^{\top}A^{\top}u$
+    \STATE $s_{x}\gets \Sigma^{-1}_{t}(\hat{x}-x_{t})$
+    \STATE $s_{\theta}(x_{t}|y,A) \gets s_{x}+s_{y|x}$
+    \STATE $\hat{x}\gets x_{t}+ \Sigma_{t}s_{\theta}(x_{t}|y,A)$
+    \STATE $z\sim\mathcal{N}(0,I)$
+    \STATE $x_{s}\gets \hat{x}+ \sigma_{s}\sqrt{1- \eta\left(1- \frac{\sigma_{s}^{2}}{\sigma_{t}^{2}}\right)}\frac{x_{t}-\hat{x}}{\sigma_{t}}+ \sigma_{s}\sqrt{\eta(1- \frac{\sigma_{s}^{2}}{\sigma_{t}^{2}})}z$
+  \ENDFOR
+  \RETURN $x_{0}$
+\end{algorithmic}
+\end{algorithm}
+
 \section{Simulations}
 
 \begin{table}[!t]
