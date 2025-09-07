@@ -65,23 +65,30 @@ In this letter, a novel channel estimator based on diffusion posterior sampling 
 
 \section{System Model}
 
-In this letter, mmWave massive MIMO downlink channel is considered. To simplify, uniform linear array with half wavelength and a quasi-static channel is assumed. Received pilot symbol is expressed as, 
-
+\textcolor{red}{In this letter, point-to-point mmWave massive MIMO system is considered, where the base station (BS) and user equipment (UE) are equipped with $N_{t}$ and $N_{r}$ antennas, respectively. For simplicity, a quasi-static narrowband channel is assumed, and the downlink channel is considered. The received at the UE for channel estimation, based on the transmitted pilot symbols, is given by,}
 \begin{equation}
 \mathbf{Y}=\mathbf{H}\mathbf{P}+\mathbf{N}\in \mathbb{C}^{N_{r}\times N_{p}}
 \end{equation}
-where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is channel matrix, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is known pilot symbol, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}\mathbf{I})$ is additive white Gaussian noise. Under the assumption of ULA and channel matrix can be expressed as virtual channel representation as 
-
+\textcolor{red}{where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is channel matrix, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is known pilot symbol, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}\mathbf{I})$ is additive white Gaussian noise. Due to a few strong multipath components of the high frequency characteristics, the angular domain representation of the channel is considered. Under the assumption of a uniform linear array (ULA) with half-wavelength antenna spacing at the both BS and UE, the channel matrix in the angular domain can be modeled using virtual channel representation as~\cite{sayeedDeconstructingMultiantennaFading2002},}
 \begin{equation}
-\mathbf{H} = \mathbf{A}_{R}\mathbf{H}_{V}\mathbf{A}_{T}^{H},
+\mathbf{H} = \mathbf{A}_{\text{R}}\mathbf{H}_{\text{v}}\mathbf{A}_{\text{T}}^{H},
 \end{equation}
-where $\mathbf{A}_{R}$ and $\mathbf{A}_{T}$ are DFT matrices and $\mathbf{H}_{V}$ is channel matrix of angular domain. Vectorized form of received symbol is expressed as,
-
+\textcolor{red}{
+where $\mathbf{A}_{\text{R}}\in \mathbb{C}^{N_{r}\times N_{r}}$ and $\mathbf{A}_{\text{T}}\in \mathbb{C}^{N_{t}\times N_{t}}$ are the array response matrices represented by the discrete Fourier transform (DFT) matrices of the receiver and transmitter, respectively and $\mathbf{H}_{\text{v}}$ is channel matrix of angular domain.
+Vectorized form of the received symbol is expressed as,
+}
 \begin{equation}
-\mathbf{y} = \mathbf{A}\mathbf{h}+\mathbf{n}\in \mathbb{C}^{N_{r}N_{p}\times 1},
+\mathbf{y} = \mathbf{A}\mathbf{h}_{\text{v}}+\mathbf{n}\in \mathbb{C}^{N_{r}N_{p}\times 1},
 \end{equation}
-
-where $\mathbf{y}$, $\mathbf{h}_{V}$, $\mathbf{n}$ are vector form of received symbol, channel matrix of angular domain, and noise each. $\mathbf{A}=(\mathbf{P}^{\top}\otimes\mathbf{I}_{N_{r}})((\mathbf{A}_{T}^{H})^{\top}\otimes \mathbf{A}_{R})\in \mathbb{C}^{N_{r}N_{p}\times N_{r}N_{t}}$ is vectorized by Kronecker product.
+\textcolor{red}{
+where $\mathbf{y}$, $\mathbf{h}_{\text{v}}$, $\mathbf{n}$ are vectorized forms of the received symbol, angular domain channel, and noise, respectively. $\mathbf{A}=(\mathbf{P}^{\top}\otimes\mathbf{I}_{N_{r}})((\mathbf{A}_{\text{T}}^{H})^{\top}\otimes \mathbf{A}_{\text{R}})\in \mathbb{C}^{N_{r}N_{p}\times N_{r}N_{t}}$ is the system matrix vectorized by Kronecker product.
+Since the number of the transmitter antennas is larger than the number of pilot symbols, i.e., $\rho=N_{p}/N_{t}<1$, the problem is converted to the ill-posed inverse problem.
+To solve the ill-posed problem, the channel estimation can be formulated within a Bayesian inference framework,
+\begin{equation}
+  p(\mathbf{h}|\mathbf{y})\propto p(\mathbf{h})p(\mathbf{y}|\mathbf{h}),
+\end{equation}
+where $p(\mathbf{h})$, and $p(\mathbf{y}|\mathbf{h})$ are prior and likelihood distribution, respectively. In this letter, the diffusion model-based posterior sampling is adopted to solve this problem.
+}
 
 \section{Proposed Method}
 
