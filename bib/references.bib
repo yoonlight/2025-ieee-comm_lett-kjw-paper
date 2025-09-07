@@ -8,14 +8,13 @@
   pages = {831--846},
   issn = {1941-0484},
   doi = {10.1109/JSTSP.2014.2334278},
-  abstract = {Millimeter wave (mmWave) cellular systems will enable gigabit-per-second data rates thanks to the large bandwidth available at mmWave frequencies. To realize sufficient link margin, mmWave systems will employ directional beamforming with large antenna arrays at both the transmitter and receiver. Due to the high cost and power consumption of gigasample mixed-signal devices, mmWave precoding will likely be divided among the analog and digital domains. The large number of antennas and the presence of analog beamforming requires the development of mmWave-specific channel estimation and precoding algorithms. This paper develops an adaptive algorithm to estimate the mmWave channel parameters that exploits the poor scattering nature of the channel. To enable the efficient operation of this algorithm, a novel hierarchical multi-resolution codebook is designed to construct training beamforming vectors with different beamwidths. For single-path channels, an upper bound on the estimation error probability using the proposed algorithm is derived, and some insights into the efficient allocation of the training power among the adaptive stages of the algorithm are obtained. The adaptive channel estimation algorithm is then extended to the multi-path case relying on the sparse nature of the channel. Using the estimated channel, this paper proposes a new hybrid analog/digital precoding algorithm that overcomes the hardware constraints on the analog-only beamforming, and approaches the performance of digital solutions. Simulation results show that the proposed low-complexity channel estimation algorithm achieves comparable precoding gains compared to exhaustive channel training algorithms. The results illustrate that the proposed channel estimation and precoding algorithms can approach the coverage probability achieved by perfect channel knowledge even in the presence of interference.},
-  keywords = {abstract,adaptive compressed sensing,Algorithm design and analysis,Array signal processing,Channel estimation,hybrid precoding,Millimeter wave cellular systems,Radio frequency,Signal processing algorithms,sparse channel estimation,Training,Vectors},
-  file = {C:\Users\cailab-kjw\Zotero\storage\73JPVAVH\Alkhateeb et al. - 2014 - Channel Estimation and Hybrid Precoding for Millim.pdf}
 }
 
 @article{arvinteMIMOChannelEstimation2023,
   title = {{{MIMO}} Channel Estimation Using Score-Based Generative Models},
   author = {Arvinte, Marius and Tamir, Jonathan I.},
+  year = {2023},
+  month = {june},
   date = {2023-06},
   journal = {IEEE Trans. Wirel. Commun.},
   volume = {22},
@@ -23,10 +22,7 @@
   pages = {3698--3713},
   issn = {1558-2248},
   doi = {10.1109/TWC.2022.3220784},
-  abstract = {Channel estimation is a critical task in multiple-input multiple-output (MIMO) digital communications that substantially affects end-to-end system performance. In this work, we introduce a novel approach for channel estimation using deep score-based generative models. A model is trained to estimate the gradient of the logarithm of a distribution and is used to iteratively refine estimates given measurements of a signal. We introduce a framework for training score-based generative models for wireless MIMO channels and performing channel estimation based on posterior sampling at test time. We derive theoretical robustness guarantees for channel estimation with posterior sampling in single-input single-output scenarios, and experimentally verify performance in the MIMO setting. Our results in simulated channels show competitive in-distribution performance, and robust out-of-distribution performance, with gains of up to 5 dB in end-to-end coded communication performance compared to supervised deep learning methods. Simulations on the number of pilots show that high fidelity channel estimation with 25\% pilot density is possible for MIMO channel sizes of up to 64 \textbackslash times 256 . Complexity analysis reveals that model size can efficiently trade performance for estimation latency, and that the proposed approach is competitive with compressed sensing in terms of floating-point operation (FLOP) count.},
   eventtitle = {{{IEEE Transactions}} on {{Wireless Communications}}},
-  keywords = {channel estimation,Channel estimation,Deep learning,diffusion,Estimation,generative,MIMO,MIMO communication,reading,score-based,Training,Wireless communication,Wireless sensor networks},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\H77KW5A9\\Arvinte and Tamir - 2023 - MIMO Channel Estimation Using Score-Based Generati.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\5UU2669K\\9957135.html}
 }
 
 @article{baissasPilotbasedEstimationTimevarying2002,
@@ -39,9 +35,6 @@
   pages = {2037--2049},
   issn = {1941-0476},
   doi = {10.1109/TSP.2002.800400},
-  abstract = {Reliable coherent wireless communication requires accurate estimation of the time-varying multipath channel. This paper addresses two issues in the context of direct-sequence code-division multiple access (CDMA) systems: (i) linear minimum-mean-squared-error (MMSE) channel estimation based on a pilot transmission and (ii) impact of channel estimation errors on coherent receiver performance. A simple characterization of the MMSE estimator in terms of a bank of filters is derived. A key channel characteristic controlling system performance is the normalized coherence time, which is approximately the number of symbols over which the channel remains strongly correlated. It is shown that the estimator performance is characterized by an effective signal-to-noise ratio (SNR)-the product of the pilot SNR and the normalized coherence time. A simple uniform averaging estimator is also proposed that is easy to implement and delivers near-optimal performance if properly designed. The receivers analyzed in this paper are based on a time-frequency RAKE structure that exploits joint multipath-Doppler diversity. It is shown that the overall receiver performance is controlled by two competing effects: shorter coherence times lead to degraded channel estimation but improved inherent receiver performance due to Doppler diversity, with opposite effects for longer coherence times. Our results demonstrate that exploiting Doppler diversity can significantly mitigate the error probability floors that plague conventional CDMA receivers under fast fading due to errors in channel estimation.},
-  keywords = {Channel bank filters,Channel estimation,Context,Control systems,Direct-sequence code-division multiple access,Filter bank,Multiaccess communication,Multipath channels,RAKE receivers,Wireless communication},
-  file = {C:\Users\cailab-kjw\Zotero\storage\QQ2FB9M5\Baissas and Sayeed - 2002 - Pilot-based estimation of time-varying multipath c.pdf}
 }
 
 @inproceedings{bajwaSparseMultipathChannels2009,
@@ -52,10 +45,7 @@
   date = {2009-01},
   pages = {320--325},
   doi = {10.1109/DSP.2009.4785942},
-  abstract = {Multipath signal propagation is the defining characteristic of terrestrial wireless channels. Virtually all existing statistical models for wireless channels are implicitly based on the assumption of rich multipath, which can be traced back to the seminal works of Bello and Kennedy on the wide-sense stationary uncorrelated scattering model, and more recently to the i.i.d. model for multi-antenna channels proposed by Telatar, and Foschini Gans. However, physical arguments and growing experimental evidence suggest that physical channels encountered in practice exhibit a sparse multipath structure that gets more pronounced as the signal space dimension gets large (e.g., due to large bandwidth or large number of antennas). In this paper, we formalize the notion of multipath sparsity and discuss applications of the emerging theory of compressed sensing for efficient estimation of sparse multipath channels.},
   eventtitle = {2009 {{IEEE}} 13th {{Digital Signal Processing Workshop}} and 5th {{IEEE Signal Processing Education Workshop}}},
-  keywords = {Bandwidth,Channel estimation,Compressed sensing,Fading,Frequency,Multipath channels,Signal resolution,Space technology,Transceivers,Wireless sensor networks},
-  file = {C:\Users\cailab-kjw\Zotero\storage\LJF5PBBC\Bajwa et al. - 2009 - Sparse Multipath Channels Modeling and Estimation.pdf}
 }
 
 @article{baraniukCompressiveSensingLecture2007,
@@ -68,9 +58,6 @@
   pages = {118--121},
   issn = {1558-0792},
   doi = {10.1109/MSP.2007.4286571},
-  abstract = {This lecture note presents a new method to capture and represent compressible signals at a rate significantly below the Nyquist rate. This method, called compressive sensing, employs nonadaptive linear projections that preserve the structure of the signal; the signal is then reconstructed from these projections using an optimization process.},
-  keywords = {Bandwidth,Data acquisition,Digital cameras,Image coding,Image sampling,Image storage,Matrices,Signal processing,Transform coding,Vectors},
-  file = {C:\Users\cailab-kjw\Zotero\storage\ZUWGPVNL\Baraniuk - 2007 - Compressive Sensing [Lecture Notes].pdf}
 }
 
 @article{barhumiOptimalTrainingDesign2003,
@@ -83,9 +70,6 @@
   pages = {1615--1624},
   issn = {1941-0476},
   doi = {10.1109/TSP.2003.811243},
-  abstract = {This paper describes a least squares (LS) channel estimation scheme for multiple-input multiple-output (MIMO) orthogonal frequency division multiplexing (OFDM) systems based on pilot tones. We first compute the mean square error (MSE) of the LS channel estimate. We then derive optimal pilot sequences and optimal placement of the pilot tones with respect to this MSE. It is shown that the optimal pilot sequences are equipowered, equispaced, and phase shift orthogonal. To reduce the training overhead, an LS channel estimation scheme over multiple OFDM symbols is also discussed. Moreover, to enhance channel estimation, a recursive LS (RLS) algorithm is proposed, for which we derive the optimal forgetting or tracking factor. This factor is found to be a function of both the noise variance and the channel Doppler spread. Through simulations, it is shown that the optimal pilot sequences derived in this paper outperform both the orthogonal and random pilot sequences. It is also shown that a considerable gain in signal-to-noise ratio (SNR) can be obtained by using the RLS algorithm, especially in slowly time-varying channels.},
-  keywords = {Channel estimation,Digital audio broadcasting,Fading,Least squares approximation,Mean square error methods,MIMO,OFDM,Resonance light scattering,Signal to noise ratio,Time-varying channels},
-  file = {C:\Users\cailab-kjw\Zotero\storage\D6WMPVSC\Barhumi et al. - 2003 - Optimal training design for MIMO OFDM systems in m.pdf}
 }
 
 @book{bjornsonMassiveMIMONetworks2018,
@@ -96,12 +80,9 @@
   eprint = {ekHYswEACAAJ},
   eprinttype = {googlebooks},
   publisher = {Now Publishers},
-  abstract = {Massive multiple-input multiple-output (Massive MIMO) is the latest technology that will improve the speed and throughput of wireless communication systems for years to come. Whilst there may be some debate over the origins of the term Massive MIMO and what it precisely means, this book describes in detail how the research conducted in the past decades lead to a scalable multiantenna technology that offers great throughput and energy efficiency under practical conditions.Written for students, practicing engineers and researchers who want to learn the conceptual and analytical foundations of Massive MIMO, in terms of spectral, energy, and/or hardware efficiency, as well as channel estimation and practical considerations, it provides a clear and tutorial like exposition of all the major topics. It also connects the dots of the research literature covering numerous topics not easily found therein.Massive MIMO Networks is the first book on the subject to cover the spatial channel correlation and consider rigorous signal processing design essential for the complete understanding by its target audience.},
   isbn = {978-1-68083-985-2},
   langid = {english},
   pagetotal = {520},
-  keywords = {Technology & Engineering / Mobile & Wireless Communications,Technology & Engineering / Signals & Signal Processing,Technology & Engineering / Telecommunications},
-  file = {C:\Users\cailab-kjw\Zotero\storage\V3Z4SMPJ\Björnson et al. - 2018 - Massive MIMO Networks Spectral, Energy, and Hardw.pdf}
 }
 
 @article{boysTweedieMomentProjected2024,
@@ -112,10 +93,7 @@
   issn = {2835-8856},
   url = {https://openreview.net/forum?id=4unJi0qrTE},
   urldate = {2025-07-02},
-  abstract = {Diffusion generative models unlock new possibilities for inverse problems as they allow for the incorporation of strong empirical priors into the process of scientific inference. Recently, diffusion models are repurposed for solving inverse problems using Gaussian approximations to conditional densities of the reverse process via Tweedie’s formula to parameterise the mean, complemented with various heuristics. To address various challenges arising from these approximations, we leverage higher order information using Tweedie’s formula and obtain a statistically principled approximation. We further provide a theoretical guarantee specifically for posterior sampling which can lead to better theoretical understanding of diffusion-based conditional sampling. Finally, we illustrate the empirical effectiveness of our approach for general linear inverse problems on toy synthetic examples as well as image restoration. We show that our method (i) removes any time-dependent step-size hyperparameters required by earlier methods, (ii) brings stability and better sample quality across multiple noise levels, (iii) is the only method that works in a stable way with variance exploding (VE) forward processes as opposed to earlier works.},
   langid = {english},
-  keywords = {interesting,reading},
-  file = {C:\Users\cailab-kjw\Zotero\storage\9UIZF8B9\Boys et al. - 2024 - Tweedie Moment Projected Diffusions for Inverse Pr.pdf}
 }
 
 @article{bradyBeamspaceMIMOMillimeterWave2013,
@@ -129,9 +107,6 @@
   pages = {3814--3827},
   issn = {1558-2221},
   doi = {10.1109/TAP.2013.2254442},
-  abstract = {Millimeter-wave wireless systems are emerging as a promising technology for meeting the exploding capacity requirements of wireless communication networks. Besides large bandwidths, small wavelengths at mm-wave lead to a high-dimensional spatial signal space, that can be exploited for significant capacity gains through high-dimensional multiple-input multiple-output (MIMO) techniques. In conventional MIMO approaches, optimal performance requires prohibitively high transceiver complexity. By combining the concept of beamspace MIMO communication with a hybrid analog-digital transceiver, continuous aperture phased (CAP) MIMO achieves near-optimal performance with dramatically lower complexity. This paper presents a framework for physically-accurate computational modeling and analysis of CAP-MIMO, and reports measurement results on a DLA-based prototype for multimode line-of-sight communication. The model, based on a critically sampled system representation, is used to demonstrate the performance gains of CAP-MIMO over state-of-the-art designs at mm-wave. For example, a CAP-MIMO system can achieve a spectral efficiency of 10–20 bits/s/Hz with a 17–31 dB power advantage over state-of-the-art, corresponding to a data rate of 10–200 Gbps with 1–10 GHz system bandwidth. The model is refined to analyze critical sources of power loss in an actual multimode system. The prototype-based measurement results closely follow the theoretical predictions, validating CAP-MIMO theory, and illustrating the utility of the model.},
-  keywords = {abstract,Analog beamforming,Apertures,Computational modeling,discrete lens array,gigabit wireless,high-dimensional MIMO,lens antennas,millimeter-wave communication,MIMO,multiple-input multiple-output (MIMO) systems,Receiving antennas,transceiver complexity,Transceivers,Vectors},
-  file = {C:\Users\cailab-kjw\Zotero\storage\S6R8CBE4\Brady et al. - 2013 - Beamspace MIMO for Millimeter-Wave Communications.pdf}
 }
 
 @article{busariMillimeterWaveMassiveMIMO2018,
@@ -145,9 +120,6 @@
   pages = {836--869},
   issn = {1553-877X},
   doi = {10.1109/COMST.2017.2787460},
-  abstract = {Several enabling technologies are being explored for the fifth-generation (5G) mobile system era. The aim is to evolve a cellular network that remarkably pushes forward the limits of legacy mobile systems across all dimensions of performance metrics. One dominant technology that consistently features in the list of the 5G enablers is the millimeter-wave (mmWave) massive multiple-input-multiple-output (massive MIMO) system. It shows potentials to significantly raise user throughput, enhance spectral and energy efficiencies and increase the capacity of mobile networks using the joint capabilities of the huge available bandwidth in the mmWave frequency bands and high multiplexing gains achievable with massive antenna arrays. In this survey, we present the preliminary outcomes of extensive research on mmWave massive MIMO (as research on this subject is still in the exploratory phase) and highlight emerging trends together with their respective benefits, challenges, and proposed solutions. The survey spans broad areas in the field of wireless communications, and the objective is to point out current trends, evolving research issues and future directions on mmWave massive MIMO as a technology that will open up new frontiers of services and applications for next-generation cellular networks.},
-  keywords = {5G,5G mobile communication,Antenna arrays,Cellular networks,channel estimation,channel feedback,channel measurement,channel modeling,Market research,massive MIMO,Massive MIMO,mmWave,precoding,propagation,Wireless communication,wireless fronthaul},
-  file = {C:\Users\cailab-kjw\Zotero\storage\IQG8ZYNN\Busari et al. - 2018 - Millimeter-Wave Massive MIMO Communication for Fut.pdf}
 }
 
 @article{carbonelliSparseChannelEstimation2007,
@@ -160,9 +132,6 @@
   pages = {1743--1763},
   issn = {1558-2248},
   doi = {10.1109/TWC.2007.360376},
-  abstract = {Algorithms for the estimation of a channel whose impulse response is characterized by a large number of zero tap coefficients are developed and compared. Estimation is conducted in a two-stage fashion where an estimate of the non-zero taps is followed by channel estimation. Tap detection is transformed into an equivalent on-off keying detection problem. Several tap detection algorithms are investigated which tradeoff between complexity and performance. The proposed methods are compared to an unstructured least squares channel estimate as well as a structured approach based on matching pursuit. Three schemes in particular are developed: a sphere decoder based scheme, a Viterbi algorithm based method and a simpler iterative approach. The latter offers a better tradeoff between estimation accuracy and computational cost. A joint estimation and zero tap detection scheme is also considered. All solutions exhibit a significant gain in terms of mean-squared error and bit error rate over conventional schemes which do not exploit the sparse nature of the channel, as well as the matching pursuit approach which does endeavor to exploit the sparsity},
-  keywords = {Bit error rate,Channel estimation,Computational efficiency,Detection algorithms,Iterative decoding,Iterative methods,Least squares approximation,Matching pursuit algorithms,Signal processing algorithms,Viterbi algorithm},
-  file = {C:\Users\cailab-kjw\Zotero\storage\S34G8BWE\Carbonelli et al. - 2007 - Sparse Channel Estimation with Zero Tap Detection.pdf}
 }
 
 @article{caversAnalysisPilotSymbol1991,
@@ -175,9 +144,6 @@
   pages = {686--693},
   issn = {1939-9359},
   doi = {10.1109/25.108378},
-  abstract = {The author presents pilot-symbol-assisted modulation (PSAM) on a solid analytical basis, a feature missing from previous work. Closed-form expressions are presented for the bit error rate (BER) in binary-phase-shift-keying (BPSK) and in quadrature-phase-shift-keying (QPSK), for a tight upper bound on the symbol error rate in 16 quadrature-amplitude-modulation (16-QAM), and for the optimized receiver coefficients. The error rates obtained are lower than for differential detection for any combination of signal-to-noise ratio (SNR) and Doppler spread, and the performance is within 1 dB of a perfect reference system under slow-fading conditions and within 3 dB when the Doppler spread is 5\% of the symbol rate.{$<>$}},
-  keywords = {Binary phase shift keying,Bit error rate,Fading,Land mobile radio,Mobile communication,Peak to average power ratio,Pulse modulation,Pulse shaping methods,Rayleigh channels,Shape},
-  file = {C:\Users\cailab-kjw\Zotero\storage\GFH2LWAF\Cavers - 1991 - An analysis of pilot symbol assisted modulation fo.pdf}
 }
 
 @article{choiCompressedSensingWireless2017,
@@ -192,9 +158,6 @@
   pages = {1527--1550},
   issn = {1553-877X},
   doi = {10.1109/COMST.2017.2664421},
-  abstract = {As a paradigm to recover the sparse signal from a small set of linear measurements, compressed sensing (CS) has stimulated a great deal of interest in recent years. In order to apply the CS techniques to wireless communication systems, there are a number of things to know and also several issues to be considered. However, it is not easy to grasp simple and easy answers to the issues raised while carrying out research on CS. The main purpose of this paper is to provide essential knowledge and useful tips and tricks that wireless communication researchers need to know when designing CS-based wireless systems. First, we present an overview of the CS technique, including basic setup, sparse recovery algorithm, and performance guarantee. Then, we describe three distinct subproblems of CS, viz., sparse estimation, support identification, and sparse detection, with various wireless communication applications. We also address main issues encountered in the design of CS-based wireless communication systems. These include potentials and limitations of CS techniques, useful tips that one should be aware of, subtle points that one should pay attention to, and some prior knowledge to achieve better performance. Our hope is that this paper will be a useful guide for wireless communication researchers and even non-experts to get the gist of CS techniques.},
-  keywords = {Algorithm design and analysis,Compressed sensing,Estimation,greedy algorithm,l₁-norm,performance guarantee,Sensors,Size measurement,sparse signal,Survey & Tutorial,Tutorials,underdetermined systems,Wireless communication,wireless communication systems},
-  file = {C:\Users\cailab-kjw\Zotero\storage\SLJAW7WJ\Choi et al. - 2017 - Compressed Sensing for Wireless Communications Us.pdf}
 }
 
 @article{chunDeepLearningBasedChannel2019,
@@ -207,9 +170,6 @@
   pages = {1228--1231},
   issn = {2162-2345},
   doi = {10.1109/LWC.2019.2912378},
-  abstract = {In this letter, we propose a deep learning (DL)-based channel estimation scheme for the massive multiple-input multiple-output (MIMO) system. Unlike existing studies, we develop the channel estimation scheme for the case that the pilot length is smaller than the number of transmit antennas. The proposed scheme takes a two-stage estimation process: 1) a DL-based pilot-aided channel estimation and 2) a DL-based data-aided channel estimation. In the first stage, the pilot itself and the channel estimator are jointly designed by using both a two-layer neural network (TNN) and a deep neural network (DNN). In the second stage, the accuracy of channel estimation is further enhanced by using another DNN in an iterative manner. The simulation results demonstrate that the proposed channel estimation scheme has much better performance than the conventional channel estimation scheme. We also derive a useful insight into the optimal pilot length given the number of transmit antennas.},
-  keywords = {Antenna arrays,Channel estimation,deep learning,Deep learning,interesting,massive MIMO system,MIMO communication,Neural networks,Receivers,Transmitting antennas},
-  file = {C:\Users\cailab-kjw\Zotero\storage\GDMYWZX8\Chun et al. - 2019 - Deep Learning-Based Channel Estimation for Massive.pdf}
 }
 
 @inproceedings{chungDiffusionPosteriorSampling2022,
@@ -219,11 +179,8 @@
   date = {2022-09-29},
   url = {https://openreview.net/forum?id=OnD9zGAGT0k},
   urldate = {2025-04-27},
-  abstract = {Diffusion models have been recently studied as powerful generative inverse problem solvers, owing to their high quality reconstructions and the ease of combining existing iterative solvers. However, most works focus on solving simple linear inverse problems in noiseless settings, which significantly under-represents the complexity of real-world problems. In this work, we extend diffusion solvers to efficiently handle general noisy (non)linear inverse problems via the Laplace approximation of the posterior sampling. Interestingly, the resulting posterior sampling scheme is a blended version of diffusion sampling with the manifold constrained gradient without a strict measurement consistency projection step, yielding a more desirable generative path in noisy settings compared to the previous studies. Our method demonstrates that diffusion models can incorporate various measurement noise statistics such as Gaussian and Poisson, and also efficiently handle noisy nonlinear inverse problems such as Fourier phase retrieval and non-uniform deblurring.},
   eventtitle = {The {{Eleventh International Conference}} on {{Learning Representations}}},
   langid = {english},
-  keywords = {interesting,reading},
-  file = {C:\Users\cailab-kjw\Zotero\storage\YQL8L4YP\Chung et al. - 2022 - Diffusion Posterior Sampling for General Noisy Inv.pdf}
 }
 
 @inproceedings{cotterMatchingPursuitBased2000,
@@ -235,26 +192,22 @@
   pages = {2713-2716 vol.5},
   issn = {1520-6149},
   doi = {10.1109/ICASSP.2000.861049},
-  abstract = {In this paper, equalization of channels with large delay spread but with few nonzero taps, such as those encountered in HDTV, are considered. Exploiting the sparse nature of the channel impulse response, we propose a decision feedback equalizer (DFE) which is based on a channel estimate obtained via a matching pursuit (MP) algorithm rather than the standard least squares (LS) channel estimate. It is shown that equalizers so designed result in a large performance gain. It is also shown that while truncation of the LS channel estimate to give a sparse channel estimate leads to some performance improvement, it falls well short of the MP-based DFE. In addition, an adaptive scheme which is intermediate in complexity between the LMS and RLS is presented for updating the sparse channel estimate in a time-varying environment. This adaptive algorithm outperforms the LMS.},
   eventtitle = {2000 {{IEEE International Conference}} on {{Acoustics}}, {{Speech}}, and {{Signal Processing}} ({{Cat}}. {{No}}.{{00CH37100}})},
-  keywords = {Channel estimation,Decision feedback equalizers,Delay estimation,HDTV,Intersymbol interference,Least squares approximation,Least squares methods,Matching pursuit algorithms,Pursuit algorithms,Resonance light scattering},
-  file = {C:\Users\cailab-kjw\Zotero\storage\2KZZGSQA\Cotter and Rao - 2000 - Matching pursuit based decision-feedback equalizer.pdf}
 }
 
 @article{feslDiffusionBasedGenerativePrior2024,
   title = {Diffusion-Based Generative Prior for Low-Complexity {{MIMO}} Channel Estimation},
   author = {Fesl, Benedikt and Baur, Michael and Strasser, Florian and Joham, Michael and Utschick, Wolfgang},
   date = {2024-12},
+  year = {2024},
+  month = {dec.},
   journal = {IEEE Wirel. Commun. Lett.},
   volume = {13},
   number = {12},
   pages = {3493--3497},
   issn = {2162-2345},
   doi = {10.1109/LWC.2024.3474570},
-  abstract = {This letter proposes a novel channel estimator based on diffusion models (DMs), one of the currently top-rated generative models, with provable convergence to the mean square error (MSE)-optimal estimator. A lightweight convolutional neural network (CNN) with positional embedding of the signal-to-noise ratio (SNR) information is designed to learn the channel distribution in the sparse angular domain. Combined with an estimation strategy that avoids stochastic resampling and truncates reverse diffusion steps that account for lower SNR than the given pilot observation, the resulting DM estimator unifies low complexity and memory overhead. Numerical results exhibit better performance than state-of-the-art estimators.},
   eventtitle = {{{IEEE Wireless Communications Letters}}},
-  keywords = {/unread,channel estimation,Channel estimation,Computational modeling,Computer Science - Machine Learning,Convergence,Convolution,Diffusion model,Electrical Engineering and Systems Science - Signal Processing,generative prior,interesting,MIMO system,minimum mean square error,Noise reduction,reading,Signal to noise ratio,Training,Transforms,Vectors,Wireless communication},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\AAEQUJD5\\Fesl et al. - 2024 - Diffusion-Based Generative Prior for Low-Complexit.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\WXUHP78U\\10705115.html}
 }
 
 @article{hassibiHowMuchTraining2003,
@@ -268,10 +221,7 @@
   pages = {951--963},
   issn = {1557-9654},
   doi = {10.1109/TIT.2003.809594},
-  abstract = {Multiple-antenna wireless communication links promise very high data rates with low error probabilities, especially when the wireless channel response is known at the receiver. In practice, knowledge of the channel is often obtained by sending known training symbols to the receiver. We show how training affects the capacity of a fading channel-too little training and the channel is improperly learned, too much training and there is no time left for data transmission before the channel changes. We compute a lower bound on the capacity of a channel that is learned by training, and maximize the bound as a function of the received signal-to-noise ratio (SNR), fading coherence time, and number of transmitter antennas. When the training and data powers are allowed to vary, we show that the optimal number of training symbols is equal to the number of transmit antennas-this number is also the smallest training interval length that guarantees meaningful estimates of the channel matrix. When the training and data powers are instead required to be equal, the optimal number of symbols may be larger than the number of antennas. We show that training-based schemes can be optimal at high SNR, but suboptimal at low SNR.},
   eventtitle = {{{IEEE Transactions}} on {{Information Theory}}},
-  keywords = {Channel capacity,Data communication,Error probability,Fading,interesting,Receiving antennas,Signal to noise ratio,Throughput,Transmitters,Transmitting antennas,Wireless communication},
-  file = {C:\Users\cailab-kjw\Zotero\storage\7LFCK7AF\Hassibi and Hochwald - 2003 - How much training is needed in multiple-antenna wi.pdf}
 }
 
 @inproceedings{huangDeepLearningUL2019,
@@ -282,10 +232,7 @@
   pages = {1--6},
   issn = {1938-1883},
   doi = {10.1109/ICC.2019.8761962},
-  abstract = {One of the fundamental challenges to realize massive Multiple-Input Multiple-Output (MIMO) communications is the accurate acquisition of channel state information for a plurality of users at the base station. This is usually accomplished in the UpLink (UL) direction profiting from the time division duplexing mode. In practical base station transceivers, there exist inevitably nonlinear hardware components, like signal amplifiers and various analog filters, which complicates the calibration task. To deal with this challenge, we design a deep neural network for channel calibration between the UL and DownLink (DL) directions. During the initial training phase, the deep neural network is trained from both UL and DL channel measurements. We then leverage the trained deep neural network with the instantaneously estimated UL channel to calibrate the DL one, which is not observable during the UL transmission phase. Our numerical results confirm the merits of the proposed approach, and show that it can achieve performance comparable to conventional approaches, like the Agros method and methods based on least squares, that however assume linear hardware behavior models. More importantly, considering generic nonlinear relationships between the UL and DL channels, it is demonstrated that our deep neural network approach exhibits robust performance, even when the number of training sequences is limited.},
   eventtitle = {{{ICC}} 2019 - 2019 {{IEEE International Conference}} on {{Communications}} ({{ICC}})},
-  keywords = {Antennas,Calibration,Channel estimation,Deep learning,Hardware,MIMO communication,Training},
-  file = {C:\Users\cailab-kjw\Zotero\storage\KR2MXPU8\Huang et al. - 2019 - Deep Learning for ULDL Channel Calibration in Gen.pdf}
 }
 
 @article{huangIterativeChannelEstimation2019,
@@ -298,9 +245,6 @@
   pages = {245--259},
   issn = {1941-0476},
   doi = {10.1109/TSP.2018.2879620},
-  abstract = {We propose an iterative channel estimation algorithm based on the least square estimation (LSE) and sparse message passing (SMP) algorithm for the millimeter wave (mmWave) MIMO systems. The channel coefficients of the mmWave MIMO are approximately modeled as a Bernoulli–Gaussian distribution and the channel matrix is sparse with only a few nonzero entries. By leveraging the advantage of sparseness, we propose an algorithm that iteratively detects the exact locations and values of nonzero entries of the sparse channel matrix. At each iteration, the locations are detected by the SMP, and values are estimated with the LSE. We also analyze the Cramér–Rao Lower Bound (CLRB), and show that the proposed algorithm is a minimum variance unbiased estimator under the assumption that we have the partial priori knowledge of the channel. Furthermore, we employ the Gaussian approximation for message densities under density evolution to simplify the analysis of the algorithm, which provides a simple method to predict the performance of the proposed algorithm. Numerical experiments show that the proposed algorithm has much better performance than the existing sparse estimators, especially when the channel is sparse. In addition, our proposed algorithm converges to the CRLB of the genie-aided estimation of sparse channels with only five turbo iterations.},
-  keywords = {Antenna arrays,Approximation algorithms,Channel estimation,Cramér–Rao lower bound,Gaussian approximation,Gaussian–Bernoulli distribution,iterative channel estimation,Millimeter wave,minimum variance unbiased estimator,Radio frequency,Receivers,Signal processing algorithms,sparse message passing,Transmitters},
-  file = {C:\Users\cailab-kjw\Zotero\storage\6F46JLFP\Huang et al. - 2019 - Iterative Channel Estimation Using LSE and Sparse .pdf}
 }
 
 @article{huDeepLearningChannel2021,
@@ -314,10 +258,7 @@
   pages = {2398--2412},
   issn = {1558-2248},
   doi = {10.1109/TWC.2020.3042074},
-  abstract = {Deep learning (DL) has emerged as an effective tool for channel estimation in wireless communication systems, especially under some imperfect environments. However, even with such unprecedented success, DL methods are often regarded as black boxes and are lack of explanations on their internal mechanisms, which severely limits their further improvement and extension. In this paper, we present preliminary theoretical analysis on DL based channel estimation for single-input multiple-output (SIMO) systems to understand and interpret its internal mechanisms. As deep neural network (DNN) with rectified linear unit (ReLU) activation function is mathematically equivalent to a piecewise linear function, the corresponding DL estimator can achieve universal approximation to a large family of functions by making efficient use of piecewise linearity. We demonstrate that DL based channel estimation does not restrict to any specific signal model and asymptotically approaches to the minimum mean-squared error (MMSE) estimation in various scenarios without requiring any prior knowledge of channel statistics. Therefore, DL based channel estimation outperforms or is at least comparable with traditional channel estimation, depending on the types of channels. Simulation results confirm the accuracy of the proposed interpretation and demonstrate the effectiveness of DL based channel estimation under both linear and nonlinear signal models.},
   eventtitle = {{{IEEE Transactions}} on {{Wireless Communications}}},
-  keywords = {/unread,channel estimation,Channel estimation,Estimation,Explainable deep learning,input space partition,Neural networks,Neurons,reading,ReLU,SIMO communication,Training,Wireless communication},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\QN6R5D4A\\Hu et al_2021_Deep Learning for Channel Estimation.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\BRB5YU97\\9288911.html}
 }
 
 @book{kayFundamentalsStatisticalSignal1993,
@@ -328,12 +269,9 @@
   edition = {1st edition},
   publisher = {Pearson},
   location = {Upper Saddle River, NJ},
-  abstract = {For practicing engineers and scientists who design and analyze signal processing systems, i.e., to extract information from noisy signals ― radar engineer, sonar engineer, geophysicist, oceanographer, biomedical engineer, communications engineer, economist, statistician, physicist, etc.A unified presentation of parameter estimation for those involved in the design and implementation of statistical signal processing algorithms.},
   isbn = {978-0-13-345711-7},
   langid = {english},
   pagetotal = {608},
-  keywords = {/unread},
-  file = {C:\Users\cailab-kjw\Zotero\storage\Q6QRFQVI\Kay_1993_Fundamentals of Statistical Signal Processing, Volume I.pdf}
 }
 
 @article{kimDeepLearningaidedWireless2023,
@@ -348,9 +286,6 @@
   pages = {61--75},
   issn = {1976-5541},
   doi = {10.23919/JCN.2022.000037},
-  abstract = {Deep learning (DL), a branch of artificial intelligence (AI) techniques, has shown great promise in various disciplines such as image classification and segmentation, speech recognition, language translation, among others. This remarkable success of DL has stimulated increasing interest in applying this paradigm to wireless channel estimation in recent years. Since DL principles are inductive in nature and distinct from the conventional rule-based algorithms, when one tries to use DL technique to the channel estimation, one might easily get stuck and confused by so many knobs to control and small details to be aware of. The primary purpose of this paper is to discuss key issues and possible solutions in DL-based wireless channel estimation and channel state information (CSI) feedback including the DL model selection, training data acquisition, and neural network design for 6G. Specifically, we present several case studies together with the numerical experiments to demonstrate the effectiveness of the DL-based wireless channel estimation framework.},
-  keywords = {Channel estimation,channel state information (CSI) feedback,deep learning (DL),interesting,Millimeter wave communication,MIMO communication,Neural networks,Sparse matrices,Wireless communication,Wireless sensor networks},
-  file = {C:\Users\cailab-kjw\Zotero\storage\46ICFY9E\Kim et al. - 2023 - Towards deep learning-aided wireless channel estim.pdf}
 }
 
 @article{liChannelEstimationPerformance2017,
@@ -363,9 +298,6 @@
   pages = {4075--4089},
   issn = {1941-0476},
   doi = {10.1109/TSP.2017.2706179},
-  abstract = {This paper considers channel estimation and system performance for the uplink of a single-cell massive multiple-input multiple-output system. Each receiver antenna of the base station is assumed to be equipped with a pair of one-bit analog-to-digital converters to quantize the real and imaginary part of the received signal. We first propose an approach for channel estimation that is applicable for both flat and frequency-selective fading, based on the Bussgang decomposition that reformulates the nonlinear quantizer as a linear function with identical first- and second-order statistics. The resulting channel estimator outperforms previously proposed approaches across all SNRs. We then derive closed-form expressions for the achievable rate in flat fading channels assuming low SNR and a large number of users for the maximal ratio and zero forcing receivers that takes channel estimation error due to both noise and one-bit quantization into account. The closed-form expressions, in turn, allow us to obtain insight into important system design issues such as optimal resource allocation, maximal sum spectral efficiency, overall energy efficiency, and number of antennas. Numerical results are presented to verify our analytical results and demonstrate the benefit of optimizing system performance accordingly.},
-  keywords = {Antennas,channel estimation,Channel estimation,large-scale antenna systems,Massive MIMO,MIMO,one-bit ADCs,power allocation,Quantization (signal),Resource management,Signal to noise ratio,Uplink},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\9PE9CM75\\Li et al. - 2017 - Channel Estimation and Performance Analysis of One.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\YRKLNBHE\\Li et al. - 2017 - Channel Estimation and Performance Analysis of One.pdf}
 }
 
 @article{linEstimationBroadbandMultiuser2018,
@@ -378,9 +310,6 @@
   pages = {3959--3973},
   issn = {1558-2248},
   doi = {10.1109/TWC.2018.2818142},
-  abstract = {In millimeter wave (mm-wave) massive multiple-input multiple-output (MIMO) systems, acquiring accurate channel state information is essential for efficient beamforming (BF) and multiuser interference cancellation, which is a challenging task since a low signal-to-noise ratio is encountered before BF in large antenna arrays. The mm-wave channel exhibits a 3-D clustered structure in the virtual angle of arrival (AOA), angle of departure (AOD), and delay domain that is imposed by the effect of power leakage, angular spread, and cluster duration. We extend the approximate message passing (AMP) with a nearest neighbor pattern learning algorithm for improving the attainable channel estimation performance, which adaptively learns and exploits the clustered structure in the 3-D virtual AOA-AOD-delay domain. The proposed method is capable of approaching the performance bound described by the state evolution based on vector AMP framework, and our simulation results verify its superiority in mm-wave systems associated with a broad bandwidth.},
-  keywords = {Approximate message passing,broadband,Broadband antennas,channel estimation,Channel estimation,Clustering algorithms,Delays,Indexes,mm-wave,NIST,OFDM,sparse structure},
-  file = {C:\Users\cailab-kjw\Zotero\storage\NP7KSZFA\Lin et al. - 2018 - Estimation of Broadband Multiuser Millimeter Wave .pdf}
 }
 
 @article{luOverviewMassiveMIMO2014,
@@ -394,9 +323,6 @@
   pages = {742--758},
   issn = {1941-0484},
   doi = {10.1109/JSTSP.2014.2317671},
-  abstract = {Massive multiple-input multiple-output (MIMO) wireless communications refers to the idea equipping cellular base stations (BSs) with a very large number of antennas, and has been shown to potentially allow for orders of magnitude improvement in spectral and energy efficiency using relatively simple (linear) processing. In this paper, we present a comprehensive overview of state-of-the-art research on the topic, which has recently attracted considerable attention. We begin with an information theoretic analysis to illustrate the conjectured advantages of massive MIMO, and then we address implementation issues related to channel estimation, detection and precoding schemes. We particularly focus on the potential impact of pilot contamination caused by the use of non-orthogonal pilot sequences by users in adjacent cells. We also analyze the energy efficiency achieved by massive MIMO systems, and demonstrate how the degrees of freedom provided by massive MIMO systems enable efficient single-carrier transmission. Finally, the challenges and opportunities associated with implementing massive MIMO in future wireless communications systems are discussed.},
-  keywords = {Antennas,Channel estimation,Downlink,energy efficiency,interesting,massive MIMO systems,MIMO,orthogonal frequency division multiplexing (OFDM),pilot contamination,precoding and detection,Receivers,single-carrier transmission,spectral efficiency,time-division duplexing (TDD),Uplink,Vectors},
-  file = {C:\Users\cailab-kjw\Zotero\storage\M7EYKCQG\Lu et al. - 2014 - An Overview of Massive MIMO Benefits and Challeng.pdf}
 }
 
 @article{maDataAidedChannelEstimation2014,
@@ -409,9 +335,6 @@
   pages = {3111--3124},
   issn = {1941-0476},
   doi = {10.1109/TSP.2014.2321120},
-  abstract = {This paper is concerned with a uplink scheme for multicell large antenna systems. We study a channel estimation technique where partially decoded data is used to estimate the channel. We show that there are two types of interference components in this scheme that do not vanish even when the number of antennas grows to infinity. The first type, referred to as cross-contamination, is due to the correlation among the data signals from different users. The second type, referred to as self-contamination, is due to the dependency between the channel estimate and the estimation error. Cross contamination is in principle similar to pilot contamination in a conventional pilot-based channel estimation scheme, while self-contamination is unique for the data-aided scheme. For efficient use of the channel, the data part in a signaling frame is typically much longer than the pilot part for a practical system. Consequently, compared with pilot signals, data signals naturally have lower cross correlation. This fact reduces the cross-contamination effect in the data-aided scheme. Furthermore, self-contamination can be effectively suppressed by iterative processing. These results are confirmed by both analyses and simulations.},
-  keywords = {Antennas,Channel estimation,Contamination,Correlation,Covariance matrices,Data-aided channel estimation,Estimation error,Interference,iterative channel estimation and signal detection,large antenna system,massive MIMO system,pilot contamination},
-  file = {C:\Users\cailab-kjw\Zotero\storage\DY64E3CB\Ma and Ping - 2014 - Data-Aided Channel Estimation in Large Antenna Sys.pdf}
 }
 
 @article{maOptimalTrainingBlock2003,
@@ -424,9 +347,6 @@
   pages = {1351--1366},
   issn = {1941-0476},
   doi = {10.1109/TSP.2003.810304},
-  abstract = {High data rates give rise to frequency-selective propagation, whereas carrier frequency-offsets and mobility-induced Doppler shifts introduce time-selectivity in wireless links. To mitigate the resulting time- and frequency-selective (or doubly selective) channels, optimal training sequences have been designed only for special cases: pilot symbol assisted modulation (PSAM) for time-selective channels and pilot tone-assisted orthogonal frequency division multiplexing (OFDM) for frequency-selective channels. Relying on a basis expansion channel model, we design low-complexity optimal PSAM for block transmissions over doubly selective channels. The optimality in designing our PSAM parameters consists of maximizing a tight lower bound on the average channel capacity that is shown to be equivalent to the minimization of the minimum mean-square channel estimation error. Numerical results corroborate our theoretical designs.},
-  keywords = {Channel capacity,Channel estimation,Channel state information,Diversity methods,Doppler shift,Fading,Frequency estimation,Mutual information,OFDM modulation,System performance},
-  file = {C:\Users\cailab-kjw\Zotero\storage\DMJEIL89\Ma et al. - 2003 - Optimal training for block transmissions over doub.pdf}
 }
 
 @article{mendez-rialHybridMIMOArchitectures2016,
@@ -439,24 +359,20 @@
   pages = {247--267},
   issn = {2169-3536},
   doi = {10.1109/ACCESS.2015.2514261},
-  abstract = {Hybrid analog/digital multiple-input multiple-output architectures were recently proposed as an alternative for fully digital-precoding in millimeter wave wireless communication systems. This is motivated by the possible reduction in the number of RF chains and analog-to-digital converters. In these architectures, the analog processing network is usually based on variable phase shifters. In this paper, we propose hybrid architectures based on switching networks to reduce the complexity and the power consumption of the structures based on phase shifters. We define a power consumption model and use it to evaluate the energy efficiency of both structures. To estimate the complete MIMO channel, we propose an open-loop compressive channel estimation technique that is independent of the hardware used in the analog processing stage. We analyze the performance of the new estimation algorithm for hybrid architectures based on phase shifters and switches. Using the estimate, we develop two algorithms for the design of the hybrid combiner based on switches and analyze the achieved spectral efficiency. Finally, we study the tradeoffs between power consumption, hardware complexity, and spectral efficiency for hybrid architectures based on phase shifting networks and switching networks. Numerical results show that architectures based on switches obtain equal or better channel estimation performance to that obtained using phase shifters, while reducing hardware complexity and power consumption. For equal power consumption, all the hybrid architectures provide similar spectral efficiencies.},
-  keywords = {Antenna arrays,channel estimation,Channel estimation,hybrid architecture,Hybrid systems,interesting,Millimeter wave,Millimeter wave communication,MIMO,Phase shifters,Power demand,precoding,Radio frequency,switches,Switches},
-  file = {C:\Users\cailab-kjw\Zotero\storage\YTRPTIR9\Méndez-Rial et al. - 2016 - Hybrid MIMO Architectures for Millimeter Wave Comm.pdf}
 }
 
 @article{minnOptimalTrainingSignals2006,
   title = {Optimal Training Signals for {{MIMO OFDM}} Channel Estimation},
   author = {Minn, Hlaing and Al-Dhahir, N.},
   date = {2006-05},
+  year= {2006},
+  month = {may},
   journal = {IEEE Trans. Wirel. Commun.},
   volume = {5},
   number = {5},
   pages = {1158--1168},
   issn = {1558-2248},
   doi = {10.1109/TWC.2006.1633369},
-  abstract = {This paper presents general classes of optimal training signals for the estimation of frequency-selective channels in MIMO OFDM systems. Basic properties of the discrete Fourier transform are used to derive the optimal training signals which minimize the channel estimation mean square error. Both single and multiple OFDM training symbols are considered. Several optimal pilot tone allocations across the transmit antennas are presented and classified as frequency-division multiplexing, time-division multiplexing, code-division multiplexing in the frequency-domain, code-division multiplexing in the time-domain, and combinations thereof. All existing optimal training signals in the literature are special cases of the presented optimal training signals and our designs can be applied to pilot-only schemes as well as pilot-data-multiplexed schemes.},
-  keywords = {Channel estimation,Code division multiplexing,Discrete Fourier transforms,Frequency division multiplexing,Frequency estimation,Mean square error methods,MIMO,OFDM,Time domain analysis,Transmitting antennas},
-  file = {C:\Users\cailab-kjw\Zotero\storage\EJRLNCBF\Minn and Al-Dhahir - 2006 - Optimal training signals for MIMO OFDM channel est.pdf}
 }
 
 @article{moChannelEstimationBroadband2018,
@@ -469,9 +385,6 @@
   pages = {1141--1154},
   issn = {1941-0476},
   doi = {10.1109/TSP.2017.2781644},
-  abstract = {We develop a broadband channel estimation algorithm for millimeter wave (mmWave) multiple input multiple output (MIMO) systems with few-bit analog-to-digital converters (ADCs). Our methodology exploits the joint sparsity of the mmWave MIMO channel in the angle and delay domains. We formulate the estimation problem as a noisy quantized compressed-sensing problem and solve it using efficient approximate message passing (AMP) algorithms. In particular, we model the angle-delay coefficients using a Bernoulli-Gaussian-mixture distribution with unknown parameters and use the expectation-maximization forms of the generalized AMP and vector AMP algorithms to simultaneously learn the distributional parameters and compute approximately minimum mean-squared error (MSE) estimates of the channel coefficients. We design a training sequence that allows fast, fast Fourier transform based implementation of these algorithms while minimizing peak-to-average power ratio at the transmitter, making our methods scale efficiently to large numbers of antenna elements and delays. We present the results of a detailed simulation study that compares our algorithms to several benchmarks. Our study investigates the effect of SNR, training length, training type, ADC resolution, and runtime on channel estimation MSE, mutual information, and achievable rate. It shows that, in a mmWave MIMO system, the methods we propose to exploit joint angle-delay sparsity allow 1-bit ADCs to perform comparably to infinite-bit ADCs at low SNR, and 4-bit ADCs to perform comparably to infinite-bit ADCs at medium SNR.},
-  keywords = {abstract,approximate message passing,Broadband antennas,Broadband communication,channel estimation,Channel estimation,Low resolution analog-to-digital converter,millimeter wave,MIMO,Quantization (signal),Signal processing algorithms,Training},
-  file = {C:\Users\cailab-kjw\Zotero\storage\WJ7SUIRD\Mo et al. - 2018 - Channel Estimation in Broadband Millimeter Wave MI.pdf}
 }
 
 @inproceedings{moChannelEstimationMillimeter2014,
@@ -482,10 +395,7 @@
   pages = {957--961},
   issn = {1058-6393},
   doi = {10.1109/ACSSC.2014.7094595},
-  abstract = {We develop channel estimation agorithms for millimeter wave (mmWave) multiple input multiple output (MIMO) systems with one-bit analog-to-digital converters (ADCs). Since the mmWave MIMO channel is sparse due to the propagation characteristics, the estimation problem is formulated as a one-bit compressed sensing problem. We propose a modified EM algorithm that exploits sparsity and has better performance than the conventional EM algorithm. We also present a second solution using the generalized approximate message passing (GAMP) algorithm to solve this optimization problem. The simulation results show that GAMP can reduce mean squared error in the important low and medium SNR regions.},
   eventtitle = {2014 48th {{Asilomar Conference}} on {{Signals}}, {{Systems}} and {{Computers}}},
-  keywords = {abstract,Channel estimation,Matching pursuit algorithms,MIMO,Quantization (signal),Receivers,Signal to noise ratio,Training},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\EEFZT74R\\Mo et al. - 2014 - Channel estimation in millimeter wave MIMO systems.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\JKLYR2BW\\Mo et al. - 2014 - Channel estimation in millimeter wave MIMO systems.pdf}
 }
 
 @article{negiPilotToneSelection1998,
@@ -498,9 +408,6 @@
   pages = {1122--1128},
   issn = {1558-4127},
   doi = {10.1109/30.713244},
-  abstract = {Channel estimation for mobile OFDM systems requires transmission of pilot tones. This paper addresses the important issue of selecting these pilot tones, so as to achieve a good quality estimate. It is shown that the best set of tones to be used are those which are equally spaced. Furthermore, it is shown using the case of a first order Markov channel, that it is more efficient to use a few pilot tones in all symbols, rather than use all tones as pilot tones in some symbols.},
-  keywords = {Blind equalizers,Channel estimation,Frequency domain analysis,Frequency estimation,Frequency response,Information systems,Laboratories,OFDM,Time-varying channels,Training data},
-  file = {C:\Users\cailab-kjw\Zotero\storage\ECBRW7HT\Negi and Cioffi - 1998 - Pilot tone selection for channel estimation in a m.pdf}
 }
 
 @inproceedings{pengImprovingDiffusionModels2024,
@@ -513,11 +420,8 @@
   issn = {2640-3498},
   url = {https://proceedings.mlr.press/v235/peng24h.html},
   urldate = {2025-07-11},
-  abstract = {Recent diffusion models provide a promising zero-shot solution to noisy linear inverse problems without retraining for specific inverse problems. In this paper, we reveal that recent methods can be uniformly interpreted as employing a Gaussian approximation with hand-crafted isotropic covariance for the intractable denoising posterior to approximate the conditional posterior mean. Inspired by this finding, we propose to improve recent methods by using more principled covariance determined by maximum likelihood estimation. To achieve posterior covariance optimization without retraining, we provide general plug-and-play solutions based on two approaches specifically designed for leveraging pre-trained models with and without reverse covariance. We further propose a scalable method for learning posterior covariance prediction based on representation with orthonormal basis. Experimental results demonstrate that the proposed methods significantly enhance reconstruction performance without requiring hyperparameter tuning.},
   eventtitle = {International {{Conference}} on {{Machine Learning}}},
   langid = {english},
-  keywords = {interesting,reading},
-  file = {C:\Users\cailab-kjw\Zotero\storage\WUKUQ92C\Peng et al. - 2024 - Improving Diffusion Models for Inverse Problems Us.pdf}
 }
 
 @article{piIntroductionMillimeterwaveMobile2011,
@@ -530,9 +434,6 @@
   pages = {101--107},
   issn = {1558-1896},
   doi = {10.1109/MCOM.2011.5783993},
-  abstract = {Almost all mobile communication systems today use spectrum in the range of 300 MHz-3 GHz. In this article, we reason why the wireless community should start looking at the 3-300 GHz spectrum for mobile broadband applications. We discuss propagation and device technology challenges associated with this band as well as its unique advantages for mobile communication. We introduce a millimeter-wave mobile broadband (MMB) system as a candidate next generation mobile communication system. We demonstrate the feasibility for MMB to achieve gigabit-per-second data rates at a distance up to 1 km in an urban mobile environment. A few key concepts in MMB network architecture such as the MMB base station grid, MMB interBS backhaul link, and a hybrid MMB + 4G system are described. We also discuss beamforming techniques and the frame structure of the MMB air interface.},
-  keywords = {Base stations,Broadband communication,Computer architecture,Millimeter wave communication,Mobile communication},
-  file = {C:\Users\cailab-kjw\Zotero\storage\TP3NCHI8\Pi and Khan - 2011 - An introduction to millimeter-wave mobile broadban.pdf}
 }
 
 @inproceedings{ranganGeneralizedApproximateMessage2011,
@@ -543,10 +444,7 @@
   pages = {2168--2172},
   issn = {2157-8117},
   doi = {10.1109/ISIT.2011.6033942},
-  abstract = {We consider the estimation of a random vector observed through a linear transform followed by a componentwise probabilistic measurement channel. Although such linear mixing estimation problems are generally highly non-convex, Gaussian approximations of belief propagation (BP) have proven to be computationally attractive and highly effective in a range of applications. Recently, Bayati and Montanari have provided a rigorous and extremely general analysis of a large class of approximate message passing (AMP) algorithms that includes many Gaussian approximate BP methods. This paper extends their analysis to a larger class of algorithms to include what we call generalized AMP (G-AMP). G-AMP incorporates general (possibly non-AWGN) measurement channels. Similar to the AWGN output channel case, we show that the asymptotic behavior of the G-AMP algorithm under large i.i.d. Gaussian transform matrices is described by a simple set of state evolution (SE) equations. The general SE equations recover and extend several earlier results, including SE equations for approximate BP on general output channels by Guo and Wang.},
   eventtitle = {2011 {{IEEE International Symposium}} on {{Information Theory}}},
-  keywords = {Algorithm design and analysis,Approximation algorithms,Approximation methods,belief propagation,Belief propagation,compressed sensing,Equations,estimation,Estimation,Mathematical model,Optimization,random matrices},
-  file = {C:\Users\cailab-kjw\Zotero\storage\2R7E4Q9H\Rangan - 2011 - Generalized approximate message passing for estima.pdf}
 }
 
 @article{ranganMillimeterWaveCellularWireless2014,
@@ -560,9 +458,6 @@
   pages = {366--385},
   issn = {1558-2256},
   doi = {10.1109/JPROC.2014.2299397},
-  abstract = {Millimeter-wave (mmW) frequencies between 30 and 300 GHz are a new frontier for cellular communication that offers the promise of orders of magnitude greater bandwidths combined with further gains via beamforming and spatial multiplexing from multielement antenna arrays. This paper surveys measurements and capacity studies to assess this technology with a focus on small cell deployments in urban environments. The conclusions are extremely encouraging; measurements in New York City at 28 and 73 GHz demonstrate that, even in an urban canyon environment, significant non-line-of-sight (NLOS) outdoor, street-level coverage is possible up to approximately 200 m from a potential low-power microcell or picocell base station. In addition, based on statistical channel models from these measurements, it is shown that mmW systems can offer more than an order of magnitude increase in capacity over current state-of-the-art 4G cellular networks at current cell densities. Cellular systems, however, will need to be significantly redesigned to fully achieve these gains. Specifically, the requirement of highly directional and adaptive transmissions, directional isolation between links, and significant possibilities of outage have strong implications on multiple access, channel structure, synchronization, and receiver design. To address these challenges, the paper discusses how various technologies including adaptive beamforming, multihop relaying, heterogeneous network architectures, and carrier aggregation can be leveraged in the mmW context.},
-  keywords = {28 GHz,3GPP LTE,73 GHz,Antennas,Atmospheric measurements,Bandwidth,Cellular networks,Cellular systems,channel models,Millimeter wave communication,millimeter-wave radio,Radio spectrum management,Shadow mapping,urban deployments,wireless propagation},
-  file = {C:\Users\cailab-kjw\Zotero\storage\UYZCXWDD\Rangan et al. - 2014 - Millimeter-Wave Cellular Wireless Networks Potent.pdf}
 }
 
 @article{ranganVectorApproximateMessage2019,
@@ -575,9 +470,6 @@
   pages = {6664--6684},
   issn = {1557-9654},
   doi = {10.1109/TIT.2019.2916359},
-  abstract = {The standard linear regression (SLR) problem is to recover a vector x0 from noisy linear observations y = Ax0 + w. The approximate message passing (AMP) algorithm proposed by Donoho, Maleki, and Montanari is a computationally efficient iterative approach to SLR that has a remarkable property: for large i.i.d. sub-Gaussian matrices A, its per-iteration behavior is rigorously characterized by a scalar state-evolution whose fixed points, when unique, are Bayes optimal. The AMP algorithm, however, is fragile in that even small deviations from the i.i.d. sub-Gaussian model can cause the algorithm to diverge. This paper considers a “vector AMP” (VAMP) algorithm and shows that VAMP has a rigorous scalar state-evolution that holds under a much broader class of large random matrices A: those that are right-orthogonally invariant. After performing an initial singular value decomposition (SVD) of A, the per-iteration complexity of VAMP is similar to that of AMP. In addition, the fixed points of VAMP's state evolution are consistent with the replica prediction of the minimum mean-squared error derived by Tulino, Caire, Verdú, and Shamai. Numerical experiments are used to confirm the effectiveness of VAMP and its consistency with state-evolution predictions.},
-  keywords = {Approximation algorithms,Belief propagation,compressive sensing,Covariance matrices,inference algorithms,Linear regression,message passing,Message passing,Minimization,random matrices,Signal processing algorithms,Standards},
-  file = {C:\Users\cailab-kjw\Zotero\storage\4LKRZTJS\Rangan et al. - 2019 - Vector Approximate Message Passing.pdf}
 }
 
 @article{rappaportWirelessCommunicationsApplications2019,
@@ -590,9 +482,6 @@
   pages = {78729--78757},
   issn = {2169-3536},
   doi = {10.1109/ACCESS.2019.2921522},
-  abstract = {Frequencies from 100 GHz to 3 THz are promising bands for the next generation of wireless communication systems because of the wide swaths of unused and unexplored spectrum. These frequencies also offer the potential for revolutionary applications that will be made possible by new thinking, and advances in devices, circuits, software, signal processing, and systems. This paper describes many of the technical challenges and opportunities for wireless communication and sensing applications above 100 GHz, and presents a number of promising discoveries, novel approaches, and recent results that will aid in the development and implementation of the sixth generation (6G) of wireless networks, and beyond. This paper shows recent regulatory and standard body rulings that are anticipating wireless products and services above 100 GHz and illustrates the viability of wireless cognition, hyper-accurate position location, sensing, and imaging. This paper also presents approaches and results that show how long distance mobile communications will be supported to above 800 GHz since the antenna gains are able to overcome air-induced attenuation, and present methods that reduce the computational complexity and simplify the signal processing used in adaptive antenna arrays, by exploiting the Special Theory of Relativity to create a cone of silence in over-sampled antenna arrays that improve performance for digital phased array antennas. Also, new results that give insights into power efficient beam steering algorithms, and new propagation and partition loss models above 100 GHz are given, and promising imaging, array processing, and position location results are presented. The implementation of spatial consistency at THz frequencies, an important component of channel modeling that considers minute changes and correlations over space, is also discussed. This paper offers the first in-depth look at the vast applications of THz wireless products and applications and provides approaches for how to reduce power and increase performance across several problem domains, giving early evidence that THz techniques are compelling and available for future wireless communications.},
-  keywords = {5G,6G,Antenna arrays,array processing,Bandwidth,channel modeling,channel sounder,Cognition,Communication system security,cone of silence,D-band,digital beamformer,digital phased arrays,imaging,Imaging,millimeter wave,mmWave,network offloading,position location,propagation measurements,scattering theory,signal processing for THz,Terahertz (THz),THz applications,wireless cognition,Wireless communication,Wireless sensor networks},
-  file = {C:\Users\cailab-kjw\Zotero\storage\JSCIVMRG\Rappaport et al. - 2019 - Wireless Communications and Applications Above 100.pdf}
 }
 
 @inproceedings{routFirstOrderTweedieSolving2024,
@@ -604,10 +493,7 @@
   pages = {9472--9481},
   issn = {2575-7075},
   doi = {10.1109/CVPR52733.2024.00905},
-  abstract = {Sampling from the posterior distribution in latent diffusion models for inverse problems is computationally challenging. Existing methods often rely on Tweedie's first-order moments that tend to induce biased results [32]. Second-order approximations are computationally prohibitive, making standard reverse diffusion processes in-tractable for posterior sampling. We present Second-order Tweedie sampler from Surrogate Loss (STSL), a novel sampler offering efficiency comparable to first-order Tweedie while enabling tractable reverse processes using second-order approximation. Theoretical results reveal that our approach establishes a lower bound through a surrogate loss and enables a tractable reverse process using the trace of the Hessian with only \textbackslash mathcalO(1) compute. We show STSL out-performs SoTA solvers PSLD [43] and P2L [10] by reducing neural function evaluations by 4X and 8X, respectively, while enhancing sampling quality on FFHQ, ImageNet, and COCO benchmarks. Moreover, STSL extends to text-guided image editing, effectively mitigating residual distortions in corrupted images. To our best knowledge, this is the first work to offer an efficient second-order approximation for solving inverse problems using latent diffusion, which further enables editing real-world images with corruptions.},
   eventtitle = {2024 {{IEEE}}/{{CVF Conference}} on {{Computer Vision}} and {{Pattern Recognition}} ({{CVPR}})},
-  keywords = {Benchmark testing,Computer vision,Diffusion models,Diffusion processes,Distortion,Gaussian deblur,Generative models,Inpainting,Inverse problems,Inversion problems,Latent diffusion models,Motion deblur,Pattern recognition,Second-order Tweedie,Super-resolution},
-  file = {C:\Users\cailab-kjw\Zotero\storage\EVT4SEXX\Rout et al. - 2024 - Beyond First-Order Tweedie Solving Inverse Proble.pdf}
 }
 
 @inproceedings{rozetLearningDiffusionPriors2024,
@@ -615,13 +501,11 @@
   booktitle = {Thirty-{{Eighth Annu}}. {{Conf}}. {{Neural Inf}}. {{Process}}. {{Syst}}.},
   author = {Rozet, François and Andry, Gérôme and Lanusse, Francois and Louppe, Gilles},
   date = {2024-11-06},
-  url = {https://openreview.net/forum?id=7v88Fh6iSM&referrer=%5Bthe%20profile%20of%20Gilles%20Louppe%5D(%2Fprofile%3Fid%3D~Gilles_Louppe1)},
+  year = {2024},
+  month = {nov.},
   urldate = {2025-07-05},
-  abstract = {Diffusion models recently proved to be remarkable priors for Bayesian inverse problems. However, training these models typically requires access to large amounts of clean data, which could prove difficult in some settings. In this work, we present a novel method based on the expectation-maximization algorithm for training diffusion models from incomplete and noisy observations only. Unlike previous works, our method leads to proper diffusion models, which is crucial for downstream tasks. As part of our method, we propose and motivate an improved posterior sampling scheme for unconditional diffusion models. We present empirical evidence supporting the effectiveness of our method.},
   eventtitle = {The {{Thirty-eighth Annual Conference}} on {{Neural Information Processing Systems}}},
   langid = {english},
-  keywords = {interesting},
-  file = {C:\Users\cailab-kjw\Zotero\storage\QE3YHQLN\Rozet et al. - 2024 - Learning Diffusion Priors from Observations by Exp.pdf}
 }
 
 @article{sayeedDeconstructingMultiantennaFading2002,
@@ -634,9 +518,6 @@
   pages = {2563--2579},
   issn = {1941-0476},
   doi = {10.1109/TSP.2002.803324},
-  abstract = {Accurate and tractable channel modeling is critical to realizing the full potential of antenna arrays in wireless communications. Current approaches represent two extremes: idealized statistical models representing a rich scattering environment and parameterized physical models that describe realistic scattering environments via the angles and gains associated with different propagation paths. However, simple rules that capture the effects of scattering characteristics on channel capacity and diversity are difficult to infer from existing models. We propose an intermediate virtual channel representation that captures the essence of physical modeling and provides a simple geometric interpretation of the scattering environment. The virtual representation corresponds to a fixed coordinate transformation via spatial basis functions defined by fixed virtual angles. We show that in an uncorrelated scattering environment, the elements of the channel matrix form a segment of a stationary process and that the virtual channel coefficients are approximately uncorrelated samples of the underlying spectral representation. For any scattering environment, the virtual channel matrix clearly reveals the two key factors affecting capacity: the number of parallel channels and the level of diversity. The concepts of spatial zooming and aliasing are introduced to provide a transparent interpretation of the effect of antenna spacing on channel statistics and capacity. Numerical results are presented to illustrate various aspects of the virtual framework.},
-  keywords = {abstract,Antenna arrays,Antennas and propagation,Channel capacity,Fading,interesting,MIMO,Receiving antennas,Scattering parameters,Solid modeling,Statistics,Wireless communication},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\THU2NHVW\\Sayeed - 2002 - Deconstructing multiantenna fading channels.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\V5T96TY7\\Sayeed - 2002 - Deconstructing multiantenna fading channels.pdf}
 }
 
 @inproceedings{songPseudoinverseGuidedDiffusionModels2022,
@@ -646,11 +527,8 @@
   date = {2022-09-29},
   url = {https://openreview.net/forum?id=9_gsMA8MRKQ},
   urldate = {2025-05-11},
-  abstract = {Diffusion models have become competitive candidates for solving various inverse problems. Models trained for specific inverse problems work well but are limited to their particular use cases, whereas methods that use problem-agnostic models are general but often perform worse empirically. To address this dilemma, we introduce Pseudoinverse-guided Diffusion Models (\$\textbackslash Pi\$GDM), an approach that uses problem-agnostic models to close the gap in performance. \$\textbackslash Pi\$GDM directly estimates conditional scores from the measurement model of the inverse problem without additional training. It can address inverse problems with noisy, non-linear, or even non-differentiable measurements, in contrast to many existing approaches that are limited to noiseless linear ones. We illustrate the empirical effectiveness of \$\textbackslash Pi\$GDM on several image restoration tasks, including super-resolution, inpainting and JPEG restoration. On ImageNet, \$\textbackslash Pi\$GDM is competitive with state-of-the-art diffusion models trained on specific tasks, and is the first to achieve this with problem-agnostic diffusion models. \$\textbackslash Pi\$GDM can also solve a wider set of inverse problems where the measurement processes are composed of several simpler ones.},
   eventtitle = {International {{Conference}} on {{Learning Representations}}},
   langid = {english},
-  keywords = {interesting,reading},
-  file = {C:\Users\cailab-kjw\Zotero\storage\E5DXW44T\Song et al. - 2022 - Pseudoinverse-Guided Diffusion Models for Inverse .pdf}
 }
 
 @article{swindlehurstMillimeterwaveMassiveMIMO2014,
@@ -658,15 +536,14 @@
   shorttitle = {Millimeter-Wave Massive {{MIMO}}},
   author = {Swindlehurst, A. Lee and Ayanoglu, Ender and Heydari, Payam and Capolino, Filippo},
   date = {2014-09},
+  year = {2014},
+  month = {sep.},
   journal = {IEEE Commun. Mag.},
   volume = {52},
   number = {9},
   pages = {56--62},
   issn = {1558-1896},
   doi = {10.1109/MCOM.2014.6894453},
-  abstract = {The combination of millimeter-wave communications, arrays with a massive number of antennas, and small cell geometries is a symbiotic convergence of technologies that has the potential to dramatically improve wireless access and throughput. This article outlines the benefits, challenges, and potential solutions associated with cellular networks that incorporate these technologies.},
-  keywords = {Adaptive arrays,Millimeter wave communication,MIMO,OFDM,Radio frequency,Wireless communication},
-  file = {C:\Users\cailab-kjw\Zotero\storage\R8AN4XKC\Swindlehurst et al. - 2014 - Millimeter-wave massive MIMO the next wireless re.pdf}
 }
 
 @article{tibshiraniRegressionShrinkageSelection1996,
@@ -679,8 +556,6 @@
   pages = {267--288},
   issn = {0035-9246},
   doi = {10.1111/j.2517-6161.1996.tb02080.x},
-  abstract = {We propose a new method for estimation in linear models. The ‘lasso’ minimizes the residual sum of squares subject to the sum of the absolute value of the coefficients being less than a constant. Because of the nature of this constraint it tends to produce some coefficients that are exactly 0 and hence gives interpretable models. Our simulation studies suggest that the lasso enjoys some of the favourable properties of both subset selection and ridge regression. It produces interpretable models like subset selection and exhibits the stability of ridge regression. There is also an interesting relationship with recent work in adaptive function estimation by Donoho and Johnstone. The lasso idea is quite general and can be applied in a variety of statistical models: extensions to generalized regression models and tree-based models are briefly described.},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\7BG76R2N\\Tibshirani - 1996 - Regression Shrinkage and Selection Via the Lasso.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\IZQ5XJCJ\\7027929.html}
 }
 
 @article{vilaExpectationMaximizationGaussianMixtureApproximate2013,
@@ -693,9 +568,6 @@
   pages = {4658--4672},
   issn = {1941-0476},
   doi = {10.1109/TSP.2013.2272287},
-  abstract = {When recovering a sparse signal from noisy compressive linear measurements, the distribution of the signal's non-zero coefficients can have a profound effect on recovery mean-squared error (MSE). If this distribution was a priori known, then one could use computationally efficient approximate message passing (AMP) techniques for nearly minimum MSE (MMSE) recovery. In practice, however, the distribution is unknown, motivating the use of robust algorithms like LASSO-which is nearly minimax optimal-at the cost of significantly larger MSE for non-least-favorable distributions. As an alternative, we propose an empirical-Bayesian technique that simultaneously learns the signal distribution while MMSE-recovering the signal-according to the learned distribution-using AMP. In particular, we model the non-zero distribution as a Gaussian mixture and learn its parameters through expectation maximization, using AMP to implement the expectation step. Numerical experiments on a wide range of signal classes confirm the state-of-the-art performance of our approach, in both reconstruction error and runtime, in the high-dimensional regime, for most (but not all) sensing operators.},
-  keywords = {Approximation algorithms,belief propagation,Complexity theory,Compressed sensing,expectation maximization algorithms,Gaussian mixture model,Message passing,Noise,Noise measurement,Sensors,Vectors},
-  file = {C:\Users\cailab-kjw\Zotero\storage\LRHFJG6X\Vila and Schniter - 2013 - Expectation-Maximization Gaussian-Mixture Approxim.pdf}
 }
 
 @article{wipfSparseBayesianLearning2004,
@@ -708,9 +580,6 @@
   pages = {2153--2164},
   issn = {1941-0476},
   doi = {10.1109/TSP.2004.831016},
-  abstract = {Sparse Bayesian learning (SBL) and specifically relevance vector machines have received much attention in the machine learning literature as a means of achieving parsimonious representations in the context of regression and classification. The methodology relies on a parameterized prior that encourages models with few nonzero weights. In this paper, we adapt SBL to the signal processing problem of basis selection from overcomplete dictionaries, proving several results about the SBL cost function that elucidate its general behavior and provide solid theoretical justification for this application. Specifically, we have shown that SBL retains a desirable property of the /spl lscr//sub 0/-norm diversity measure (i.e., the global minimum is achieved at the maximally sparse solution) while often possessing a more limited constellation of local minima. We have also demonstrated that the local minima that do exist are achieved at sparse solutions. Later, we provide a novel interpretation of SBL that gives us valuable insight into why it is successful in producing sparse representations. Finally, we include simulation studies comparing sparse Bayesian learning with basis pursuit and the more recent FOCal Underdetermined System Solver (FOCUSS) class of basis selection algorithms. These results indicate that our theoretical insights translate directly into improved performance.},
-  keywords = {Bayesian methods,Biomedical signal processing,Cost function,Dictionaries,Inverse problems,Iterative algorithms,Machine learning,Signal processing algorithms,Solids,Support vector machines},
-  file = {C:\Users\cailab-kjw\Zotero\storage\XJ23T8R7\Wipf and Rao - 2004 - Sparse Bayesian learning for basis selection.pdf}
 }
 
 @article{zhangSparseSignalRecovery2011,
@@ -723,9 +592,6 @@
   pages = {912--926},
   issn = {1941-0484},
   doi = {10.1109/JSTSP.2011.2159773},
-  abstract = {We address the sparse signal recovery problem in the context of multiple measurement vectors (MMV) when elements in each nonzero row of the solution matrix are temporally correlated. Existing algorithms do not consider such temporal correlation and thus their performance degrades significantly with the correlation. In this paper, we propose a block sparse Bayesian learning framework which models the temporal correlation. We derive two sparse Bayesian learning (SBL) algorithms, which have superior recovery performance compared to existing algorithms, especially in the presence of high temporal correlation. Furthermore, our algorithms are better at handling highly underdetermined problems and require less row-sparsity on the solution matrix. We also provide analysis of the global and local minima of their cost function, and show that the SBL cost function has the very desirable property that the global minimum is at the sparsest solution to the MMV problem. Extensive experiments also provide some interesting results that motivate future theoretical research on the MMV model.},
-  keywords = {Algorithm design and analysis,Bayesian methods,Brain models,Compressed sensing,Correlation,Covariance matrix,multiple measurement vectors (MMV),Signal processing algorithms,sparse Bayesian learning (SBL),sparse signal recovery,temporal correlation},
-  file = {C:\Users\cailab-kjw\Zotero\storage\ZGXY722E\Zhang and Rao - 2011 - Sparse Signal Recovery With Temporally Correlated .pdf}
 }
 
 @article{zhouGenerativeDiffusionModels2025,
@@ -736,9 +602,6 @@
   pages = {1--1},
   issn = {1558-2248},
   doi = {10.1109/TWC.2025.3549592},
-  abstract = {Along with the prosperity of generative artificial intelligence (AI), its potential for solving conventional challenges in wireless communications has also surfaced. Inspired by this trend, we investigate the application of the advanced diffusion models (DMs), a representative class of generative AI models, to high dimensional wireless channel estimation. By capturing the structure of multiple-input multiple-output (MIMO) wireless channels via a deep generative prior encoded by DMs, we develop a novel posterior inference method for channel reconstruction. We further adapt the proposed method to recover channel information from low-resolution quantized measurements. Additionally, to enhance the over-the-air viability, we integrate the DM with the unsupervised Stein’s unbiased risk estimator to enable learning from noisy observations and circumvent the requirements for ground truth channel data that is hardly available in practice. Results reveal that the proposed estimator achieves high-fidelity channel recovery while reducing estimation latency by a factor of 10 compared to state-of-the-art schemes, facilitating real-time implementation. Moreover, our method outperforms existing estimators while reducing the pilot overhead by half, showcasing its scalability to ultra-massive antenna arrays.},
-  keywords = {Antenna arrays,Antenna measurements,Channel estimation,Computer Science - Information Theory,deep learning,diffusion models,Electrical Engineering and Systems Science - Signal Processing,Estimation,generative AI,Generative AI,Mathematics - Information Theory,MIMO,MIMO channel estimation,Noise measurement,reading,Symbols,Training,Transmitting antennas},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\BCJUW2UT\\Zhou et al. - 2025 - Generative Diffusion Models for High Dimensional C.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\3XTRJVGK\\2408.html}
 }
 
 @article{efronTweediesFormulaSelection2011,
@@ -754,8 +617,6 @@
   publisher = {[American Statistical Association, Taylor \& Francis, Ltd.]},
   issn = {0162-1459},
   urldate = {2025-05-11},
-  abstract = {We suppose that the statistician observes some large number of estimates zi, each with its own unobserved expectation parameter {$\mu$}i. The largest few of the zi's are likely to substantially overestimate their corresponding {$\mu$}i's, this being an example of selection bias, or regression to the mean. Tweedie's formula, first reported by Robbins in 1956, offers a simple empirical Bayes approach for correcting selection bias. This article investigates its merits and limitations. In addition to the methodology, Tweedie's formula raises more general questions concerning empirical Bayes theory, discussed here as "relevance" and "empirical Bayes information." There is a close connection between applications of the formula and James---Stein estimation.},
-  file = {C:\Users\cailab-kjw\Zotero\storage\XWSPLTD7\2011TweediesFormula.pdf}
 }
 
 @article{saadGMRESGeneralizedMinimal1986,
@@ -772,8 +633,6 @@
   issn = {0196-5204},
   doi = {10.1137/0907058},
   urldate = {2025-08-28},
-  abstract = {The generalized minimum residual method (GMRES) is well known for solving large nonsymmetric systems of linear equations. It generally uses restarting, which slows the convergence. However, some information can be retained at the time of the restart and used in the next cycle. We present algorithms that use implicit restarting in order to retain this information. Approximate eigenvectors determined from the previous subspace are included in the new subspace. This deflates the smallest eigenvalues and thus improves the convergence. The subspace that contains the approximate eigenvectors is itself a Krylov subspace, but not with the usual starting vector. The implicitly restarted FOM algorithm includes standard Ritz vectors in the subspace. The eigenvalue portion of its calculations is equivalent to Sorensen's IRA algorithm. The implicitly restarted GMRES algorithm uses harmonic Ritz vectors. This algorithm also gives a new approach to computing interior eigenvalues.},
-  file = {C:\Users\cailab-kjw\Zotero\storage\WX9JY7TG\Saad and Schultz - 1986 - GMRES A Generalized Minimal Residual Algorithm fo.pdf}
 }
 
 @article{zhangAtomicNormDenoisingBased2018,
@@ -788,9 +647,6 @@
   issn = {1939-9359},
   doi = {10.1109/TVT.2017.2758024},
   urldate = {2025-03-20},
-  abstract = {We consider joint channel estimation and faulty antenna detection for massive multiple-input multiple-output systems operating in time-division duplexing mode. For systems with faulty antennas, we show that the impact of faulty antennas on uplink data transmission does not vanish even with unlimited number of antennas. However, the signal detection performance can be improved with a priori knowledge on the indices of faulty antennas. This motivates us to propose the approach for simultaneous channel estimation and faulty antenna detection. By exploiting the fact that the degrees of freedom of the physical channel matrix are smaller than the number of free parameters, the channel estimation and faulty antenna detection can be formulated as an extended atomic norm denoising problem and solved efficiently via the alternating direction method of multipliers. Furthermore, we improve the computational efficiency by proposing a fast algorithm and show that it is a good approximation of the corresponding extended atomic norm minimization method. Numerical simulations are provided to compare the performances of the proposed algorithms with several existing approaches and demonstrate the performance gains of detecting the indices of faulty antennas.},
-  keywords = {Antenna arrays,Antenna failure,atomic norm,channel estimation,Channel estimation,interesting,massive MIMO,MIMO,Receiving antennas,Training,Transmitting antennas},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\J682SFPA\\Zhang et al. - 2018 - Atomic Norm Denoising-Based Joint Channel Estimati.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\PETMTZ4R\\8053836.html}
 }
 
 @article{heDeepLearningBasedChannel2018,
@@ -805,7 +661,4 @@
   issn = {2162-2345},
   doi = {10.1109/LWC.2018.2832128},
   urldate = {2024-12-04},
-  abstract = {Channel estimation is very challenging when the receiver is equipped with a limited number of radio-frequency (RF) chains in beamspace millimeter-wave massive multiple-input and multiple-output systems. To solve this problem, we exploit a learned denoising-based approximate message passing (LDAMP) network. This neural network can learn channel structure and estimate channel from a large number of training data. Furthermore, we provide an analytical framework on the asymptotic performance of the channel estimator. Based on our analysis and simulation results, the LDAMP neural network significantly outperforms state-of-the-art compressed sensing-based algorithms even when the receiver is equipped with a small number of RF chains.},
-  keywords = {abstract,Antenna arrays,beamspace MIMO,channel estimation,Channel estimation,deep learning,Lenses,Millimeter wave,MIMO communication,neural network,Neural networks,Noise measurement,Radio frequency},
-  file = {C\:\\Users\\cailab-kjw\\Zotero\\storage\\UASRKPK9\\He et al. - 2018 - Deep Learning-Based Channel Estimation for Beamspa.pdf;C\:\\Users\\cailab-kjw\\Zotero\\storage\\U8ASA2DY\\8353153.html}
 }
