@@ -1,10 +1,9 @@
 {
     "name": "2025 IEEE Communications Letters KJW",
-    "image": "dotwee/latexdevcontainer:latest-full",
-    // "build": {
-    //     "context": "..",
-    //     "dockerfile": "Dockerfile"
-    // },
+    "build": {
+        "context": "..",
+        "dockerfile": "Dockerfile"
+    },
     "customizations": {
         "settings": {
             "latex-workshop.latex.recipes": [
@@ -74,7 +73,7 @@
                         "%DIR%"
                     ],
                     "env": {}
-                },
+                }
             ],
             "extensions": [
                 "james-yu.latex-workshop",
