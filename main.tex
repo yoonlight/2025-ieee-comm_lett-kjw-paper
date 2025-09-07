@@ -92,78 +92,75 @@ where $p(\mathbf{h})$, and $p(\mathbf{y}|\mathbf{h})$ are prior and likelihood d
 
 \section{Proposed Method}
 
+\textcolor{red}{
+% In this section, 
+In this letter, denoising diffusion probabilistic model (DDPM) is adopted to learn the channel distribution~\cite{hoDenoisingDiffusionProbabilistic2020}. DDPM is consists of forward and reverse diffusion processes. In forward process, original channel $\mathbf{h}_{0}$ is converted to the Gaussian noise using Gaussian transition kernel for T time steps, and using the reparameterization trick, it can be expressed by,
+}
 \begin{equation}
 \mathbf{h}_{t} = \sqrt{ \bar{\alpha}_{t} }\mathbf{h}_{0} + \sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{t},
 \end{equation}
-
+\textcolor{red}{
+where $\epsilon_{t}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ is Gaussian noise. $\bar{\alpha}_{t}=\prod_{i=1}^{t}\alpha_{i}$, and $\alpha_{t}=1-\beta_{t}$ where $\beta_{t}$ is pre-defined variance schedule. In reverse process, the original channel $\mathbf{h}_{0}$ is recovered from the $\mathbf{h}_{T}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ using denoising networks $\epsilon_{\theta}$ for $T$ time step. The denoising networks are trained to minimize the mean squared error (MSE) loss as,
+}
 \begin{equation}
 \mathcal{L}(\theta) = \mathbb{E}[\|\epsilon_{t} - \epsilon_{\theta}(\mathbf{h}_{t},t)\|_{2}^{2}],
 \end{equation}
+\textcolor{red}{
+where $t\sim\mathcal{U}[1,T]$. After the training, the denoising networks can be used as the prior information of the channel distribution.
+}
 
+After the denosing networks are trained, diffusion-based posterior sampling is performed to estimate the channel using iterative manner as,
 \begin{equation}
 \mathbf{h}_{t-1} = \frac{1}{\sqrt{ \alpha_{t} }}(\mathbf{h}_{t}+(1-\alpha_{t})\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})),
 \end{equation}
 where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})$ is posterior score decomposed by Bayes' rule as,
-
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y}) = \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})+\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t}),
 \end{equation}
-
-Prior score can be approximated by trained denoising networks expressed as,
+Prior score can be approximated by trained denoising networks given by,
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})\approx -\frac{1}{\sqrt{ 1-\bar{\alpha}_{t} }}\epsilon_{\theta}(\mathbf{h}_{t},t).
 \end{equation}
-
-Likelihood score can be approximated by Gaussian approximation, expressed as,
-
+Likelihood score can be approximated by Gaussian approximation using moment matching method given by,
 \begin{equation}
 p(\mathbf{y}|\mathbf{h}_{t}) = \int p(\mathbf{y}|\mathbf{h})p(\mathbf{h}|\mathbf{h}_{t})d\mathbf{h} \approx\mathcal{N}(\mathbf{y}|\mathbb{E}[\mathbf{h}|\mathbf{h}_{t}], \mathbb{V}[\mathbf{h}|\mathbf{h}_{t}])
 \end{equation}
-
 Mean and variance of Gaussian distribution is approximated by the Tweedie’s formula~\cite{efronTweediesFormulaSelection2011}.
-
 \begin{equation}
 \mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \frac{1}{\sqrt{ \bar{\alpha}_{t} }}(1-\sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{\theta}(\mathbf{h}_{t},t)),
 \end{equation}
-
 \begin{equation}
 \mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \boldsymbol{\Sigma}_{t}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}],
 \end{equation}
-
-Likelihood score can be approximated through Gaussian approximation and Tweedie's formula using well-trained score networks.
-
+Through this process, likelihood is approximated to Gaussian distribution as,
 \begin{equation}
 \begin{aligned}
-& \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t})\\
-\approx & (\boldsymbol{\Sigma}_{\mathbf{y}} + \mathbf{A}\boldsymbol{\Sigma}_{t}^{2}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top})^{-1}(\mathbf{y}-\mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}])
+p_{t}(\mathbf{y}|\mathbf{h}_{t}) \approx \mathcal{N}(\mathbf{y}; \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}], \sigma_{n}^{2}\mathbf{I}+\mathbf{A}\mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top}).
 \end{aligned}
 \end{equation}
-
-Due to high complexity of calculation of the inverse matrix, GMRES algorithm is adopted to reduce the complexity~\cite{saadGMRESGeneralizedMinimal1986}.
-
+\textcolor{red}{The computation of the likelihood score requires matrix inversion, which is computationally expensive operation. Therefore, instead of being computed directly, the score can be obtained by solving the linear system with the GMRES method as~\cite{saadGMRESGeneralizedMinimal1986},}
 \begin{equation}
 (\boldsymbol{\Sigma}_{\mathbf{y}}+\mathbf{A}\boldsymbol{\Sigma}_{t}^{2}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top})\mathbf{u} = \mathbf{y}- \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}],
 \end{equation}
-where $\mathbf{u}$ is ~.
+\textcolor{red}{
+where $\mathbf{u}$ is the approximated likelihood score. The proposed algorithm is summarized in Algorithm~\ref{alg:algorithm1}.
+}
 
 \begin{algorithm}[!t]
 \caption{Posterior sampling-based channel estimation}
+\label{alg:algorithm1}
 \begin{algorithmic}[1]
-  \STATE $x_{1}\sim\mathcal{N}(0, \Sigma_{1})$
-  \FOR{$i=T$ to $1$}
-    \STATE $s \gets i-1 / T$
-    \STATE $t \gets i/T$
-    \STATE $\hat{x} \gets d_{\theta}(x_{t}|y,A)$
-    \STATE $\Sigma_{x|x_{t}}\gets \Sigma_{t}\nabla_{x_{t}}d_{\theta}(x_{t},t)^{\top}$
-    \STATE $u\gets (\Sigma_{y}+A\Sigma_{x|x_{t}}A^{\top})^{-1}(y-A\hat{x})$
-    \STATE $s_{y|x}\gets \nabla_{x_{t}}d_{\theta}(x_{t},t)^{\top}A^{\top}u$
-    \STATE $s_{x}\gets \Sigma^{-1}_{t}(\hat{x}-x_{t})$
-    \STATE $s_{\theta}(x_{t}|y,A) \gets s_{x}+s_{y|x}$
-    \STATE $\hat{x}\gets x_{t}+ \Sigma_{t}s_{\theta}(x_{t}|y,A)$
-    \STATE $z\sim\mathcal{N}(0,I)$
-    \STATE $x_{s}\gets \hat{x}+ \sigma_{s}\sqrt{1- \eta\left(1- \frac{\sigma_{s}^{2}}{\sigma_{t}^{2}}\right)}\frac{x_{t}-\hat{x}}{\sigma_{t}}+ \sigma_{s}\sqrt{\eta(1- \frac{\sigma_{s}^{2}}{\sigma_{t}^{2}})}z$
-  \ENDFOR
-  \RETURN $x_{0}$
+\STATE $\mathbf{h}_T \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$
+\FOR{$t=T$ to $1$}
+	\STATE $\hat{\mathbf{h}} \gets \mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \frac{1}{\sqrt{ \bar{\alpha}_{t} }}(1-\sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{\theta}(\mathbf{h}_{t},t))$
+	\STATE $\boldsymbol{\Sigma}_{\mathbf{h}|\mathbf{h}_{t}} \gets \boldsymbol{\Sigma}_{t} \nabla_{\mathbf{h}_{t}}d_{\theta}(\mathbf{h}_{t},t)^{\top}$
+	\STATE $\mathbf{u} \gets (\boldsymbol{\Sigma}_{\mathbf{y}}+\mathbf{A}\boldsymbol{\Sigma}_{\mathbf{h}|\mathbf{h}_{t}}\mathbf{A}^{\top})^{-1}(\mathbf{y}-\mathbf{A}\hat{\mathbf{h}})$
+	\STATE $\mathbf{s}_{\theta}(\mathbf{h}_{t}|\mathbf{y},\mathbf{A}) \gets \nabla_{\mathbf{h}_{t}}d_{\theta}(\mathbf{h}_{t},t)^{\top}\mathbf{A}^{\top}\mathbf{u} + \boldsymbol{\Sigma}_{t}^{-1}(\hat{\mathbf{h}}-\mathbf{h}_{t})$
+	\STATE $\hat{\mathbf{h}} \gets \mathbf{h}_{t} + \boldsymbol{\Sigma}_{t}\mathbf{s}_{\theta}(\mathbf{h}_{t}|\mathbf{y},\mathbf{A})$
+	\STATE $\mathbf{z}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$
+	\STATE $\mathbf{h}_{t-1} \gets \hat{\mathbf{h}} + \sigma_{t-1}\sqrt{ 1-\eta( 1- \sigma_{t-1}^{2} /\sigma_{t}^{2} ) }\frac{\mathbf{h}_{t}-\hat{\mathbf{h}}}{\sigma_{t}} + \sigma_{t-1}\sqrt{ \eta( 1- \sigma_{t-1}^{2} / \sigma_{t}^{2}) }\mathbf{z}$
+\ENDFOR
+\RETURN $\mathbf{h}_{0}$
 \end{algorithmic}
 \end{algorithm}
 
