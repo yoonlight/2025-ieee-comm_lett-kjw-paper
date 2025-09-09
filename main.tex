@@ -65,22 +65,19 @@ In this letter, a novel channel estimator based on diffusion posterior sampling 
 
 \section{System Model}
 
-\textcolor{red}{In this letter, point-to-point mmWave massive MIMO system is considered, where the base station (BS) and user equipment (UE) are equipped with $N_{t}$ and $N_{r}$ antennas, respectively. For simplicity, a quasi-static narrowband channel is assumed, and the downlink channel is considered. The received at the UE for channel estimation, based on the transmitted pilot symbols, is given by,}
+In this letter, point-to-point mmWave massive MIMO system is considered, where the base station (BS) and user equipment (UE) are equipped with $N_{t}$ and $N_{r}$ antennas, respectively. For simplicity, a quasi-static narrowband channel is assumed, and the downlink channel is considered. The received at the UE for channel estimation, based on the transmitted pilot symbols, is given by,
 \begin{equation}
 \mathbf{Y}=\mathbf{H}\mathbf{P}+\mathbf{N}\in \mathbb{C}^{N_{r}\times N_{p}}
 \end{equation}
-\textcolor{red}{where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is channel matrix, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is known pilot symbol, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}\mathbf{I})$ is additive white Gaussian noise. Due to a few strong multipath components of the high frequency characteristics, the angular domain representation of the channel is considered. Under the assumption of a uniform linear array (ULA) with half-wavelength antenna spacing at the both BS and UE, the channel matrix in the angular domain can be modeled using virtual channel representation as~\cite{sayeedDeconstructingMultiantennaFading2002},}
+where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is channel matrix, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is known pilot symbol, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}\mathbf{I})$ is additive white Gaussian noise. Due to a few strong multipath components of the high frequency characteristics, the angular domain representation of the channel is considered. Under the assumption of a uniform linear array (ULA) with half-wavelength antenna spacing at the both BS and UE, the channel matrix in the angular domain can be modeled using virtual channel representation as~\cite{sayeedDeconstructingMultiantennaFading2002},
 \begin{equation}
 \mathbf{H} = \mathbf{A}_{\text{R}}\mathbf{H}_{\text{v}}\mathbf{A}_{\text{T}}^{H},
 \end{equation}
-\textcolor{red}{
 where $\mathbf{A}_{\text{R}}\in \mathbb{C}^{N_{r}\times N_{r}}$ and $\mathbf{A}_{\text{T}}\in \mathbb{C}^{N_{t}\times N_{t}}$ are the array response matrices represented by the discrete Fourier transform (DFT) matrices of the receiver and transmitter, respectively and $\mathbf{H}_{\text{v}}$ is channel matrix of angular domain.
 Vectorized form of the received symbol is expressed as,
-}
 \begin{equation}
 \mathbf{y} = \mathbf{A}\mathbf{h}_{\text{v}}+\mathbf{n}\in \mathbb{C}^{N_{r}N_{p}\times 1},
 \end{equation}
-\textcolor{red}{
 where $\mathbf{y}$, $\mathbf{h}_{\text{v}}$, $\mathbf{n}$ are vectorized forms of the received symbol, angular domain channel, and noise, respectively. $\mathbf{A}=(\mathbf{P}^{\top}\otimes\mathbf{I}_{N_{r}})((\mathbf{A}_{\text{T}}^{H})^{\top}\otimes \mathbf{A}_{\text{R}})\in \mathbb{C}^{N_{r}N_{p}\times N_{r}N_{t}}$ is the system matrix vectorized by Kronecker product.
 Since the number of the transmitter antennas is larger than the number of pilot symbols, i.e., $\rho=N_{p}/N_{t}<1$, the problem is converted to the ill-posed inverse problem.
 To solve the ill-posed problem, the channel estimation can be formulated within a Bayesian inference framework,
@@ -88,26 +85,18 @@ To solve the ill-posed problem, the channel estimation can be formulated within 
   p(\mathbf{h}|\mathbf{y})\propto p(\mathbf{h})p(\mathbf{y}|\mathbf{h}),
 \end{equation}
 where $p(\mathbf{h})$, and $p(\mathbf{y}|\mathbf{h})$ are prior and likelihood distribution, respectively. In this letter, the diffusion model-based posterior sampling is adopted to solve this problem.
-}
 
 \section{Proposed Method}
 
-\textcolor{red}{
-% In this section, 
 In this letter, denoising diffusion probabilistic model (DDPM) is adopted to learn the channel distribution~\cite{hoDenoisingDiffusionProbabilistic2020}. DDPM is consists of forward and reverse diffusion processes. In forward process, original channel $\mathbf{h}_{0}$ is converted to the Gaussian noise using Gaussian transition kernel for T time steps, and using the reparameterization trick, it can be expressed by,
-}
 \begin{equation}
 \mathbf{h}_{t} = \sqrt{ \bar{\alpha}_{t} }\mathbf{h}_{0} + \sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{t},
 \end{equation}
-\textcolor{red}{
 where $\epsilon_{t}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ is Gaussian noise. $\bar{\alpha}_{t}=\prod_{i=1}^{t}\alpha_{i}$, and $\alpha_{t}=1-\beta_{t}$ where $\beta_{t}$ is pre-defined variance schedule. In reverse process, the original channel $\mathbf{h}_{0}$ is recovered from the $\mathbf{h}_{T}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ using denoising networks $\epsilon_{\theta}$ for $T$ time step. The denoising networks are trained to minimize the mean squared error (MSE) loss as,
-}
 \begin{equation}
 \mathcal{L}(\theta) = \mathbb{E}[\|\epsilon_{t} - \epsilon_{\theta}(\mathbf{h}_{t},t)\|_{2}^{2}],
 \end{equation}
-\textcolor{red}{
 where $t\sim\mathcal{U}[1,T]$. After the training, the denoising networks can be used as the prior information of the channel distribution.
-}
 
 After the denosing networks are trained, diffusion-based posterior sampling is performed to estimate the channel using iterative manner as,
 \begin{equation}
@@ -138,13 +127,11 @@ Through this process, likelihood is approximated to Gaussian distribution as,
 p_{t}(\mathbf{y}|\mathbf{h}_{t}) \approx \mathcal{N}(\mathbf{y}; \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}], \sigma_{n}^{2}\mathbf{I}+\mathbf{A}\mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top}).
 \end{aligned}
 \end{equation}
-\textcolor{red}{The computation of the likelihood score requires matrix inversion, which is computationally expensive operation. Therefore, instead of being computed directly, the score can be obtained by solving the linear system with the GMRES method as~\cite{saadGMRESGeneralizedMinimal1986},}
+The computation of the likelihood score requires matrix inversion, which is computationally expensive operation. Therefore, instead of being computed directly, the score can be obtained by solving the linear system with the GMRES method as~\cite{saadGMRESGeneralizedMinimal1986},
 \begin{equation}
 (\boldsymbol{\Sigma}_{\mathbf{y}}+\mathbf{A}\boldsymbol{\Sigma}_{t}^{2}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top})\mathbf{u} = \mathbf{y}- \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}],
 \end{equation}
-\textcolor{red}{
 where $\mathbf{u}$ is the approximated likelihood score. The proposed algorithm is summarized in Algorithm~\ref{alg:algorithm1}.
-}
 
 \begin{algorithm}[!t]
 \caption{Posterior sampling-based channel estimation}
