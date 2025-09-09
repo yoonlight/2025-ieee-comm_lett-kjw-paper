@@ -100,7 +100,7 @@ where $\epsilon_{t}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ is Gaussian noise. $\
 \end{equation}
 where $t\sim\mathcal{U}[1,T]$. After the training, the denoising networks can be used as the prior information of the channel distribution.
 
-After the denosing networks are trained, diffusion-based posterior sampling is performed to estimate the channel using iterative manner as,
+\textcolor{red}{After the denosing networks are trained, diffusion-based posterior sampling is performed to estimate the channel using iterative manner as~\cite{zhouGenerativeDiffusionModels2025},}
 \begin{equation}
 \mathbf{h}_{t-1} = \frac{1}{\sqrt{ \alpha_{t} }}(\mathbf{h}_{t}+(1-\alpha_{t})\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})),
 \end{equation}
@@ -108,22 +108,32 @@ where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})$ is posterio
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y}) = \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})+\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t}),
 \end{equation}
+\textcolor{red}{where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ and $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t})$ are prior and noise-perturbed likelihood score, respectively.}
 Prior score can be approximated by trained denoising networks given by,
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})\approx -\frac{1}{\sqrt{ 1-\bar{\alpha}_{t} }}\epsilon_{\theta}(\mathbf{h}_{t},t).
 \end{equation}
-Likelihood score can be approximated by Gaussian approximation using moment matching method given by,
+\textcolor{red}{
+However, likelihood score is intractable to compute because there exists no a closed-form expression for the likelihood $p_{t}(\mathbf{y}|\mathbf{h}_{t})$ which has no explicit relationship between $\mathbf{y}$ and $\mathbf{h}_{t}$. Instead, the likelihood can be expressed by marginalizing over $\mathbf{h}_{0}$, which has relationship with both $\mathbf{y}$ and $\mathbf{h}_{t}$, as,
 \begin{equation}
-p(\mathbf{y}|\mathbf{h}_{t}) = \int p(\mathbf{y}|\mathbf{h})p(\mathbf{h}|\mathbf{h}_{t})d\mathbf{h} \approx\mathcal{N}(\mathbf{y}|\mathbb{E}[\mathbf{h}|\mathbf{h}_{t}], \mathbb{V}[\mathbf{h}|\mathbf{h}_{t}])
+p(\mathbf{y}|\mathbf{h}_{t}) = \int p(\mathbf{y}|\mathbf{h}_{0})p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})d\mathbf{h}_{0},
 \end{equation}
-Mean and variance of Gaussian distribution is approximated by the Tweedie’s formula~\cite{efronTweediesFormulaSelection2011}.
+The likelihood $p_{t}(\mathbf{y}|\mathbf{h}_{t})$ is intractable because the true distribution $p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ of the likelihood is unknown. Even in this form, the likelihood is still intractable because $p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ is unknown. To overcome this intractability, we approximate the likelihood to tractable Gaussian distribution $q_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ as~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025},
+\begin{equation}
+p(\mathbf{y}|\mathbf{h}_{t}) \approx \int p(\mathbf{y}|\mathbf{h}_{0})q_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})d\mathbf{h}_{0}.
+\end{equation}
+In order to find the approximation closest to the true distribution, the moment matching method is adopted, which is known that matching the first, and second moments of the approximation to the true distribution of the moments can be minimize the Kullback-Leibler divergence between the distributions~\cite{bishopPatternRecognitionMachine2006}.
+Given the well-approximated prior score $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ from the diffusion models, the first and second moments of the true distribution can be approximated using Tweedie’s formula as~\cite{efronTweediesFormulaSelection2011},
+}
 \begin{equation}
 \mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \frac{1}{\sqrt{ \bar{\alpha}_{t} }}(1-\sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{\theta}(\mathbf{h}_{t},t)),
 \end{equation}
 \begin{equation}
 \mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \boldsymbol{\Sigma}_{t}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}],
 \end{equation}
-Through this process, likelihood is approximated to Gaussian distribution as,
+\textcolor{red}{
+Through this process, the approximated likelihood can be derived as,
+}
 \begin{equation}
 \begin{aligned}
 p_{t}(\mathbf{y}|\mathbf{h}_{t}) \approx \mathcal{N}(\mathbf{y}; \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}], \sigma_{n}^{2}\mathbf{I}+\mathbf{A}\mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top}).
