@@ -168,13 +168,16 @@ Toolbox. Delay profiles of CDL-B, and CDL-D were adopted to evaluate the
 performance in both LOS and NLOS environments, respectively. The parameters for channels
 generation were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023} to ensure a fair comparison.
 }
+
 \textcolor{red}{
 The proposed estimator was implemented using PyTorch 2.1.2, CUDA 11.8, and Python 3.10.13 on Ubuntu 20.04.6. To meet the computational requirements of the diffusion model, single NVIDIA GeForce RTX 4090 GPU, an AMD Ryzen Threadripper PRO 5975WX CPU and 128GB of RAM were used for the simulations. For the hyperparameter settings of the method, the number of epochs was empirically set to 500. The optimizer was configured as AdamW, with 0.0001 learning rate. The batch size was set to 256. % 아래 수정 필요
 For the diffusion models, the number of diffusion steps $T$ was set to 1000, and the variance schedule $\beta_{t}$ was set to linearly increase from 0.0001 to 0.02. The number of sampling steps was set to 20, and the parameter $\eta$ controlling the noise scale was set to 1.0. The maximum number of iterations for GMRES was set to 5.
 }
+
 \textcolor{red}{
 Channel estimation performance was evaluated using the normalized mean square error (NMSE) metric, defined as $\mathbb{E}[\|\mathbf{H}-\mathbf{H}_{\text{est}}\|_{2}^{2} / \|\mathbf{H}\|_{2}^{2}]$. For comparison, the baselines from three categories consist of CS, DL, and DM models. OMP and fsAD were selected as CS baselines~\cite{mendez-rialHybridMIMOArchitectures2016,zhangAtomicNormDenoisingBased2018}. LDAMP was selected as DL baseline~\cite{heDeepLearningBasedChannel2018}. Score-ALD and DMPS were selected as DM baselines~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025}. All hyperparameters of baselines were set through validation set.
 }
+
 \textcolor{red}{
 The channel estimation performance under LOS and NLOS conditions with a pilot density $\rho$ of 0.6 was evaluated as shown in Fig.~\ref{fig_sim_1}. As shown in Fig.~\ref{fig:los-1}, it had been confirmed that the proposed outperforms the baselines in terms of channel estimation performance. While the performance of fsAD degraded significantly in low SNR, the performance of OMP did not improve after 20dB of SNR. While the performance of fsAD degraded significantly in low SNR, the performance of OMP did not improve after 20dB of SNR. The limitations of both methods arise from the mismatch between the sparsity assumed by the methods and the actual sparsity in the channels. In LDAMP, error floors and sensity in high and low SNR, respectively, arrised from the CS-based methods had been not confirmed. However, the performance of LDAMP still not enough to the proposed method. In comparison of the diffusion model-based methods, the proposed method had been better performance. Specifically, the proposed method outperformed the SGM by about 8dB in low SNR range, and DMPS by about 2dB in high SNR.
 }
