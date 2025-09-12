@@ -100,7 +100,7 @@ where $\epsilon_{t}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ is Gaussian noise. $\
 \end{equation}
 where $t\sim\mathcal{U}[1,T]$. After the training, the denoising networks can be used as the prior information of the channel distribution.
 
-\textcolor{red}{After the denosing networks are trained, diffusion-based posterior sampling is performed to estimate the channel using iterative manner as~\cite{zhouGenerativeDiffusionModels2025},}
+After the denosing networks are trained, diffusion-based posterior sampling is performed to estimate the channel using iterative manner as~\cite{zhouGenerativeDiffusionModels2025},
 \begin{equation}
 \mathbf{h}_{t-1} = \frac{1}{\sqrt{ \alpha_{t} }}(\mathbf{h}_{t}+(1-\alpha_{t})\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})),
 \end{equation}
@@ -108,12 +108,11 @@ where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})$ is posterio
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y}) = \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})+\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t}),
 \end{equation}
-\textcolor{red}{where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ and $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t})$ are prior and noise-perturbed likelihood score, respectively.}
+where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ and $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t})$ are prior and noise-perturbed likelihood score, respectively.
 Prior score can be approximated by trained denoising networks given by,
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})\approx -\frac{1}{\sqrt{ 1-\bar{\alpha}_{t} }}\epsilon_{\theta}(\mathbf{h}_{t},t).
 \end{equation}
-\textcolor{red}{
 However, likelihood score is intractable to compute because there exists no a closed-form expression for the likelihood $p_{t}(\mathbf{y}|\mathbf{h}_{t})$ which has no explicit relationship between $\mathbf{y}$ and $\mathbf{h}_{t}$. Instead, the likelihood can be expressed by marginalizing over $\mathbf{h}_{0}$, which has relationship with both $\mathbf{y}$ and $\mathbf{h}_{t}$, as,
 \begin{equation}
 p(\mathbf{y}|\mathbf{h}_{t}) = \int p(\mathbf{y}|\mathbf{h}_{0})p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})d\mathbf{h}_{0},
@@ -124,16 +123,13 @@ p(\mathbf{y}|\mathbf{h}_{t}) \approx \int p(\mathbf{y}|\mathbf{h}_{0})q_{t}(\mat
 \end{equation}
 In order to find the approximation closest to the true distribution, the moment matching method is adopted, which is known that matching the first, and second moments of the approximation to the true distribution of the moments can be minimize the Kullback-Leibler divergence between the distributions~\cite{bishopPatternRecognitionMachine2006}.
 Given the well-approximated prior score $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ from the diffusion models, the first and second moments of the true distribution can be approximated using Tweedie’s formula as~\cite{efronTweediesFormulaSelection2011},
-}
 \begin{equation}
 \mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \frac{1}{\sqrt{ \bar{\alpha}_{t} }}(1-\sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{\theta}(\mathbf{h}_{t},t)),
 \end{equation}
 \begin{equation}
 \mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \boldsymbol{\Sigma}_{t}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}],
 \end{equation}
-\textcolor{red}{
 Through this process, the approximated likelihood can be derived as,
-}
 \begin{equation}
 \begin{aligned}
 p_{t}(\mathbf{y}|\mathbf{h}_{t}) \approx \mathcal{N}(\mathbf{y}; \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}], \sigma_{n}^{2}\mathbf{I}+\mathbf{A}\mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top}).
@@ -165,61 +161,69 @@ where $\mathbf{u}$ is the approximated likelihood score. The proposed algorithm 
 
 \section{Simulations}
 
-\begin{table}[!t]
-\begin{center}
-  \renewcommand{\arraystretch}{1.1} 
-\caption{Hyper-parameter settings for simulation\label{tab:table1}}
-\label{tab1}
-\begin{tabular}{M{0.19\columnwidth}|M{0.3\columnwidth}}
-\hline
-\textbf{Parameter} & \textbf{Value} \\
-\hline
-Batch Size & 256 \\
-\hline
-Optimizer & AdamW \\
-\hline
-Learning Rate & 0.0001 \\
-\hline
-Decaying Rate & 0.1 (per 50 epoch) \\
-\hline
-Training Epoch & 500 \\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
+\textcolor{red}{
+To validate the proposed method, we utilized the clustered delay line (CDL)
+channel model specified in 3GPP TR 38.901, which was generated via MATLAB 5G
+Toolbox. Delay profiles of CDL-B, and CDL-D were adopted to evaluate the
+performance in both LOS and NLOS environments, respectively. The parameters for channels
+generation were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023} to ensure a fair comparison.
+}
+\textcolor{red}{
+The proposed estimator was implemented using PyTorch 2.1.2, CUDA 11.8, and Python 3.10.13 on Ubuntu 20.04.6. To meet the computational requirements of the diffusion model, single NVIDIA GeForce RTX 4090 GPU, an AMD Ryzen Threadripper PRO 5975WX CPU and 128GB of RAM were used for the simulations. For the hyperparameter settings of the method, the number of epochs was empirically set to 500. The optimizer was configured as AdamW, with 0.0001 learning rate. The batch size was set to 256. % 아래 수정 필요
+For the diffusion models, the number of diffusion steps $T$ was set to 1000, and the variance schedule $\beta_{t}$ was set to linearly increase from 0.0001 to 0.02. The number of sampling steps was set to 20, and the parameter $\eta$ controlling the noise scale was set to 1.0. The maximum number of iterations for GMRES was set to 5.
+}
+\textcolor{red}{
+Channel estimation performance was evaluated using the normalized mean square error (NMSE) metric, defined as $\mathbb{E}[\|\mathbf{H}-\mathbf{H}_{\text{est}}\|_{2}^{2} / \|\mathbf{H}\|_{2}^{2}]$. For comparison, the baselines from three categories consist of CS, DL, and DM models. OMP and fsAD were selected as CS baselines~\cite{mendez-rialHybridMIMOArchitectures2016,zhangAtomicNormDenoisingBased2018}. LDAMP was selected as DL baseline~\cite{heDeepLearningBasedChannel2018}. Score-ALD and DMPS were selected as DM baselines~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025}. All hyperparameters of baselines were set through validation set.
+}
+\textcolor{red}{
+The channel estimation performance under LOS and NLOS conditions with a pilot density $\rho$ of 0.6 was evaluated as shown in Fig.~\ref{fig_sim_1}. As shown in Fig.~\ref{fig:los-1}, it had been confirmed that the proposed outperforms the baselines in terms of channel estimation performance. While the performance of fsAD degraded significantly in low SNR, the performance of OMP did not improve after 20dB of SNR. While the performance of fsAD degraded significantly in low SNR, the performance of OMP did not improve after 20dB of SNR. The limitations of both methods arise from the mismatch between the sparsity assumed by the methods and the actual sparsity in the channels. In LDAMP, error floors and sensity in high and low SNR, respectively, arrised from the CS-based methods had been not confirmed. However, the performance of LDAMP still not enough to the proposed method. In comparison of the diffusion model-based methods, the proposed method had been better performance. Specifically, the proposed method outperformed the SGM by about 8dB in low SNR range, and DMPS by about 2dB in high SNR.
+}
+\begin{figure}[!t]
+\subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/results-1/CDL-D.eps}%
+\label{fig:los-1}}
+\\
+\subfigure[NLOS]{\includegraphics[width=0.48\textwidth]{images/results-1/CDL-B.eps}%
+\label{fig:nlos-1}}
+\caption{Channel estimation performance in terms of NMSE with $\rho$=0.6.}
+\label{fig_sim_1}
+\end{figure}
+
+\textcolor{red}{
+As shown in Fig.~\ref{fig_sim_2}, the channel estimation performance per the pilot density was evaluated in the LOS and NLOS conditions. While the performance of the proposed method consistently degraded by about 2 dB across the SNR range, both DMPS and SGM model degraded gradually after SNR 0dB, with DMPS degrading up to 7 dB and SGM degrading up to about 6dB, in Fig.~\ref{fig:los-2}. With a pilot density of 0.3, the proposed method outperformed the DMPS and SGM up to about 6dB and 4dB, respectively, models in most SNR. However, the performance degradation had more increased in NLOS, as shown in Fig.~\ref{fig:nlos-2}. The performance of the proposed method, SGM, and DMPS degraded by about 5dB, 10dB, and 15dB, respectively. While both DMPS and SGM use the heuristic covariance and don’t use the diffusion prior for likelihood score approximation, the proposed method use the moment matching method to approximate the accurate first and second moment from Tweedie’s formula using the diffusion prior. It had been confirmed that approximation accuracy of the likelihood score has been effect on the estimation performance. In particular, the performance degradation has been pronounced in the NLOS condition.
+}
+
+\begin{figure}[!t]
+\subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/results-2/CDL-D.eps}%
+\label{fig:los-2}}
+\\
+\subfigure[NLOS]{\includegraphics[width=0.48\textwidth]{images/results-2/CDL-B.eps}%
+\label{fig:nlos-2}}
+\caption{Robustness of pilot density on LOS and NLOS channel.}
+\label{fig_sim_2}
+\end{figure}
+
+\textcolor{red}{
+In Table~\ref{tab:table1}, the computational complexity of the proposed method and other DM-based methods was investigated in terms of floating point operations (FLOPs), the number of function evaluations (NFEs), and inference latency. The inference FLOPs were calculated by multiplying the FLOPs by the NFEs. The inference latency was measured for a batch size of 100 and pilot density of 0.6, averaged over 10 independent runs. For the performance shown in Figs.~\ref{fig_sim_1} and \ref{fig_sim_2}, NFEs were set to 6933, 130, 20 for SGM, DMPS, and the proposed method, respectively. The proposed method outperformed the SGM in terms of FLOPS, NFEs, latency. In particular, the proposed method achieved about 65 times faster inference latency compared to SGM, while achieving better performance. in comparison with DMPS, the proposed method achieved comparable latency while outperforming in terms of FLOPs and NFEs. Consequently, the proposed method achieved a better trade-off between estimation accuracy and inference latency than all considered baselines under the low pilot overhead.
+}
 
 \begin{table}[!t]
 \centering
 \renewcommand{\arraystretch}{1.1} 
 \caption{Computational complexity for diffusion model-based channel estimators in terms of FLOPs, NFE, and latency}
-\label{tab:table2}
+\label{tab:table1}
 \begin{tabular}{M{0.20\columnwidth}|M{0.21\columnwidth}|M{0.20\columnwidth}|M{0.20\columnwidth}}
 \hline
 \textbf{Method} & \textbf{FLOPs} & \textbf{NFE} & \textbf{Latency (s)} \\
 \hline
 SGM\cite{arvinteMIMOChannelEstimation2023} & \(1.028 \times 10^{12}\) & 6933 & 84.97 \\
 \hline
-DMPS\cite{zhouGenerativeDiffusionModels2025} & \(2.449 \times 10^{10}\) & 100 & 1.72 \\
+% TODO: DMPS NFE가 변경되어 FLOPs 변경 필요
+DMPS\cite{zhouGenerativeDiffusionModels2025} & \(2.449 \times 10^{10}\) & 130 & 1.27 \\
 \hline
-Proposed & \(4.899 \times 10^9\) & 20 & 2.39 \\
+Proposed & \(4.899 \times 10^9\) & 20 & 1.29 \\
 \hline
 \end{tabular}
 \end{table}
-
-\begin{figure*}[!t]
-\centering
-\subfigure[CDL-A]{\includegraphics[width=0.48\textwidth]{images/results_CDL-A.eps}%
-\label{fig:cdl-a}}
-\subfigure[CDL-B]{\includegraphics[width=0.48\textwidth]{images/results_CDL-B.eps}%
-\label{fig:cdl-b}}
-\hfil
-\subfigure[CDL-C]{\includegraphics[width=0.48\textwidth]{images/results_CDL-C.eps}%
-\label{fig:cdl-c}}
-\subfigure[CDL-D]{\includegraphics[width=0.48\textwidth]{images/results_CDL-D.eps}%
-\label{fig:cdl-d}}
-\caption{Channel estimation performance in terms of NMSE with $\rho$=0.6 (a) CDL-A. (b) CDL-B. (c) CDL-C. (d) CDL-D.}
-\label{fig_sim}
-\end{figure*}
 
 \section{Conclusion}
 
