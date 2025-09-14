@@ -15,6 +15,7 @@
 \usepackage{bbm}
 \usepackage{hyperref}
 \usepackage{xcolor} % 삭제 예정
+\newcommand{\tred}{\textcolor{red}}
 
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -23,7 +24,7 @@
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 \usepackage{balance}
 \begin{document}
-\title{An Enhanced Diffusion Posterior Sampling \\ for mmWave Massive MIMO Systems Channel Estimation}
+\title{Novel Channel Estimation Based on Enhanced Diffusion Posterior Sampling for mmWave Massive MIMO Systems}
 
 \author{\IEEEauthorblockN{Jinwook Kim,~\IEEEmembership{Graduate Student Member,~IEEE}},  \IEEEauthorblockN{Seongwoo Lee,~\IEEEmembership{Graduate Student Member,~IEEE}},
 
@@ -42,87 +43,85 @@ supported by the MSIT(Ministry of Science and ICT), Korea, under the ITRC(Inform
 
 
 % The paper headers
-\markboth{IEEE communications letters, ~Vol.~14, No.~8, August~2024}%
+\markboth{IEEE communications letters, ~Vol.~15, No.~8, August~2025}%
 {Shell \MakeLowercase{\textit{et al.}}: A Sample Article Using IEEEtran.cls for IEEE Journals}
 
 \maketitle
 \begin{abstract}
-\textcolor{red}{
-In this letter, a novel diffusion model (DM)-based posterior sampling method for millimeter-wave massive multiple-input multiple-output systems channel estimation is proposed to address the trade-off between accuracy, pilot overhead, and complexity. The proposed method is derived by approximating the likelihood score using the moment matching method and Tweedie's formula to enable accurate and efficient posterior sampling. From the simulation results, the proposed method outperforms the baselines in terms of estimation accuracy, while achieving a comparable latency to the state-of-the-art DM-based estimator under low pilot overhead in both line-of-sight and non-line-of-sight environments.
-}
+In this letter, \tred{a novel channel estimation method based on diffusion posterior sampling is proposed for millimeter-wave (mmWave) massive multiple-input multiple-output (MIMO) systems} to address the trade-off between accuracy, pilot overhead, and complexity. The proposed method is derived by approximating the likelihood score using \tred{moment matching} and Tweedie's formula to enable accurate and efficient posterior sampling. From the simulation results, the proposed method outperforms the baselines in terms of estimation accuracy, while achieving a comparable latency to the state-of-the-art \tred{diffusion model-based channel estimation methods} under low pilot overhead in both line-of-sight and non-line-of-sight environments.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Channel estimation, mmWave, massive MIMO, diffusion model, score function, Tweedie's formula.
+Channel estimation, mmWave, massive MIMO, diffusion model, \tred{moment matching}, Tweedie's formula.
 \end{IEEEkeywords}
 
 
 \section{Introduction}
 
-Millimeter-wave (mmWave) massive multiple-input multiple-output (MIMO) has emerged as a key technology in modern wireless communication systems, which can provide significant gains in data rates and spectral efficiency. To achieve these gains, channel state information needs to be acquired by channel estimation~\cite{busariMillimeterWaveMassiveMIMO2018}. Traditional channel estimation approaches, including least squares (LS) and minimum mean squared error (MMSE), are often limited by performance degradation and the need for a large pilot overhead. This degradation derives from the high dimensionality caused by the large number of antennas, leading to significant pilot overhead and lower spectral efficiency~\cite{hassibiHowMuchTraining2003}. While compressed sensing (CS)-based approaches can significantly reduce pilot overhead by leveraging the inherent sparsity of mmWave channels, their performance is highly sensitive to the accuracy of the sparsity and channel modeling~\cite{zhangAtomicNormDenoisingBased2018,mendez-rialHybridMIMOArchitectures2016,choiCompressedSensingWireless2017}.
+\tred{In modern wireless communication systems, millimeter-wave (mmWave) massive multiple-input multiple-output (MIMO) has emerged as a key technology}, which can provide significant gains in data rates and spectral efficiency. To achieve these gains, channel state information needs to be acquired by channel estimation~\cite{busariMillimeterWaveMassiveMIMO2018}. Traditional channel estimation approaches, including least squares (LS) and minimum mean squared error (MMSE), are often limited by performance degradation and \tred{large pilot overhead}. This degradation \tred{stems} from the high dimensionality caused by the large number of antennas, leading to significant pilot overhead and lower spectral efficiency~\cite{hassibiHowMuchTraining2003}. While compressed sensing (CS)-based approaches can significantly reduce pilot overhead by leveraging the inherent sparsity of mmWave channels, their performance is highly sensitive to the accuracy of the sparsity and channel modeling~\cite{zhangAtomicNormDenoisingBased2018,mendez-rialHybridMIMOArchitectures2016,choiCompressedSensingWireless2017}.
 
-These limitations have motivated the research on deep learning (DL) based channel estimation, which has been confirmed to have better approximation capability compared to mathematical modeling~\cite{kimDeepLearningaidedWireless2023, heDeepLearningBasedChannel2018}. In particular, diffusion models, one of the generative models, have gained much attention for their ability to approximate the complex distribution of data~\cite{arvinteMIMOChannelEstimation2023,feslDiffusionBasedGenerativePrior2024,zhouGenerativeDiffusionModels2025}. As shown in~\cite{arvinteMIMOChannelEstimation2023}, a posterior sampling method for channel estimation based on DM has been introduced. This method has been confirmed to outperform state-of-the-art methods in terms of estimation accuracy. However, the large number of sampling steps is required to achieve this performance. To address this limitation, denoising strategy for DM-based channel estimator has been proposed, leveraging the LS estimate, as shown in~\cite{feslDiffusionBasedGenerativePrior2024}. This strategy has been confirmed to reduce the sampling latency of the estimator, but at the cost of increased pilot overhead. In~\cite{zhouGenerativeDiffusionModels2025}, the novel DM-based estimator has been proposed, considering the pilot overhead and achieving better estimation latency compared to~\cite{arvinteMIMOChannelEstimation2023} in the line-of-sight (LOS) environment. However, in the non-line-of-sight (NLOS) environment, the validation of the performance has been limited to full pilot overhead.
+These limitations have motivated \tred{research into} deep learning (DL) based channel estimation, which has been confirmed to have better approximation capability compared to mathematical \tred{models}~\cite{kimDeepLearningaidedWireless2023, heDeepLearningBasedChannel2018}. In particular, \tred{diffusion models (DMs)}, one of the generative models, have gained much attention for their ability to approximate the complex distribution of data~\cite{arvinteMIMOChannelEstimation2023,feslDiffusionBasedGenerativePrior2024,zhouGenerativeDiffusionModels2025}. \tred{A DM-based posterior sampling method for channel estimation has been introduced in}~\cite{arvinteMIMOChannelEstimation2023}. This method has been confirmed to outperform state-of-the-art methods in terms of estimation accuracy. However, \tred{a large number of sampling steps are} required to achieve this performance. To address this limitation, \tred{a denoising strategy} for \tred{the DM-based channel estimation} has been proposed, leveraging the LS estimate~\cite{feslDiffusionBasedGenerativePrior2024}. This strategy has been confirmed to \tred{reduce the sampling latency}, but at the cost of increased pilot overhead. In~\cite{zhouGenerativeDiffusionModels2025}, \tred{a novel DM-based channel estimation} method has been proposed, considering the pilot overhead and achieving better estimation latency compared to~\cite{arvinteMIMOChannelEstimation2023} in the line-of-sight (LOS) environment. \tred{However, performance validation in  the non-line-of-sight (NLOS) environment has been limited to full pilot overhead.}
 
-In this letter, a novel channel estimator based on diffusion posterior sampling is proposed to jointly address the pilot overhead and latency in both LOS and NLOS environments. First, the diffusion posterior sampling is decomposed into a prior from trained diffusion model and posterior guidance term. Subsequently, posterior guidance term is derived in the form of Jacobian-vector product (JVP) by leveraging Tweedie’s formula and a moment matching method. Finally, the generalized minimal residual method (GMRES) is employed to approximate the JVP, thereby avoiding the high complexity of direct matrix inversion. Simulation results demonstrate that the proposed method outperforms conventional compressed sensing approaches and other diffusion model-based estimators in terms of normalized mean square error (NMSE) across both LOS and NLOS environments. Furthermore, a latency comparable to state-of-the-art (SOTA) DM-based estimators is achieved while all counterparts are outperformed in terms of neural function evaluation (NFE).
+In this letter, a novel \tred{channel estimation method} based on diffusion posterior sampling is proposed to jointly address \tred{pilot overhead and latency} in both LOS and NLOS environments. First, the diffusion posterior sampling is decomposed into a prior \tred{from a trained DM and a posterior guidance term}. Subsequently, \tred{the posterior guidance term} is derived in the form of Jacobian-vector product (JVP) by leveraging Tweedie's formula and a moment matching method. Finally, the generalized minimal residual method (GMRES) is employed to approximate the JVP, thereby avoiding the high complexity of direct matrix inversion. Simulation results demonstrate that the proposed method outperforms conventional compressed sensing approaches and other \tred{DM-based methods} in terms of normalized mean square error (NMSE) across both LOS and NLOS environments. Furthermore, a latency comparable to state-of-the-art (SOTA) \tred{DM-based methods} is achieved while all counterparts are outperformed in terms of \tred{neural function evaluations (NFEs)}.
 
 \section{System Model}
 
-In this letter, point-to-point mmWave massive MIMO system is considered, where the base station (BS) and user equipment (UE) are equipped with $N_{t}$ and $N_{r}$ antennas, respectively. For simplicity, a quasi-static narrowband channel is assumed, and the downlink channel is considered. The received at the UE for channel estimation, based on the transmitted pilot symbols, is given by,
+In this letter, \tred{a point-to-point mmWave massive MIMO system} is considered, where the base station (BS) and user equipment (UE) are equipped with $N_{t}$ and $N_{r}$ antennas, respectively. For simplicity, a quasi-static narrowband channel is assumed, and the downlink channel is considered. \tred{The received signal} at the UE for channel estimation, based on the transmitted pilot symbols, is given by,
 \begin{equation}
-\mathbf{Y}=\mathbf{H}\mathbf{P}+\mathbf{N}\in \mathbb{C}^{N_{r}\times N_{p}}
+\mathbf{Y}=\mathbf{H}\mathbf{P}+\mathbf{N}\in \mathbb{C}^{N_{r}\times N_{p}},
 \end{equation}
-where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is channel matrix, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is known pilot symbol, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}\mathbf{I})$ is additive white Gaussian noise. Due to a few strong multipath components of the high frequency characteristics, the angular domain representation of the channel is considered. Under the assumption of a uniform linear array (ULA) with half-wavelength antenna spacing at the both BS and UE, the channel matrix in the angular domain can be modeled using virtual channel representation as~\cite{sayeedDeconstructingMultiantennaFading2002},
+where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is \tred{the channel matrix}, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is \tred{known pilot symbols}, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}\mathbf{I})$ is additive white Gaussian noise. Due to a few strong multipath components of the \tred{high-frequency} characteristics, the angular domain representation of the channel is considered. Under the assumption of a uniform linear array (ULA) with half-wavelength antenna spacing at \tred{both the BS and UE}, the channel matrix in the angular domain can be modeled using virtual channel representation \tred{as in}~\cite{sayeedDeconstructingMultiantennaFading2002},
 \begin{equation}
 \mathbf{H} = \mathbf{A}_{\text{R}}\mathbf{H}_{\text{v}}\mathbf{A}_{\text{T}}^{H},
 \end{equation}
-where $\mathbf{A}_{\text{R}}\in \mathbb{C}^{N_{r}\times N_{r}}$ and $\mathbf{A}_{\text{T}}\in \mathbb{C}^{N_{t}\times N_{t}}$ are the array response matrices represented by the discrete Fourier transform (DFT) matrices of the receiver and transmitter, respectively and $\mathbf{H}_{\text{v}}$ is channel matrix of angular domain.
-Vectorized form of the received symbol is expressed as,
+where $\mathbf{A}_{\text{R}}\in \mathbb{C}^{N_{r}\times N_{r}}$ and $\mathbf{A}_{\text{T}}\in \mathbb{C}^{N_{t}\times N_{t}}$ are the array response matrices represented by the discrete Fourier transform (DFT) matrices of the receiver and transmitter, respectively and $\mathbf{H}_{\text{v}}$ is \tred{the channel matrix in the angular domain}.
+\tred{The vectorized form} of the received symbol is expressed as,
 \begin{equation}
 \mathbf{y} = \mathbf{A}\mathbf{h}_{\text{v}}+\mathbf{n}\in \mathbb{C}^{N_{r}N_{p}\times 1},
 \end{equation}
-where $\mathbf{y}$, $\mathbf{h}_{\text{v}}$, $\mathbf{n}$ are vectorized forms of the received symbol, angular domain channel, and noise, respectively. $\mathbf{A}=(\mathbf{P}^{\top}\otimes\mathbf{I}_{N_{r}})((\mathbf{A}_{\text{T}}^{H})^{\top}\otimes \mathbf{A}_{\text{R}})\in \mathbb{C}^{N_{r}N_{p}\times N_{r}N_{t}}$ is the system matrix vectorized by Kronecker product.
-Since the number of the transmitter antennas is larger than the number of pilot symbols, i.e., $\rho=N_{p}/N_{t}<1$, the problem is converted to the ill-posed inverse problem.
-To solve the ill-posed problem, the channel estimation can be formulated within a Bayesian inference framework,
+where $\mathbf{y}$, $\mathbf{h}_{\text{v}}$, \tred{and} $\mathbf{n}$ are \tred{the vectorized forms} of the received symbol, angular domain channel, and noise, respectively. $\mathbf{A}=(\mathbf{P}^{\top}\otimes\mathbf{I}_{N_{r}})((\mathbf{A}_{\text{T}}^{H})^{\top}\otimes \mathbf{A}_{\text{R}})\in \mathbb{C}^{N_{r}N_{p}\times N_{r}N_{t}}$ is the system matrix vectorized by Kronecker product.
+Since the number of the transmitter antennas is larger than the number of pilot symbols, i.e., \tred{pilot density} $\rho=N_{p}/N_{t}<1$, the problem \tred{becomes an ill-posed inverse problem}.
+\tred{To solve this} ill-posed problem, the channel estimation can be formulated within a Bayesian inference framework,
 \begin{equation}
   p(\mathbf{h}|\mathbf{y})\propto p(\mathbf{h})p(\mathbf{y}|\mathbf{h}),
 \end{equation}
-where $p(\mathbf{h})$, and $p(\mathbf{y}|\mathbf{h})$ are prior and likelihood distribution, respectively. In this letter, the diffusion model-based posterior sampling is adopted to solve this problem.
+where $p(\mathbf{h})$, and $p(\mathbf{y}|\mathbf{h})$ are prior and likelihood distribution, respectively. \tred{To solve this problem, the DM-based posterior sampling} is adopted.
 
 \section{Proposed Method}
 
-In this letter, denoising diffusion probabilistic model (DDPM) is adopted to learn the channel distribution~\cite{hoDenoisingDiffusionProbabilistic2020}. DDPM is consists of forward and reverse diffusion processes. In forward process, original channel $\mathbf{h}_{0}$ is converted to the Gaussian noise using Gaussian transition kernel for T time steps, and using the reparameterization trick, it can be expressed by,
+In this letter, \tred{the} denoising diffusion probabilistic model (DDPM) is adopted to learn the channel distribution~\cite{hoDenoisingDiffusionProbabilistic2020}. \tred{The DDPM consists of forward and reverse diffusion processes.} \tred{In the forward process}, original channel $\mathbf{h}_{0}$ is converted to \tred{Gaussian noise} using Gaussian transition kernel \tred{over} T time steps, and using the reparameterization trick, it can be expressed by,
 \begin{equation}
 \mathbf{h}_{t} = \sqrt{ \bar{\alpha}_{t} }\mathbf{h}_{0} + \sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{t},
 \end{equation}
-where $\epsilon_{t}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ is Gaussian noise. $\bar{\alpha}_{t}=\prod_{i=1}^{t}\alpha_{i}$, and $\alpha_{t}=1-\beta_{t}$ where $\beta_{t}$ is pre-defined variance schedule. In reverse process, the original channel $\mathbf{h}_{0}$ is recovered from the $\mathbf{h}_{T}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ using denoising networks $\epsilon_{\theta}$ for $T$ time step. The denoising networks are trained to minimize the mean squared error (MSE) loss as,
+where $\epsilon_{t}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ is Gaussian noise. $\bar{\alpha}_{t}=\prod_{i=1}^{t}\alpha_{i}$, and $\alpha_{t}=1-\beta_{t}$ where $\beta_{t}$ is pre-defined variance schedule. \tred{In the reverse process}, the original channel $\mathbf{h}_{0}$ is recovered from the $\mathbf{h}_{T}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ using denoising networks $\epsilon_{\theta}$ for $T$ \tred{time steps}. The denoising networks are trained to minimize the mean squared error (MSE) loss as,
 \begin{equation}
 \mathcal{L}(\theta) = \mathbb{E}[\|\epsilon_{t} - \epsilon_{\theta}(\mathbf{h}_{t},t)\|_{2}^{2}],
 \end{equation}
-where $t\sim\mathcal{U}[1,T]$. After the training, the denoising networks can be used as the prior information of the channel distribution.
+where $t\sim\mathcal{U}[1,T]$. \tred{After training}, the denoising networks can be used as \tred{prior information} of the channel distribution.
 
-After the denosing networks are trained, diffusion-based posterior sampling is performed to estimate the channel using iterative manner as~\cite{zhouGenerativeDiffusionModels2025},
+After the \tred{denoising} networks are trained, \tred{DM-based posterior sampling} is performed to estimate the channel \tred{in an iterative manner} as~\cite{zhouGenerativeDiffusionModels2025},
 \begin{equation}
 \mathbf{h}_{t-1} = \frac{1}{\sqrt{ \alpha_{t} }}(\mathbf{h}_{t}+(1-\alpha_{t})\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})),
 \end{equation}
-where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})$ is posterior score decomposed by Bayes' rule as,
+where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y})$ is posterior score\tred{, which is decomposed by Bayes' rule as follows:}
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t}|\mathbf{y}) = \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})+\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t}),
 \end{equation}
 where $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ and $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{y}|\mathbf{h}_{t})$ are prior and noise-perturbed likelihood score, respectively.
-Prior score can be approximated by trained denoising networks given by,
+Prior score can be approximated \tred{using} trained denoising networks given by,
 \begin{equation}
 \nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})\approx -\frac{1}{\sqrt{ 1-\bar{\alpha}_{t} }}\epsilon_{\theta}(\mathbf{h}_{t},t).
 \end{equation}
-However, likelihood score is intractable to compute because there exists no a closed-form expression for the likelihood $p_{t}(\mathbf{y}|\mathbf{h}_{t})$ which has no explicit relationship between $\mathbf{y}$ and $\mathbf{h}_{t}$. Instead, the likelihood can be expressed by marginalizing over $\mathbf{h}_{0}$, which has relationship with both $\mathbf{y}$ and $\mathbf{h}_{t}$, as,
+However, \tred{the likelihood score} is intractable to compute because \tred{no closed-form expression exists} for the likelihood $p_{t}(\mathbf{y}|\mathbf{h}_{t})$\tred{, which} has no explicit relationship between $\mathbf{y}$ and $\mathbf{h}_{t}$. Instead, the likelihood can be expressed by marginalizing over $\mathbf{h}_{0}$, which has \tred{a relationship} with both $\mathbf{y}$ and $\mathbf{h}_{t}$, \tred{as follows:}
 \begin{equation}
 p(\mathbf{y}|\mathbf{h}_{t}) = \int p(\mathbf{y}|\mathbf{h}_{0})p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})d\mathbf{h}_{0},
 \end{equation}
-The likelihood $p_{t}(\mathbf{y}|\mathbf{h}_{t})$ is intractable because the true distribution $p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ of the likelihood is unknown. Even in this form, the likelihood is still intractable because $p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ is unknown. To overcome this intractability, we approximate the likelihood to tractable Gaussian distribution $q_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ as~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025},
+\tred{Even in this form, the likelihood $p_{t}(\mathbf{y}|\mathbf{h}_{t})$ is still intractable because the true distribution $p_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ of the likelihood is unknown.} To overcome this intractability, we approximate the likelihood to tractable Gaussian distribution $q_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})$ as~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025},
 \begin{equation}
 p(\mathbf{y}|\mathbf{h}_{t}) \approx \int p(\mathbf{y}|\mathbf{h}_{0})q_{t}(\mathbf{h}_{0}|\mathbf{h}_{t})d\mathbf{h}_{0}.
 \end{equation}
-In order to find the approximation closest to the true distribution, the moment matching method is adopted, which is known that matching the first, and second moments of the approximation to the true distribution of the moments can be minimize the Kullback-Leibler divergence between the distributions~\cite{bishopPatternRecognitionMachine2006}.
-Given the well-approximated prior score $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ from the diffusion models, the first and second moments of the true distribution can be approximated using Tweedie’s formula as~\cite{efronTweediesFormulaSelection2011},
+In order to find the approximation closest to the true distribution, the moment matching method is adopted, \tred{as it is known} that matching \tred{the first and second moments} of the approximation to \tred{those of the true distribution can minimize} the Kullback-Leibler divergence between the distributions~\cite{bishopPatternRecognitionMachine2006}.
+Given the well-approximated prior score $\nabla_{\mathbf{h}_{t}}\log p_{t}(\mathbf{h}_{t})$ from the \tred{DM}, the first and second moments of the true distribution can be approximated using Tweedie's formula as~\cite{efronTweediesFormulaSelection2011},
 \begin{equation}
 \mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}] = \frac{1}{\sqrt{ \bar{\alpha}_{t} }}(1-\sqrt{ 1-\bar{\alpha}_{t} }\epsilon_{\theta}(\mathbf{h}_{t},t)),
 \end{equation}
@@ -135,7 +134,7 @@ Through this process, the approximated likelihood can be derived as,
 p_{t}(\mathbf{y}|\mathbf{h}_{t}) \approx \mathcal{N}(\mathbf{y}; \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}], \sigma_{n}^{2}\mathbf{I}+\mathbf{A}\mathbb{V}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top}).
 \end{aligned}
 \end{equation}
-The computation of the likelihood score requires matrix inversion, which is computationally expensive operation. Therefore, instead of being computed directly, the score can be obtained by solving the linear system with the GMRES method as~\cite{saadGMRESGeneralizedMinimal1986},
+The computation of the likelihood score requires matrix inversion, \tred{which is a computationally expensive operation}. Therefore, instead of being computed directly, the score can be obtained by solving the linear system with the GMRES method as~\cite{saadGMRESGeneralizedMinimal1986},
 \begin{equation}
 (\boldsymbol{\Sigma}_{\mathbf{y}}+\mathbf{A}\boldsymbol{\Sigma}_{t}^{2}\nabla_{\mathbf{h}_{t}}^{\top}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}]\mathbf{A}^{\top})\mathbf{u} = \mathbf{y}- \mathbf{A}\mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{t}],
 \end{equation}
@@ -162,17 +161,14 @@ where $\mathbf{u}$ is the approximated likelihood score. The proposed algorithm 
 \section{Simulations}
 
 To validate the proposed method, we utilized the clustered delay line (CDL)
-channel model specified in 3GPP TR 38.901, which was generated via MATLAB 5G
-Toolbox. Delay profiles of CDL-B, and CDL-D were adopted to evaluate the
-performance in both LOS and NLOS environments, respectively. The parameters for channels
-generation were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023} to ensure a fair comparison.
+channel model specified in 3GPP TR 38.901, which was generated \tred{using the MATLAB 5G Toolbox}. Delay profiles of \tred{CDL-B and CDL-D} were adopted to evaluate the performance in both LOS and NLOS environments, respectively. The parameters for \tred{channel generation} were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023} to ensure a fair comparison.
 
-The proposed estimator was implemented using PyTorch 2.1.2, CUDA 11.8, and Python 3.10.13 on Ubuntu 20.04.6. To meet the computational requirements of the diffusion model, single NVIDIA GeForce RTX 4090 GPU, an AMD Ryzen Threadripper PRO 5975WX CPU and 128GB of RAM were used for the simulations. For the hyperparameter settings of the method, the number of epochs was empirically set to 500. The optimizer was configured as AdamW, with 0.0001 learning rate. The batch size was set to 256. % 아래 수정 필요
-For the diffusion models, the number of diffusion steps $T$ was set to 1000, and the variance schedule $\beta_{t}$ was set to linearly increase from 0.0001 to 0.02. The number of sampling steps was set to 20, and the parameter $\eta$ controlling the noise scale was set to 1.0. The maximum number of iterations for GMRES was set to 5.
+The proposed \tred{method} was implemented using PyTorch 2.1.2, CUDA 11.8, and Python 3.10.13 on Ubuntu 20.04.6. To meet the computational requirements of the \tred{DM}, \tred{a single} NVIDIA GeForce RTX 4090 GPU, an AMD Ryzen Threadripper PRO 5975WX CPU and 128GB of RAM were used for the simulations. For the hyperparameter settings of the method, the number of epochs was empirically set to 500. The optimizer was configured as AdamW, \tred{with a learning rate of 0.0001}. The batch size was set to 256. % 아래 수정 필요
+For the \tred{DM}, the number of diffusion steps $T$ was set to 1000, and the variance schedule $\beta_{t}$ was set to linearly increase from 0.0001 to 0.02. \tred{To improve sampling efficiency, DDIM strategy was adopted,} and the number of sampling steps was set to 20, and the parameter $\eta$ controlling the noise scale was set to 1.0~\cite{songDenoisingDiffusionImplicit2020}. The maximum number of iterations for \tred{the} GMRES was set to 5 \tred{through a validation set}.
 
-Channel estimation performance was evaluated using the normalized mean square error (NMSE) metric, defined as $\mathbb{E}[\|\mathbf{H}-\mathbf{H}_{\text{est}}\|_{2}^{2} / \|\mathbf{H}\|_{2}^{2}]$. For comparison, the baselines from three categories consist of CS, DL, and DM models. OMP and fsAD were selected as CS baselines~\cite{mendez-rialHybridMIMOArchitectures2016,zhangAtomicNormDenoisingBased2018}. LDAMP was selected as DL baseline~\cite{heDeepLearningBasedChannel2018}. Score-ALD and DMPS were selected as DM baselines~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025}. All hyperparameters of baselines were set through validation set.
+Channel estimation performance was evaluated using the normalized mean square error (NMSE) metric, defined as $\mathbb{E}[\|\mathbf{H}-\mathbf{H}_{\text{est}}\|_{2}^{2} / \|\mathbf{H}\|_{2}^{2}]$. For comparison, the baselines from three categories \tred{were selected: CS, DL, and DM}. OMP and fsAD were selected as CS baselines~\cite{mendez-rialHybridMIMOArchitectures2016,zhangAtomicNormDenoisingBased2018}. LDAMP was selected as \tred{the DL baseline}~\cite{heDeepLearningBasedChannel2018}. Score-ALD and DMPS were selected as DM baselines~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025}. All \tred{hyperparameters of the baselines} were set through \tred{a validation set}.
 
-The channel estimation performance under LOS and NLOS conditions with a pilot density $\rho$ of 0.6 was evaluated as shown in Fig.~\ref{fig_sim_1}. As shown in Fig.~\ref{fig:los-1}, it had been confirmed that the proposed outperforms the baselines in terms of channel estimation performance. While the performance of fsAD degraded significantly in low SNR, the performance of OMP did not improve after 20dB of SNR. While the performance of fsAD degraded significantly in low SNR, the performance of OMP did not improve after 20dB of SNR. The limitations of both methods arise from the mismatch between the sparsity assumed by the methods and the actual sparsity in the channels. In LDAMP, error floors and sensity in high and low SNR, respectively, arrised from the CS-based methods had been not confirmed. However, the performance of LDAMP still not enough to the proposed method. In comparison of the diffusion model-based methods, the proposed method had been better performance. Specifically, the proposed method outperformed the SGM by about 8dB in low SNR range, and DMPS by about 2dB in high SNR.
+The channel estimation performance under LOS and NLOS conditions with a pilot density $\rho$ of 0.6 was evaluated as shown in Fig.~\ref{fig_sim_1}. \tred{In both LOS and NLOS, it was confirmed} that \tred{the proposed method} outperforms \tred{the baselines across most of the SNR range}. While the performance of fsAD degraded significantly \tred{at low SNR}, the performance of OMP did not improve \tred{above 20 dB} of SNR. \tred{The limitations of these methods arise from the mismatch between their assumed sparsity and the actual channel sparsity.} \tred{Unlike the CS-based methods, LDAMP did not exhibit the error floors at high SNR or high sensitivity at low SNR.} However, the performance of LDAMP \tred{was still inferior to that of the proposed method}. \tred{In comparison to the other DM-based methods}, the proposed method \tred{achieved} better performance. Specifically, the proposed method outperformed the \tred{Score-ALD} by about \tred{8 dB} in \tred{the low SNR range}, and DMPS by about \tred{2 dB} in \tred{the high SNR range}.
 
 \begin{figure}[!t]
 \subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/results-1/CDL-D.eps}%
@@ -184,7 +180,7 @@ The channel estimation performance under LOS and NLOS conditions with a pilot de
 \label{fig_sim_1}
 \end{figure}
 
-As shown in Fig.~\ref{fig_sim_2}, the channel estimation performance per the pilot density was evaluated in the LOS and NLOS conditions. While the performance of the proposed method consistently degraded by about 2 dB across the SNR range, both DMPS and SGM model degraded gradually after SNR 0dB, with DMPS degrading up to 7 dB and SGM degrading up to about 6dB, in Fig.~\ref{fig:los-2}. With a pilot density of 0.3, the proposed method outperformed the DMPS and SGM up to about 6dB and 4dB, respectively, models in most SNR. However, the performance degradation had more increased in NLOS, as shown in Fig.~\ref{fig:nlos-2}. The performance of the proposed method, SGM, and DMPS degraded by about 5dB, 10dB, and 15dB, respectively. While both DMPS and SGM use the heuristic covariance and don’t use the diffusion prior for likelihood score approximation, the proposed method use the moment matching method to approximate the accurate first and second moment from Tweedie’s formula using the diffusion prior. It had been confirmed that approximation accuracy of the likelihood score has been effect on the estimation performance. In particular, the performance degradation has been pronounced in the NLOS condition.
+As shown in Fig.~\ref{fig_sim_2}, \tred{the channel estimation performance for different pilot densities} was evaluated in the LOS and NLOS conditions. While the performance of the proposed method consistently degraded by about 2 dB across the SNR range, \tred{the performance of} both DMPS and \tred{Score-ALD} \tred{models} degraded gradually after SNR \tred{0 dB}, with DMPS degrading up to 7 dB and \tred{Score-ALD} degrading up to about \tred{6 dB}, in Fig.~\ref{fig:los-2}. With a pilot density of 0.3, the proposed method outperformed the DMPS and \tred{Score-ALD} up to about \tred{6 dB} and \tred{4 dB}, \tred{respectively, across most of the SNR range}. However, the performance \tred{degradation was more pronounced} in NLOS, as shown in Fig.~\ref{fig:nlos-2}. The performance of the proposed method, \tred{Score-ALD}, and DMPS degraded by about \tred{5 dB}, \tred{10 dB}, and \tred{15 dB}, respectively. While both DMPS and \tred{Score-ALD} use the heuristic covariance and \tred{do not use} the diffusion prior for likelihood score approximation, \tred{the proposed method uses the moment matching method} to approximate the \tred{first and second moments} from Tweedie's formula using the diffusion prior. \tred{It was confirmed} that approximation accuracy of the likelihood score \tred{affects} the estimation performance. In particular, the performance degradation has been pronounced in the NLOS condition.
 
 \begin{figure}[!t]
 \subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/results-2/CDL-D.eps}%
@@ -192,22 +188,22 @@ As shown in Fig.~\ref{fig_sim_2}, the channel estimation performance per the pil
 \\
 \subfigure[NLOS]{\includegraphics[width=0.48\textwidth]{images/results-2/CDL-B.eps}%
 \label{fig:nlos-2}}
-\caption{Robustness of pilot density on LOS and NLOS channel.}
+\caption{\tred{Robustness to pilot density in LOS and NLOS channels.}}
 \label{fig_sim_2}
 \end{figure}
 
-In Table~\ref{tab:table1}, the computational complexity of the proposed method and other DM-based methods was investigated in terms of floating point operations (FLOPs), the number of function evaluations (NFEs), and inference latency. The inference FLOPs were calculated by multiplying the FLOPs by the NFEs. The inference latency was measured for a batch size of 100 and pilot density of 0.6, averaged over 10 independent runs. For the performance shown in Figs.~\ref{fig_sim_1} and \ref{fig_sim_2}, NFEs were set to 6933, 130, 20 for SGM, DMPS, and the proposed method, respectively. The proposed method outperformed the SGM in terms of FLOPS, NFEs, latency. In particular, the proposed method achieved about 65 times faster inference latency compared to SGM, while achieving better performance. in comparison with DMPS, the proposed method achieved comparable latency while outperforming in terms of FLOPs and NFEs. Consequently, the proposed method achieved a better trade-off between estimation accuracy and inference latency than all considered baselines under the low pilot overhead.
+In Table~\ref{tab:table1}, the computational complexity of the proposed method and other DM-based methods was investigated in terms of floating point operations (FLOPs), the number of function evaluations (NFEs), and inference latency. The inference FLOPs were calculated by multiplying the FLOPs \tred{per function evaluation} by the NFEs. The inference latency was measured for a batch size of 100 and pilot density of 0.6, averaged over 10 independent runs. For the performance shown in Figs.~\ref{fig_sim_1} and \ref{fig_sim_2}, NFEs were set to 6933, 130, 20 for \tred{Score-ALD}, DMPS, and the proposed method, respectively. The proposed method outperformed the \tred{Score-ALD} in terms of \tred{FLOPS, NFEs, and latency}. In particular, the proposed method achieved about 65 times faster inference latency compared to \tred{Score-ALD}, while achieving better performance. \tred{In comparison with DMPS}, the proposed method achieved comparable latency while outperforming \tred{it} in terms of FLOPs and NFEs. Consequently, the proposed method achieved a better trade-off between estimation accuracy and inference latency than \tred{the baselines under low pilot overhead}.
 
 \begin{table}[!t]
 \centering
 \renewcommand{\arraystretch}{1.1} 
-\caption{Computational complexity for diffusion model-based channel estimators in terms of FLOPs, NFE, and latency}
+\caption{Computational complexity for \tred{DM-based channel estimation methods} in terms of FLOPs, \tred{NFEs}, and latency}
 \label{tab:table1}
 \begin{tabular}{M{0.20\columnwidth}|M{0.21\columnwidth}|M{0.20\columnwidth}|M{0.20\columnwidth}}
 \hline
-\textbf{Method} & \textbf{FLOPs} & \textbf{NFE} & \textbf{Latency (s)} \\
+\textbf{Method} & \textbf{FLOPs} & \tred{\textbf{NFEs}} & \textbf{Latency (s)} \\
 \hline
-SGM\cite{arvinteMIMOChannelEstimation2023} & \(1.028 \times 10^{12}\) & 6933 & 84.97 \\
+\tred{Score-ALD}\cite{arvinteMIMOChannelEstimation2023} & \(1.028 \times 10^{12}\) & 6933 & 84.97 \\
 \hline
 % TODO: DMPS NFE가 변경되어 FLOPs 변경 필요
 DMPS\cite{zhouGenerativeDiffusionModels2025} & \(2.449 \times 10^{10}\) & 130 & 1.27 \\
@@ -219,10 +215,8 @@ Proposed & \(4.899 \times 10^9\) & 20 & 1.29 \\
 
 \section{Conclusion}
 
-% 직접 수정 필요
-\textcolor{red}{
-In this letter, a novel channel estimation algorithm has been proposed to address the trade-off between accuracy, pilot overhead, and complexity in mmWave massive MIMO systems. By leveraging moment matching and Tweedie's formula to approximate the likelihood score, the proposed method can perform accurate and efficient posterior sampling, achieving superior estimation accuracy compared to baselines with comparable latency. In future work, the extension of the proposed method to wideband and multi-user scenarios will be considered.
-}
+% TODO: 직접 수정 필요
+In this letter, a novel channel estimation \tred{method} has been proposed to address the trade-off between accuracy, pilot overhead, and complexity in mmWave massive MIMO systems. By leveraging \tred{the} moment matching and Tweedie's formula to approximate the likelihood score, the proposed method can perform accurate and efficient posterior sampling, achieving superior estimation accuracy compared to baselines with comparable latency. In future work, the extension of the proposed method to wideband and multi-user scenarios will be considered.
 
 \bibliographystyle{IEEEtran}
 % \bibliography{bib/IEEEabrv,bib/references}
