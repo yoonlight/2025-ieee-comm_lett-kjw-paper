@@ -175,8 +175,8 @@ channel model specified in 3GPP TR 38.901, which was generated using the MATLAB 
 
 %\tred{The parameters for channel generation were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023} to ensure a fair comparison.} The hyperparameters for Score-ALD were set be same as in~\cite{arvinteMIMOChannelEstimation2023}. In DMPS, the sampling steps was set to 100 and last ten steps iterative tree times. All hyperparameters of the baselines were set through a validation set.
 
-The channel estimation performance was evaluated under LOS and NLOS environments at a pilot density $\rho$ of 0.6, as shown in Fig.~\ref{fig_sim_1}. It was confirmed that the proposed method outperforms the baselines across most of the SNR range in both environments. The performance of fsAD degraded significantly at low SNR, and OMP showed little improvement beyond 20 dB. The limitations of these methods arise from the mismatch between their assumed
-and the actual channel sparsities. Unlike the CS-based methods, LDAMP was not characterized by error floors at high SNR or high sensitivity at low SNR. In comparison to the DM-based methods, the proposed method outperformed the Score-ALD and DMPS by about 8 dB and 2 dB in the low and high SNR ranges, respectively.
+The channel estimation performance was evaluated under LOS and NLOS environments at a pilot density $\rho$ of 0.6, as shown in Fig.~\ref{fig_sim_1}. It was confirmed that the proposed method outperforms the baselines across most of the SNR range in both environments. The performance of fsAD degraded significantly at low SNR, and OMP showed \tred{slightly} improvement beyond 20 dB. The limitations of these methods arise from the mismatch between their assumed
+and the actual channel sparsities. Unlike the CS-based methods, LDAMP was not characterized by error floors at high SNR or high sensitivity at low SNR. In comparison to the DM-based methods, the proposed method outperformed the Score-ALD and DMPS by about 8 dB and 2 dB in the low and high SNR ranges, respectively. \tred{Consequently, it was demonstrated that the learned prior by the proposed method can more accurately approximate channel distribution compared to those assumed by the baselines.}
 
 \begin{figure}[!t]
 \subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/results-1/CDL-D.eps}%
@@ -188,8 +188,9 @@ and the actual channel sparsities. Unlike the CS-based methods, LDAMP was not ch
 \label{fig_sim_1}
 \end{figure}
 
-As shown in Fig.~\ref{fig_sim_2}, the channel estimation performance for different pilot densities was evaluated in the LOS and NLOS conditions. While the performance of the proposed method consistently degraded by about 2 dB across the SNR range, the performance of both DMPS and Score-ALD models degraded gradually after SNR 0 dB, with DMPS degrading up to 7 dB and Score-ALD degrading up to about 6 dB, in Fig.~\ref{fig:los-2}. With a pilot density of 0.3, the proposed method outperformed the DMPS and Score-ALD up to about 6 dB and 4 dB, respectively, across most of the SNR range. However, the performance degradation was more pronounced in NLOS, as shown in Fig.~\ref{fig:nlos-2}. The performance of the proposed method, Score-ALD, and DMPS degraded by about 5 dB, 10 dB, and 15 dB, respectively. While both DMPS and Score-ALD use the heuristic covariance and do not use the diffusion prior for likelihood score approximation, the proposed method uses the moment matching method to approximate the first and second moments from Tweedie's formula using the diffusion prior. It was confirmed that approximation accuracy of the likelihood score affects the estimation performance. In particular, the performance degradation has been pronounced in the NLOS condition.
-
+\tred{
+In Fig.~\ref{fig_sim_2}, robustness of the DM-based approaches was evaluated under the low pilot density. Specifically, at a pilot density of 0.3, it was confirmed that the proposed method outperforms the DMPS and Score-ALD by about 6 dB and 4 dB, respectively in the LOS environment. Furthermore, the performance gap widens to about 12dB and 5dB, respectively in the NLOS environment. Consequently, it was demonstrated that the superior robustness of the proposed method stems from a fundamental difference in the likelihood score approximation. While both DMPS and Score-ALD approximate the mean and covariance based on the heuristic methods, the proposed method approximates them based on the moment matching principle with the learned prior.
+}
 \begin{figure}[!t]
 \subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/results-2/CDL-D.eps}%
 \label{fig:los-2}}
@@ -200,7 +201,8 @@ As shown in Fig.~\ref{fig_sim_2}, the channel estimation performance for differe
 \label{fig_sim_2}
 \end{figure}
 
-In Table~\ref{tab:table1}, the computational complexity of the proposed method and other DM-based methods was investigated in terms of floating point operations (FLOPs), NFEs, and inference latency. The inference FLOPs were calculated by multiplying the FLOPs per function evaluation by the NFEs. The inference latency was measured for a batch size of 100 and pilot density of 0.6, averaged over 10 independent runs. For the performance shown in Figs.~\ref{fig_sim_1} and \ref{fig_sim_2}, NFEs were set to 6933, 130, 20 for Score-ALD, DMPS, and the proposed method, respectively. The proposed method outperformed the Score-ALD in terms of FLOPS, NFEs, and latency. In particular, the proposed method achieved about 65 times faster inference latency compared to Score-ALD, while achieving better performance. In comparison with DMPS, the proposed method achieved comparable latency while outperforming it in terms of FLOPs and NFEs. Consequently, the proposed method achieved a better trade-off between estimation accuracy and inference latency than the baselines under low pilot overhead.
+\tred{
+In addition to its superior estimation performance, the proposed method offers significant advantages in computational efficiency in terms of floating point operations (FLOPs), NFEs, and inference latency, as detailed in Table~\ref{tab:table1}.} The inference FLOPs were calculated by multiplying the FLOPs per function evaluation by the NFEs. The inference latency was measured for a batch size of 100 and pilot density of 0.6, averaged over 10 independent runs. \tred{The proposed method achieved about 65 times faster inference latency compared to Score-ALD.} In comparison with DMPS, the proposed method achieved comparable latency while outperforming it in terms of FLOPs and NFEs. \tred{Therefore, it was demonstrated that the proposed method is more efficient and accurate solution by providing a better trade-off between estimation accuracy and inference latency than the baselines.}
 
 \begin{table}[!t]
 \centering
@@ -223,8 +225,7 @@ Proposed & \(4.899 \times 10^9\) & 20 & 1.29 \\
 
 \section{Conclusion}
 
-% TODO: 직접 수정 필요
-In this letter, a novel channel estimation method has been proposed to address the trade-off between accuracy, pilot overhead, and complexity in mmWave massive MIMO systems. By leveraging the moment matching and Tweedie's formula to approximate the likelihood score, the proposed method can perform accurate and efficient posterior sampling, achieving superior estimation accuracy compared to baselines with comparable latency. In future work, the extension of the proposed method to wideband and multi-user scenarios will be considered.
+In this letter, a novel channel estimation method has been proposed to address the trade-off between accuracy, pilot overhead, and complexity in mmWave massive MIMO systems. \tred{Based on the moment matching principle}, the proposed method can perform accurate and efficient posterior sampling, achieving superior estimation accuracy compared to baselines with comparable latency. \tred{From the simulation results, it is demonstrated that the proposed method has the potential to overcome a key bottleneck posed by high-dimensional channel.} In future work, the extension of the proposed method to wideband and multi-user scenarios will be considered.
 
 \bibliographystyle{IEEEtran}
 % \bibliography{bib/IEEEabrv,bib/references}
