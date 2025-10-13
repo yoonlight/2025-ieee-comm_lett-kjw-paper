@@ -16,6 +16,7 @@
 \usepackage{hyperref}
 \usepackage{xcolor} % 삭제 예정
 \newcommand{\tred}{\textcolor{red}}
+\newcommand{\tblue}{\textcolor{blue}}
 
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -34,9 +35,9 @@
 \vspace{-10pt}
 }
         % <-this % stops a space
-% \thanks{This work was 
-% partly supported by Institute of Information \& communications Technology Planning \& Evaluation (IITP) grant funded by the Korea government (MSIT) (No. 2021-0-00892-005, Research on advanced physical layer technologies of low-earth orbit (LEO) satellite communication systems for ubiquitous intelligence in space) and 
-% supported by the MSIT(Ministry of Science and ICT), Korea, under the ITRC(Information Technology Research Center) support program(IITP-2025-RS-2023-00258639) supervised by the IITP(Institute for Information \& Communications Technology Planning \& Evaluation).}% <-this % stops a space
+\thanks{This work was 
+partly supported by Institute of Information \& communications Technology Planning \& Evaluation (IITP) grant funded by the Korea government (MSIT) (No. 2021-0-00892-005, Research on advanced physical layer technologies of low-earth orbit (LEO) satellite communication systems for ubiquitous intelligence in space) and 
+supported by the MSIT(Ministry of Science and ICT), Korea, under the ITRC(Information Technology Research Center) support program(IITP-2025-RS-2023-00258639) supervised by the IITP(Institute for Information \& Communications Technology Planning \& Evaluation). (\it{Corresponding author: Jin Young Kim.})}% <-this % stops a space
 \thanks{Jinwook Kim, Seongwoo Lee, Joonho Seon, Soo Hyun Kim, Young Ghyu Sun, and Jin Young Kim are with the Department of Electronic Convergence Engineering, Kwangwoon University, Seoul 01897, South Korea (e-mail: \{yoonlight12, swoo1467, dimlight13, kimsoogus, yakrkr, jinyoung\}@kw.ac.kr).}
 \thanks{Hyowoon Seo, and Dong In Kim are with the Department of Electrical and Computer Engineering, Sungkyunkwan University, Suwon 16419, South Korea (e-mail: \{hyowoonseo,dongin\}@skku.edu).}}
 
@@ -47,7 +48,9 @@
 
 \maketitle
 \begin{abstract}
-In this letter, a novel channel estimation method based on diffusion posterior sampling is proposed for effective millimeter-wave (mmWave) massive multiple-input multiple-output (MIMO) systems to jointly address estimation accuracy, pilot overhead, and complexity. The proposed method is derived by approximating the likelihood score using moment matching and Tweedie's formula to enable accurate and efficient posterior sampling. From the simulation results, it is confirmed that the proposed method outperforms the state-of-the-art diffusion model-based channel estimation methods in terms of estimation accuracy while achieving a comparable computational complexity under low pilot overhead in both line-of-sight (LOS) and non-LOS environments.
+\tred{
+In this letter, a novel diffusion model-based channel estimation method is proposed. It aims to address the performace cliff in massive multiple-input multiple-output (MIMO) systems under low pilot overhead. Existing diffusion model (DM)-based estimators often rely on first-moment approximations of the likelihood score. This leads to performance degradation in high-uncertainty conditions. To overcome this, our method incorporates both first and second-order posterior moments via the moment matching principle and Tweedie's formula. This enables more robust and accurate posterior sampling. To maintain computational tractability, the resulting linear system is efficiently solved using the generalized minimal residual (GMRES) method. From the simulation results, it is confirmed that the proposed method successfully mitigates the performance cliff. It also substantially outperforms state-of-the-art DM-based methods in estimation accuracy under severe pilot scarcity, while achieving a comparable computational complexity.
+}
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -59,7 +62,7 @@ Channel estimation, massive MIMO, diffusion model, moment matching, Tweedie's fo
 
 Massive multiple-input-multiple-output (MIMO) has emerged as a key technology for future 6G communication systems~\cite{busariMillimeterWaveMassiveMIMO2018}. To realize full potential of the system, accurate channel state information (CSI) is essential. However, a fundamental limitation is that the number of pilot symbols required for estimation scales linearly with the massive number of antennas. This leads to a severe pilot overhead bottleneck, directly degrading the spectral efficiency. Consequently, a critical research challenge is to design a channel estimation scheme that achieves high accuracy with minimal pilot overhead.
 
-Initial solutions have been dominated by compressive sensing (CS)-based methods which exploit channel sparsity~\cite{zhangAtomicNormDenoisingBased2018,mendez-rialHybridMIMOArchitectures2016,choiCompressedSensingWireless2017}. Their primary drawback, however, was performance degradation from the model mismatch between the assumed sparsity and practical channel conditions. To overcome this limitation, data-driven deep learning (DL) approaches has been introduced. Supervised DL models, while effective, lack generalizability as they are tiled to specific training conditions~\cite{heDeepLearningBasedChannel2018}. A paradigm shift then emerged with deep generative models (DGMs) which learn the underlying channel distribution itself to improve generalizability~\cite{vanhuynhGenerativeAIPhysical2024}. In particular, diffusion models (DMs) have attracted considerable attention for their remarkable ability to approximate complex data distributions~\cite{hoDenoisingDiffusionProbabilistic2020}.
+Initial solutions have been dominated by compressive sensing (CS)-based methods which exploit channel sparsity~\cite{zhangAtomicNormDenoisingBased2018,choiCompressedSensingWireless2017}. Their primary drawback, however, was performance degradation from the model mismatch between the assumed sparsity and practical channel conditions. To overcome this limitation, data-driven deep learning (DL) approaches has been introduced. Supervised DL models, while effective, lack generalizability as they are tiled to specific training conditions~\cite{heDeepLearningBasedChannel2018}. A paradigm shift then emerged with deep generative models (DGMs) which learn the underlying channel distribution itself to improve generalizability~\cite{vanhuynhGenerativeAIPhysical2024}. In particular, diffusion models (DMs) have attracted considerable attention for their remarkable ability to approximate complex data distributions~\cite{hoDenoisingDiffusionProbabilistic2020}.
 
 \tred{
 While demonstrating impressive accuracy, the success of recent DM-based channel estimators has been confined to pilot-sufficient scenarios~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025}. This work addresses a critical limitation overlooked by prior works, that is, the performance cliff, a sudden and severe degradation of estimation accuracy in the critically pilot-scarce regime. We attribute this problem to their reliance on first moment approximations, which neglect posterior variance and are thus fundamentally unsuited for high-uncertainty conditions. This collapse is, therefore, an inevitable artifact of their underlying methodology.
@@ -133,8 +136,7 @@ Even in this form, the likelihood $p_{k}(\mathbf{y}|\mathbf{h}_{k})$ is still in
 p_{k}(\mathbf{y}|\mathbf{h}_{k}) \approx \int p(\mathbf{y}|\mathbf{h}_{0})q_{k}(\mathbf{h}_{0}|\mathbf{h}_{k})d\mathbf{h}_{0}.
 \end{equation}
 
-We are motivated by the idea that making a single, high-fidelity estimate can be more beneficial than repeatedly approximating a distribution. The proposed method is designed based on this idea, adopting the moment-matching principle to offer advantages in terms of both accuracy and computational complexity. This principle is known to minimize the Kullback–Leibler divergence to the true distribution by matching the first and second moments. This process yields the closest approximation to the true distribution~\cite{bishopPatternRecognitionMachine2006}. Furthermore, to enable an high-fidelity estimation of the score function, we adapt Tweedie’s formula in accordance with the forward process of the DM.
-Given the well-approximated prior score $\nabla_{\mathbf{h}_{k}}\log p_{k}(\mathbf{h}_{k})$, the first and second order moments of the true distribution can be, respectively, approximated using Tweedie's formula as~\cite{efronTweediesFormulaSelection2011},
+\tred{To address this intractability, we approximate the likelihood by first constructing a more faithful Gaussian approximation of the posterior distribution $p_{k}(\mathbf{h}_{0}|\mathbf{h}_{k})$. This is achieved by adopting the moment matching principle. This principle minimizes the Kullback–Leibler divergence to the true distribution by matching its first and second moments~\cite{bishopPatternRecognitionMachine2006}. To estimate these moments in practice, we leverage Tweedie's formula. It provides tractable expressions for both the posterior mean and covariance, derived directly from the DM's score function. This process yields a more accurate likelihood score, offering clear advantages over methods that neglect the posterior covariance.} Given the well-approximated prior score $\nabla_{\mathbf{h}_{k}}\log p_{k}(\mathbf{h}_{k})$, the first and second order moments of the true distribution can be, respectively, approximated using Tweedie's formula as~\cite{efronTweediesFormulaSelection2011},
 \begin{equation}
 \label{eq:first_moment}
 \mathbb{E}[\mathbf{h}_{0}|\mathbf{h}_{k}] = \frac{1}{\sqrt{ \bar{\alpha}_{k} }}(1-\sqrt{ 1-\bar{\alpha}_{k} }\epsilon_{\theta}(\mathbf{h}_{k},k)),
@@ -184,36 +186,39 @@ The proposed method was implemented using PyTorch 2.1.2, CUDA 11.8, and Python 3
 % 아래 수정 필요
 To improve sampling efficiency, accelerated strategy was adopted~\cite{songDenoisingDiffusionImplicit2020}. Specifically, a sub-sequence of 20 timesteps was utilized for posterior sampling, and the maximum number of iterations for the GMRES was set to 5 through a validation set. For denoising networks, the DDPM network architecture was adopted, which consists downsample, bottleneck, and upsample blocks without attention layer~\cite{hoDenoisingDiffusionProbabilistic2020}. While the downsample block increases the output channel size from 32 to 64, the upsample block conversely reduces it in the opposite direction.
 
-To validate the proposed method, we utilized the clustered delay line (CDL)
-channel model specified in 3GPP TR 38.901, which was generated using the MATLAB 5G Toolbox. Delay profiles of CDL-B and CDL-D were used to evaluate the performance in both LOS and NLOS environments, respectively. Channel estimation performance was evaluated using the NMSE, defined as $\mathbb{E}[\|\mathbf{h}-\hat{\mathbf{h}}\|_{2}^{2} / \|\mathbf{h}\|_{2}^{2}]$. For comparison, the baselines from three categories were selected: CS, DL, and DM. Here, OMP~\cite{zhangAtomicNormDenoisingBased2018} and  fsAD~\cite{mendez-rialHybridMIMOArchitectures2016} correspond to CS, LDAMP~\cite{heDeepLearningBasedChannel2018} corresponds to DL, and Score-ALD~\cite{arvinteMIMOChannelEstimation2023} and DMPS~\cite{zhouGenerativeDiffusionModels2025} correspond to DM.
+To validate the proposed method, we utilized the clustered delay line (CDL) channel model specified in 3GPP TR 38.901, which was generated using the MATLAB 5G Toolbox. Delay profiles of CDL-A and CDL-D were used to evaluate the performance in both LOS and NLOS environments, respectively. Channel estimation performance was evaluated using the NMSE, defined as $\mathbb{E}[\|\mathbf{h}-\hat{\mathbf{h}}\|_{2}^{2} / \|\mathbf{h}\|_{2}^{2}]$. For comparison, the baselines from two categories were selected: CS, and DM. Here, fsAD~\cite{zhangAtomicNormDenoisingBased2018} corresponds to CS, and Score-ALD~\cite{arvinteMIMOChannelEstimation2023} and DMPS~\cite{zhouGenerativeDiffusionModels2025} correspond to DM.
 
 %\tred{The parameters for channel generation were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023} to ensure a fair comparison.} The hyperparameters for Score-ALD were set be same as in~\cite{arvinteMIMOChannelEstimation2023}. In DMPS, the sampling steps was set to 100 and last ten steps iterative tree times. All hyperparameters of the baselines were set through a validation set.
 
-The channel estimation performance was evaluated under LOS and NLOS environments at a pilot density $\rho$ of 0.6, as shown in Fig.~\ref{fig_sim_1}. It was confirmed that the proposed method outperforms the baselines across most of the SNR range in both the environments. The performance of fsAD degraded significantly at low SNR, and OMP showed slightly improvement beyond 20 dB. The limitations of these methods arise from the mismatch between their assumed and the actual channel sparsities. Unlike the CS-based methods, LDAMP was not characterized by error floors at high SNR or high sensitivity at low SNR. In comparison to the DM-based methods, the proposed method outperformed the Score-ALD and DMPS by about 8 dB and 2 dB in the low and high SNR ranges, respectively. Therefore, it was demonstrated that the DM-based prior by the proposed method can more accurately approximate channel distribution compared to the baselines.
+\tred{
+Fig.~\ref{fig_sim_1} illustrates the NMSE performance versus pilot density ($\rho$) at a fixed SNR of 30 dB. The results first highlight the superiority of data-driven generative priors. The fsAD method, relying on a hand-crafted sparsity prior, exhibits the most severe performance cliff, demonstrating the limitations of a simple structural assumption in the highly uncertain pilot-scarce regime ($\rho<$ 0.5).
+While DM-based methods like Score-ALD and DMPS are significantly more robust than fsAD, they also suffer from a notable, albeit less severe, performance cliff. This indicates that their heuristic likelihood approximations are still insufficient to fully resolve the high uncertainty from limited measurements.
+In contrast, our proposed method is the only one to overcome this cliff, showing only a gradual performance degradation. This results in a substantial gain of over 10 dB against both Score-ALD and DMPS at $\rho$=0.2. This superior pilot efficiency is achieved by rigorously incorporating the local posterior covariance via Tweedie's formula. This covariance acts as a powerful, data-driven regularizer that effectively constrains the solution space, demonstrating a clear advantage over both conventional CS and other advanced DM-based techniques.
+}
 
 \begin{figure}[!t]
-\subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/20251010/results-1-30db/CDL-D.eps}%
-\label{fig:los-1}}
-\\
-\subfigure[NLOS]{\includegraphics[width=0.48\textwidth]{images/20251010/results-1-30db/CDL-A.eps}%
-\label{fig:nlos-1}}
-\caption{Impact of pilot density on the NMSE performance at SNR of 30dB for (a) LOS and (b) NLOS channel.}
+\includegraphics[width=0.48\textwidth]{images/20251013/fig_1.eps}
+\caption{Impact of pilot density on the NMSE performance at SNR of 30dB for LOS and NLOS channels.}
 \label{fig_sim_1}
 \end{figure}
 
-In Fig.~\ref{fig_sim_2}, robustness of the DM-based methods was evaluated under the low pilot density. Specifically, at a $\rho$ of 0.3 in the LOS environment, it was confirmed that the proposed method outperforms the DMPS and Score-ALD by about 6 dB and 4 dB, respectively. Furthermore, the performance gap widens in the NLOS environment to about 12dB and 5dB compared to the DMPS and Score-ALD, respectively. Therefore, it was demonstrated that the robustness of the proposed method is attributable to a fundamental difference in the likelihood score approximation. While both DMPS and Score-ALD approximate the mean and covariance based on heuristic methods, the proposed method approximates them based on the moment matching principle and Tweedie's formula with the DM-based prior.
-
 \begin{figure}[!t]
-\subfigure[LOS]{\includegraphics[width=0.48\textwidth]{images/20251010/results-2/CDL-D.eps}%
-\label{fig:los-2}}
-\\
-\subfigure[NLOS]{\includegraphics[width=0.48\textwidth]{images/20251010/results-2/CDL-A.eps}%
-\label{fig:nlos-2}}
-\caption{Channel estimation performance in terms of NMSE with pilot density of 0.2. for (a) LOS and (b) NLOS channels.}
+\includegraphics[width=0.48\textwidth]{images/20251013/fig_2.eps}
+\caption{Channel estimation performance in terms of NMSE with pilot density of 0.2 for LOS and NLOS channels.}
 \label{fig_sim_2}
 \end{figure}
 
-In order to verify the computational efficiency of the proposed method for deployments of practical wireless communication, we evaluated its floating-point operations (FLOPs), neural function evaluations (NFEs), and inference latency. The proposed method offers significant advantages in computational efficiency, as detailed in Table~\ref{tab:table1}. The inference latency was measured in the condition of a batch size of 100 and $\rho$ of 0.6, averaged over 10 independent runs. The proposed method achieved about 65 times faster inference latency compared to Score-ALD. In comparison with DMPS, the proposed method achieved comparable latency while outperforming it in terms of FLOPs and NFEs. Consequently, it is shown that the proposed method can be a more accurate and efficient solution by providing a better trade-off between estimation accuracy and inference latency than the baselines.
+\tred{
+Fig.~\ref{fig_sim_2} presents the NMSE performance versus SNR
+at a fixed pilot density of $\rho$=0.6 to evaluate estimation fidelity.
+The fsAD baseline shows a distinct error floor around -14 dB,
+which is attributable to model mismatch. Its fixed sparsity assumption deviates from the true channel structure.
+This limits performance once thermal noise is no longer the dominant error source. While all DM-based methods overcome this model mismatch, they exhibit their own error floors. DMPS and Score-ALD show floors around -21 dB and -19 dB, respectively. This is due to algorithmic approximation errors in their posterior score modeling. In sharp contrast, our proposed method maintains a linear performance improvement. It achieves an NMSE below -30 dB with increasing SNR, showing no error floor. This demonstrates that our moment matching-based approach is highly effective. By rigorously incorporating the local posterior covariance, it minimizes error accumulation. This eliminates the approximation-induced error floor that plagues other advanced estimators.
+}
+
+\tred{
+Table~\ref{tab:table1} summarizes the computational efficiency of the proposed method. A superior trade-off between estimation accuracy and latency is demonstrated. Notably, the proposed method is approximately 65 times faster than Score-ALD. This latency reduction stems from requiring significantly fewer neural function evaluations (NFEs). This is in contrast to Score-ALD's iterative annealed Langevin dynamics. While our method has a slightly higher per-step complexity than DMPS, this deliberate trade-off is highly effective. The added computation is for rigorously estimating the local posterior covariance. This is achieved using Tweedie's formula as part of our moment matching approach. This targeted increase in complexity is precisely what enables our method to eliminate the performance-limiting error floors observed in baseline methods, as shown in Fig.~\ref{fig_sim_2}. Consequently, our approach offers a compelling balance, delivering state-of-the-art accuracy without prohibitive latency.
+}
 
 \begin{table}[!t]
 \centering
@@ -224,19 +229,20 @@ In order to verify the computational efficiency of the proposed method for deplo
 \hline
 \textbf{Method} & \textbf{FLOPs} & \textbf{NFEs} & \textbf{Latency (s)} \\
 \hline
+Proposed & \(4.899 \times 10^9\) & 20 & 1.29 \\
+\hline
 Score-ALD\cite{arvinteMIMOChannelEstimation2023} & \(1.028 \times 10^{12}\) & 6933 & 84.97 \\
 \hline
 DMPS\cite{zhouGenerativeDiffusionModels2025} & \(3.184 \times 10^{10}\) & 130 & 1.27 \\
-\hline
-Proposed & \(4.899 \times 10^9\) & 20 & 1.29 \\
 \hline
 \end{tabular}
 \end{table}
 
 \section{Conclusions}
 
-In this letter, a novel channel estimation method has been proposed to jointly address estimation accuracy, pilot overhead, and complexity in mmWave massive MIMO systems. Based on the moment matching principle and Tweedie's formula, the proposed method performed accurate and efficient diffusion posterior sampling, achieving superior estimation accuracy compared to baselines with comparable computational complexity. From the simulation results, it was demonstrated that the proposed method has the potential to overcome a key bottleneck posed by high-dimensional channel. In future work, the extension of the proposed method to wideband and multi-user scenarios can be explored.
-
+\tred{
+In this letter, a novel channel estimation method has been proposed for massive MIMO systems. The method effectively addresses estimation accuracy, pilot overhead, and complexity. Our approach performs accurate and efficient diffusion posterior sampling. It incorporates posterior covariance based on the moment matching principle and Tweedie's formula. This proved crucial for overcoming the performance cliff observed in pilot-scarce regimes. From the simulation results, it was demonstrated that the proposed method achieves superior estimation accuracy compared to state-of-the-art baselines. This advantage is especially pronounced under severe pilot scarcity. Furthermore, it eliminates the error floor present in other advanced estimators at high SNRs. These gains are achieved while maintaining a comparable computational complexity. In future work, the extension of the proposed method to wideband and multi-user scenarios can be explored.
+}
 \bibliographystyle{IEEEtran}
 % \bibliography{bib/IEEEabrv,bib/references}
 \bibliography{bib/references}
