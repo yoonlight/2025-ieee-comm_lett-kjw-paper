@@ -60,11 +60,30 @@ Channel estimation, massive MIMO, diffusion model, moment matching, Tweedie's fo
 
 Massive multiple-input-multiple-output (MIMO) systems have emerged as a key technology for future 6G communication systems~\cite{busariMillimeterWaveMassiveMIMO2018}. To fully exploit its potential, accurate acquisition of channel state information (CSI) is indispensable. However, a fundamental limitation is that the number of pilot symbols required for channel estimation scales linearly with the massive number of antennas. This limitation leads to a severe pilot overhead bottleneck which directly degrades the spectral efficiency. Consequently, a critical research challenge is to design a channel estimation scheme that maintains high accuracy under pilot-scarce conditions.
 
-Initial solutions have been dominated by compressive sensing (CS)-based methods which exploit the inherent sparsity of wireless channels~\cite{zhangAtomicNormDenoisingBased2018,choiCompressedSensingWireless2017}. However, the primary drawback of these methods is performance degradation caused by model mismatch between the assumed sparsity and practical channel conditions. To overcome this limitation, deep learning (DL) approaches have been introduced enabled by powerful data-driven priors~\cite{kimDeepLearningaidedWireless2023}. In particular, diffusion models (DMs) have recently attracted considerable attention for their remarkable ability to approximate complex data distributions~\cite{hoDenoisingDiffusionProbabilistic2020,vanhuynhGenerativeAIPhysical2024}.
+Initial solutions have been dominated by compressive sensing (CS)-based methods which exploit the inherent sparsity of wireless channels~\cite{zhangAtomicNormDenoisingBased2018,choiCompressedSensingWireless2017}. However, the primary drawback of these methods is performance degradation caused by model mismatch between the assumed sparsity and practical channel conditions. To overcome this limitation, deep learning (DL) approaches have been introduced, enabled by powerful data-driven priors~\cite{kimDeepLearningaidedWireless2023}. In particular, diffusion models (DMs) have recently attracted considerable attention for their remarkable ability to approximate complex data distributions~\cite{hoDenoisingDiffusionProbabilistic2020,vanhuynhGenerativeAIPhysical2024}.
 
-Recent DM-based channel estimators have achieved impressive accuracy, but their performance is ensured only under sufficient pilot conditions~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025}. Under severe pilot scarcity, they suffer from an abrupt performance degradation because the posterior variance is ignored, leading to instability under high uncertainty. Consequently, existing approaches are difficult to apply under severe pilot-scarce conditions.
+Recent DM-based channel estimators have achieved impressive accuracy, but their performance is ensured only under sufficient pilot conditions~\cite{arvinteMIMOChannelEstimation2023,zhouGenerativeDiffusionModels2025}. Under severe pilot scarcity, they suffer from abrupt performance degradation because the posterior variance is ignored, leading to instability under high uncertainty. Consequently, existing approaches are difficult to apply under severe pilot-scarce conditions.
 
-In this letter, we address the abrupt performance degradation of existing DM-based channel estimators under pilot-scarce conditions. The key contribution is the explicit modeling of the posterior covariance to mitigate the high uncertainty caused by the pilot conditions. To this end, we propose a moment-matched Gaussian approximation based on Tweedie's formula that explicitly models both the posterior mean and covariance. Furthermore, we employ generalized minimal residual method (GMRES) to efficiently handle the computational complexity induced by this approach. From the simulation results, it is demonstrated that the proposed method successfully overcomes this performance degradation while achieving a significant reduction in inference time.
+% [의견]
+
+% 뭔가 novelty보다는 해결 방안 제시로만 보임. 논리적으로는 맞으나, 좀 더 확실하게 보여줄 수 있게 작성하면 좋을 듯.
+
+% ex:
+% ~ the pilot conditions. 다음에
+
+% To the best of our knowledge, it is the first study to address the complexity of DM and the pilot shortage situation.
+
+% 와 같이 강조하는 문장이 있으면 좋을 듯
+In this letter, we address the abrupt performance degradation of existing DM-based channel estimators under pilot-scarce conditions. \tblue{The key contribution is the explicit modeling of the posterior covariance to mitigate the high uncertainty caused by the pilot conditions.} To this end, we propose a moment-matched Gaussian approximation based on Tweedie's formula that explicitly models both the posterior mean and covariance. Furthermore, we employ generalized minimal residual method (GMRES) to efficiently handle the computational complexity induced by this approach. \tblue{From the simulation results, it is demonstrated that the proposed method successfully overcomes this performance degradation while achieving a significant reduction in inference time.}
+
+\tred{
+The remaining sections of this letter are structured as follows. Section II provides an overview of the massive MIMO system. In Section III, the proposed method for channel estimation is described. Simulation settings and results are described in Section IV. The conclusion is presented in Section V.
+}
+
+% 1) 여기서 시뮬레이션 관련된 것을 언급하는 것은 적절하지 않은거 같음.
+% 해당 내용을 삭제 또는 다른 곳으로 배치하고
+
+% 3) 이 문단이 이 논문의 핵심 문단인데 적어도 감사의글과 정보 파트(1페이지 왼쪽하단)보다는 분량이 있어보여야 될거 같음. contribution의 설명을 좀 더 추가하는 것이 좋을듯함.
 
 \section{System Model}
 
@@ -72,16 +91,16 @@ In this letter, a point-to-point massive MIMO system is considered, where the ba
 \begin{equation}
 \mathbf{Y}=\mathbf{H}\mathbf{P}+\mathbf{N}\in \mathbb{C}^{N_{r}\times N_{p}},
 \end{equation}
-where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is the channel matrix, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is known pilot symbols, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}_{n}\mathbf{I})$ is additive white Gaussian noise. We consider a mmWave system where both the BS and UE are equipped with a uniform linear array (ULA) with half-wavelength antenna spacing. A key characteristic of mmWave channels is their sparse multipath structure, which enables a highly efficient channel representation for estimation. Accordingly, the channel matrix can be modeled using the virtual channel representation as,
+where $\mathbf{H}\in \mathbb{C}^{N_{r}\times N_{t}}$ is the channel matrix, $\mathbf{P}\in \mathbb{C}^{N_{t}\times N_{p}}$ is known pilot symbols, and $\mathbf{N}\sim\mathcal{N}(\mathbf{0},\sigma^{2}_{n}\mathbf{I})$ is additive white Gaussian noise. We consider a mmWave system where both the BS and UE are equipped with a uniform linear array (ULA) with half-wavelength antenna spacing. A key characteristic of mmWave channels is their sparse multipath structure, which enables a highly efficient channel representation for estimation. Accordingly, the channel matrix can be modeled using virtual channel representation as,
 \begin{equation}
-\mathbf{H} = \mathbf{A}_{\text{R}}\mathbf{H}_{\text{a}}\mathbf{A}_{\text{T}}^{H},
+\mathbf{H} = \mathbf{A}_{\text{Rx}}\mathbf{H}_{\text{a}}\mathbf{A}_{\text{Tx}}^{H},
 \end{equation}
-where $\mathbf{A}_{\text{R}}\in \mathbb{C}^{N_{r}\times N_{r}}$ and $\mathbf{A}_{\text{T}}\in \mathbb{C}^{N_{t}\times N_{t}}$ are the array response matrices represented by the discrete Fourier transform (DFT) matrices of the receiver and transmitter, respectively and $\mathbf{H}_{\text{a}}$ is the channel matrix in the angular domain.
+where $\mathbf{A}_{\text{Rx}}\in \mathbb{C}^{N_{r}\times N_{r}}$ and $\mathbf{A}_{\text{Tx}}\in \mathbb{C}^{N_{t}\times N_{t}}$ are the array response matrices represented by the discrete Fourier transform (DFT) matrices of the receiver and transmitter, respectively and $\mathbf{H}_{\text{a}}$ is the channel matrix in the angular domain.
 The vectorized form of the received symbol is expressed as,
 \begin{equation}
 \mathbf{y} = \mathbf{A}\mathbf{h}_{\text{a}}+\mathbf{n}\in \mathbb{C}^{N_{r}N_{p}\times 1},
 \end{equation}
-where $\mathbf{y}$, $\mathbf{h}_{\text{a}}$, and $\mathbf{n}$ are the vectorized forms of the received symbol, angular domain channel, and noise, respectively. $\mathbf{A}=\mathbf{A}_{M}\mathbf{A}_{D}\in \mathbb{C}^{N_{r}N_{p}\times N_{r}N_{t}}$ is the system matrix vectorized by Kronecker product, where $\mathbf{A}_{M} = (\mathbf{P}^{\top}\otimes\mathbf{I}_{N_{r}})$, $\mathbf{A}_{D}=((\mathbf{A}_{\text{T}}^{H})^{\top}\otimes \mathbf{A}_{\text{R}})$ are measurement matrix and dictionary matrix, respectively.
+where $\mathbf{y}$, $\mathbf{h}_{\text{a}}$, and $\mathbf{n}$ are the vectorized forms of the received symbol, angular domain channel, and noise, respectively. $\mathbf{A}=\mathbf{A}_{M}\mathbf{A}_{D}\in \mathbb{C}^{N_{r}N_{p}\times N_{r}N_{t}}$ is the system matrix vectorized by Kronecker product, where $\mathbf{A}_{M} = (\mathbf{P}^{\top}\otimes\mathbf{I}_{N_{r}})$, $\mathbf{A}_{D}=((\mathbf{A}_{\text{Tx}}^{H})^{\top}\otimes \mathbf{A}_{\text{Rx}})$ are measurement matrix and dictionary matrix, respectively.
 Since the number of the transmitter antennas is larger than the number of pilot symbols, i.e., pilot density $\rho=N_{p}/N_{t}<1$, the problem becomes an ill-posed inverse problem.
 To solve the ill-posed problem, the channel estimation can be formulated within a Bayesian inference framework,
 \begin{equation}
@@ -91,13 +110,13 @@ where $p(\mathbf{h}_{\text{a}})$ and $p(\mathbf{y}|\mathbf{h}_{\text{a}})$ are p
 
 \section{Proposed Method}
 
-In the proposed method, we perform Bayesian inference by sampling from the posterior distribution $p(\mathbf{h}_{a}|\mathbf{y})$. A crucial component for this inference is the prior distribution $p(\mathbf{h}_{a})$, which is often unknown. To address this, we propose to learn a data-driven prior from the channel distribution using a denoising diffusion probabilistic model (DDPM)~\cite{hoDenoisingDiffusionProbabilistic2020}. The DDPM consists of forward and reverse diffusion processes. In the forward process, original channel $\mathbf{h}_{0}$ is converted to Gaussian noise using Gaussian transition kernel over $K$ time steps, and using the reparameterization trick, it can be expressed by,
+In the proposed method, we perform Bayesian inference by sampling from the posterior distribution $p(\mathbf{h}_{a}|\mathbf{y})$. A crucial component for this inference is the prior distribution $p(\mathbf{h}_{a})$, which is often unknown. To address this, we propose to learn a data-driven prior from the channel distribution using a denoising diffusion probabilistic model (DDPM)~\cite{hoDenoisingDiffusionProbabilistic2020}. DDPM consists of forward and reverse diffusion processes. In the forward process, original channel $\mathbf{h}_{0}$ is converted to Gaussian noise using Gaussian transition kernel over $K$ diffusion time steps, and using the reparameterization trick, it can be expressed by,
 \begin{equation}
 \mathbf{h}_{k} = \sqrt{ \bar{\alpha}_{k} }\mathbf{h}_{0} + \sqrt{ 1-\bar{\alpha}_{k} }\epsilon_{k},\quad \epsilon_{k}\sim\mathcal{N}(\mathbf{0},\mathbf{I}),
 \end{equation}
 where $\mathbf{h}_{0} = \mathbf{h}_{\text{a}}$, $\bar{\alpha}_{k}=\prod_{i=1}^{k}\alpha_{i}$, $\alpha_{k}=1-\beta_{k}$, and $\beta_{k}$ is pre-defined variance schedule.
 
-In the reverse process, the original channel $\mathbf{h}_{0}$ is recovered from the $\mathbf{h}_{K}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ using denoising networks $\epsilon_{\theta}$ for $K$ time steps where $\theta$ is trainable parameters. The denoising networks are trained to minimize the mean squared error (MSE) loss as,
+In the reverse process, the original channel $\mathbf{h}_{0}$ is recovered from the $\mathbf{h}_{K}\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ using denoising networks $\epsilon_{\theta}$ for $K$ steps where $\theta$ is trainable parameters. The denoising networks are trained to minimize the mean squared error (MSE) loss as,
 \begin{equation}
 \mathcal{L}(\theta) = \mathbb{E}[\|\epsilon_{k} - \epsilon_{\theta}(\mathbf{h}_{k},k)\|_{2}^{2}],
 \end{equation}
@@ -175,13 +194,39 @@ Once the posterior sampling is complete, we obtain a posterior sample of the vir
 \end{algorithmic}
 \end{algorithm}
 
+\begin{table}
+\begin{center}
+  \renewcommand{\arraystretch}{1.1} 
+\caption{Hyper-parameter settings for simulation\label{tab:table1}}
+\label{tab1}
+\begin{tabular}{M{0.4\columnwidth}|M{0.3\columnwidth}}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+Training Epoch & 500 \\
+\hline
+Batch Size & 256 \\
+\hline
+Optimizer & AdamW \\
+\hline
+Learning Rate & 0.0001 \\
+\hline
+Diffusion Variance Schedule & Linear \\
+\hline
+Diffusion Variance & $0.0001 \leq \beta_{k} \leq 0.02$ \\
+\hline
+Diffusion Time Steps & 1000 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
 \section{Simulation Results}
 
-The proposed method was implemented using PyTorch 2.1.2, CUDA 11.8, and Python 3.10.13 on Ubuntu 20.04.6. To meet the computational requirements, a single NVIDIA GeForce RTX 4090 GPU, an AMD Ryzen Threadripper PRO 5975WX CPU and 128GB of RAM were used for the simulations. For the hyperparameter settings, the epochs, diffusion steps $K$, batch size, learning rate, the variance schedule $\beta_{k}$, and optimizer were set to 500, 1000, 256, 0.0001, linearly increase from 0.0001 to 0.02, and AdamW, respectively.
-% 아래 수정 필요
-To improve sampling efficiency, an accelerated strategy was adopted~\cite{songDenoisingDiffusionImplicit2020}. Specifically, a sub-sequence of 20 timesteps was utilized for posterior sampling, and the maximum number of iterations for the GMRES was set to 5 through a validation set. For denoising networks, the DDPM network architecture was adopted, which consists of downsample, bottleneck, and upsample blocks without an attention layer~\cite{hoDenoisingDiffusionProbabilistic2020}. While the downsample block increases the output channel size from 32 to 64, the upsample block conversely reduces it in the opposite direction.
+The proposed method was implemented using PyTorch 2.1.2, CUDA 11.8, and Python 3.10.13 on Ubuntu 20.04.6. To meet the computational requirements, a single NVIDIA GeForce RTX 4090 GPU, an AMD Ryzen Threadripper PRO 5975WX CPU and 128GB of RAM were used for the simulations. \tred{Hyperparameter settings are summarized in Table~\ref{tab1}.}
+\tred{In addition to these settings, an accelerated sampling strategy} was adopted~\cite{songDenoisingDiffusionImplicit2020}. Specifically, a sub-sequence of 20 timesteps was utilized for posterior sampling, and the maximum number of iterations for the GMRES was set to 5 based on a validation set. For denoising networks, the DDPM network architecture was adopted, which consists of downsample, bottleneck, and upsample blocks without an attention layer~\cite{hoDenoisingDiffusionProbabilistic2020}. While the downsample block increases the output channel size from 32 to 64, the upsample block reduces it in the opposite direction.
 
-To validate the proposed method, we utilized the clustered delay line (CDL) channel model specified in 3GPP TR 38.901, which was generated using the MATLAB 5G Toolbox. Delay profiles of CDL-A and CDL-D were used to evaluate the performance in both LOS and NLOS environments, respectively. Channel estimation performance was evaluated using the NMSE, defined as $\mathbb{E}[\|\mathbf{h}-\hat{\mathbf{h}}\|_{2}^{2} / \|\mathbf{h}\|_{2}^{2}]$. For comparison, the baselines from two categories were selected: CS and DM. Here, fast atomic norm denoising-based method (fsAD)~\cite{zhangAtomicNormDenoisingBased2018} corresponds to CS, and score-based annealed Langevin dynamics (Score-ALD)~\cite{arvinteMIMOChannelEstimation2023} and uninformative prior-based posterior sampling (UPS)~\cite{zhouGenerativeDiffusionModels2025} correspond to DM.
+To validate the proposed method, we utilized the clustered delay line (CDL) channel model specified in 3GPP TR 38.901, which was generated using the MATLAB 5G Toolbox. \tred{The parameters for the channel model were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023}.} Delay profiles of CDL-A and CDL-D were used to evaluate the performance in both LOS and NLOS environments, respectively. Channel estimation performance was evaluated using the NMSE, defined as $\mathbb{E}[\|\mathbf{h}-\hat{\mathbf{h}}\|_{2}^{2} / \|\mathbf{h}\|_{2}^{2}]$. For comparison, the baselines from two categories were selected: CS and DM. Here, fast atomic norm denoising-based method (fsAD)~\cite{zhangAtomicNormDenoisingBased2018} corresponds to CS, and score-based annealed Langevin dynamics (Score-ALD)~\cite{arvinteMIMOChannelEstimation2023} and uninformative prior-based posterior sampling (UPS)~\cite{zhouGenerativeDiffusionModels2025} correspond to DM.
 
 %{The parameters for channel generation were set following the setup presented in~\cite{arvinteMIMOChannelEstimation2023} to ensure a fair comparison.} The hyperparameters for Score-ALD were set be same as in~\cite{arvinteMIMOChannelEstimation2023}. In UPS, the sampling steps was set to 100 and last ten steps iterative tree times. All hyperparameters of the baselines were set through a validation set.
 
